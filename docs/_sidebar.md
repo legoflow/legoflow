@@ -18,3 +18,4 @@
     - [静态资源文件夹](other/assets)
     - [移动端调试小工具](other/debug)
     - [快捷键](other/shortcuts)
+- [常见问题](issues)
