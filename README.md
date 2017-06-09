@@ -28,6 +28,10 @@
 * 支持自定义脚手架，合适每个团队配置自己的初始化文件
 * 更多 ...
 
+## 界面
+
+![](https://legox.org/assets/img/legoflow-app.png)
+
 ## 相关资源
 
 * [官网](https://legoflow.com)
