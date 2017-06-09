@@ -53,7 +53,7 @@
 
 * macOS → https://github.com/legoflow/legoflow/releases/download/1.0.0/LegoFlow-for-macOS.zip
 
-* Windows64 → https://github.com/legoflow/legoflow/releases/download/1.0.0/LegoFlow-for-window.rar
+* Windows64 → https://github.com/legoflow/legoflow/releases/download/1.0.0/LegoFlow-for-windows64.rar
 
 **百度云 下载地址**
 
