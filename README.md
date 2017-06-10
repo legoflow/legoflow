@@ -60,3 +60,11 @@
 * macOS → http://pan.baidu.com/s/1c10Y0Bu
 
 * Windows64 → http://pan.baidu.com/s/1c19LZqw
+
+
+## 反馈
+
+可能功能上并不能全部满足期望，但有了你的反馈意见会做得更好更完善，欢迎大家给出建议。Q 群 457756220 Y 群 20316461 
+
+
+
