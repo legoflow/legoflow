@@ -1,0 +1,5 @@
+{
+    "alias": {
+    	"vue$2.2": "./src/assets//vue.min.js"
+    }
+}

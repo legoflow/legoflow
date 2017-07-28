@@ -1,0 +1,12 @@
+{
+    "user.dev.args": {
+        "*": {
+            "token": "1"
+        }
+    },
+    "user.build.args": {
+        "*": {
+            "token": "2"
+        }
+    }
+}

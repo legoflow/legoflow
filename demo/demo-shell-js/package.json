@@ -1,0 +1,10 @@
+{
+  "name": "demo-shell-js",
+  "version": "0.0.1",
+  "repository": {},
+  "author": "UED.lijialiang",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
