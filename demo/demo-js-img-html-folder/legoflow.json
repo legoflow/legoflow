@@ -1,5 +1,5 @@
 {
-    "version": "0.1.76",
+    "version": "1.0.0",
     "type": "clean",
     "assets": "",
     "es6": true,
@@ -30,5 +30,6 @@
     "build.env": "",
     "build.zip": "",
     "img.folder": "images",
-    "html.folder": "html"
+    "html.folder": "html",
+    "js.folder": "javascript"
 }
