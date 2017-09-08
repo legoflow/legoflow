@@ -10,5 +10,3 @@ new Vue({
     }
 })
 
-
-import './t.ts';
