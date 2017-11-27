@@ -1,6 +1,6 @@
 {
-    "version": "1.0.46",
-    "type": "Mobile",
+    "version": "1.0.0",
+    "type": "clean",
     "assets": "",
     "es6": true,
     "webp": false,
@@ -21,7 +21,9 @@
     "alias": {},
     "global": {},
     "externals": {},
-    "proxy": {},
+    "proxy": {
+        "/mock": "http://legox.yy.com/mock/api/14"
+    },
     "ts": {},
     "cache": "timestamp",
     "user.dev.args": {},
