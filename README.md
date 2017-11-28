@@ -1,5 +1,7 @@
 # LegoFlow
 
+**[2.0 Future](https://github.com/legoflow/legoflow/issues/10)**
+
 简单、快捷、高效、开箱即用的 前端工作流客户端，无需各种配置系统环境。
 
 * 开发者无需再配置各种版本混乱的 NodeJS 环境
