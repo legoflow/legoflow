@@ -22,7 +22,10 @@
     "global": {},
     "externals": {},
     "proxy": {
-        "/mock": "http://legox.yy.com/mock/api/14"
+        "/test/**": "/index.html",
+        "/user": "mock/user.json",
+        "/mock-api": "http://legox.yy.com/mock/api/14",
+        "/api": "http://legox.yy.com/mock/api"
     },
     "ts": {},
     "cache": "timestamp",
