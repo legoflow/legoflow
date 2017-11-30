@@ -1,0 +1,42 @@
+{
+    "version": "1.0.51",
+    "type": "vue",
+    "assets": "",
+    "es6": true,
+    "webp": false,
+    "legolib": false,
+    "https": false,
+    "hot": false,
+    "isUglifyJs": true,
+    "isPackVueStyle": false,
+    "vue@2.1": false,
+    "watch": [],
+    "publicPath": "",
+    "packImgSize": "",
+    "packCommon": "",
+    "other": "",
+    "dist": "",
+    "output": "",
+    "shell": "",
+    "alias": {
+        "var": "./src/sass/var.scss",
+        "js": "./src/js"
+    },
+    "global": {},
+    "externals": {
+        "vue": "Vue"
+    },
+    "proxy": {},
+    "ts": {},
+    "cache": "timestamp",
+    "user.dev.args": {},
+    "user.build.args": {},
+    "env": {},
+    "build.move": [],
+    "build.env": "",
+    "build.zip": "",
+    "img.folder": "",
+    "html.folder": "",
+    "js.folder": "",
+    "export.folder": ""
+}

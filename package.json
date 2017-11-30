@@ -1,0 +1,26 @@
+{
+  "name": "legoflow",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./script/start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legoflow/legoflow.git"
+  },
+  "author": "lijialiang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/legoflow/legoflow/issues"
+  },
+  "homepage": "https://github.com/legoflow/legoflow#readme",
+  "dependencies": {
+    "fs-extra": "^4.0.2",
+    "shelljs": "^0.7.8"
+  },
+  "config": {
+    "debug": true
+  }
+}

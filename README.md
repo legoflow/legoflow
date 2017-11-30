@@ -1,3 +1,4 @@
-# legoflow
+# LegoFlow 2.0
 
-Collect some legoflow`s issues
+
+

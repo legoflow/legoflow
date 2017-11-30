@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> LegoFlow </title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+    <app></app>
+
+    <!-- @bundle ./js/base.min.js -->
+    <!-- @if env='dev' -->
+    <script src="./assets/vue.runtime.js"></script>
+    <!-- @endif -->
+    <!-- @if env='build' !>
+    <script src="./assets/vue.min.js"></script>
+    <!-- @endif -->
+    <script src="./assets/vuex.min.js"></script>
+    <!-- @endbundle -->
+
+    <script src="./js/main.js"></script>
+
+</body>
+</html>
