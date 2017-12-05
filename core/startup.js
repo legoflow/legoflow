@@ -49,9 +49,9 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
-        global.__logger = require('./lib/logger')( mainWindow );
+        global.__messager = require('./lib/messager')( mainWindow );
 
-        debug ? mainWindow.loadURL('http://localhost:3000') : mainWindow.loadURL(`file://${ root }/view/index.html`);
+        debug ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
 
         debug ? mainWindow.webContents.openDevTools({ mode: 'right' }) : void 0;
 

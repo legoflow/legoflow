@@ -1,21 +1,21 @@
 'use strict';
 
 module.exports = ( mainWindow ) => {
-    const logger = { };
+    const messager = { };
 
-    const messager = ( type, msg ) => {
+    const sender = ( type, msg ) => {
         // send to view
         mainWindow.webContents.send( 'messager', { type, msg, });
 
         console[ console[ type ] ? type : 'log' ]( `[logger ${ type }]: `, msg );
     }
 
-    logger.info = msg => messager( 'info', msg );
+    messager.info = msg => sender( 'info', msg );
 
-    logger.error = msg => messager( 'error', msg );
+    messager.error = msg => sender( 'error', msg );
 
-    logger.event = msg => messager( 'event', msg );
+    messager.event = msg => sender( 'event', msg );
 
-    return logger;
+    return messager;
 };
 

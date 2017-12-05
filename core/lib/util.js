@@ -11,8 +11,7 @@ String.prototype.toConfig = function ( ) {
     const p = this.toString();
 
     if ( !fs.existsSync( p ) ) {
-        __logger.error( `${ p } undefined.` );
-
+        console.error( `${ p } undefined.` );
         return void 0;
     }
 
