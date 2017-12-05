@@ -19,9 +19,6 @@
     <a href="https://legoflow.com/wiki" target="_blank">
         <img alt="Wiki" src="https://img.shields.io/badge/wiki-2.0-red.svg" />
     </a>
-    <a href="">
-        <img alt="QQ" src="https://img.shields.io/badge/qq-353943780-yellow.svg" />
-    </a>
     <a href="" target="_blank">
         <img alt="Download-macOS" src="https://img.shields.io/badge/download-macOS-brightgreen.svg" />
     </a>
@@ -51,6 +48,24 @@
 * JS 编译 [art-template](https://aui.github.io/art-template/zh-cn/index.html) 语法 tpl 文件
 * 提供工作流前后拦截器，自定义功能
 * ......
+
+## 文档
+
+若想了解更多使用文档，请查看 [legoflow.com](https://legoflow.com)
+
+## 下载
+
+百度云 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+
+开发服务器 地址地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+
+Github release 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+
+## 反馈
+
+遇到问题或者有更棒的想法，欢迎大家提出 issues.
+
+交流 Q 群 457756220
 
 ## 许可
 
