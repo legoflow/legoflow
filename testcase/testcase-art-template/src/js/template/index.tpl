@@ -1,4 +1,4 @@
-{{@require('./zhihu.raw.svg')}}
+<!-- {{@require('./zhihu.raw.svg')}} -->
 
 <div>
     {{@content}}

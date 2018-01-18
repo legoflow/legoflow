@@ -1,8 +1,8 @@
 {
-    "version": "1.0.52",
+    "version": "1.0.58",
     "type": "clean",
     "assets": "",
-    "es6": true,
+    "es6": false,
     "webp": false,
     "legolib": false,
     "https": false,

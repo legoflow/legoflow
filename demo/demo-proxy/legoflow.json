@@ -24,8 +24,8 @@
     "proxy": {
         "/test/**": "/index.html",
         "/user": "mock/user.json",
-        "/mock-api": "http://legox.yy.com/mock/api/14",
-        "/api": "http://legox.yy.com/mock/api"
+        "/mock-api": "https://legox.org/mock/24d501c0-cb49-11e7-ba75-c111f832c2e3",
+        "/api": "https://legox.org/mock"
     },
     "ts": {},
     "cache": "timestamp",

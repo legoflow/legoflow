@@ -1,7 +1,7 @@
-const runtime = require('art-template/lib/runtime');
+var runtime = require('art-template/lib/runtime');
 
 runtime.test = function ( value ) {
-    return `TEST-${ value }`
+    return 'TEST-' + value;
 };
 
 document.body.innerHTML = require('./template')({
