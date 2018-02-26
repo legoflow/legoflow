@@ -4,24 +4,31 @@
 @import "var";
 
 @font-face {
-	font-family: 'PingFangSC';
-	src: url('../assets/PingFangSC.ttf') format('truetype');
+	font-family: "PingFangSC";
+	src: url('../assets/font/PingFangSC.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "monaco";
+	src: url('../assets/font/monaco.ttf') format('truetype');
 }
 
 html, body {
     padding: 0;
     margin: 0;
-    width: 100%;
+    width: 280px;
     height: 100%;
 }
 
 body {
-    font: 12px "PingFangSC", "San Francisco", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font: 12px "monaco", "PingFangSC", "San Francisco", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     color: $fontColor;
-    background-color: $backgroundColor;
+    overflow: hidden;
+    background-color: $whiteColor;
     * {
         box-sizing: border-box;
         outline: none;
+        font-family: "monaco", "PingFangSC", "San Francisco", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     }
     input {
         color: $fontColor;
@@ -35,4 +42,8 @@ body {
 
 .fade-enter, .fade-leave-to {
     opacity: 0;
+}
+
+svg {
+    display: block;
 }

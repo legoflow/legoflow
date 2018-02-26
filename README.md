@@ -49,23 +49,60 @@
 * 提供工作流前后拦截器，自定义功能
 * ......
 
+## 开发
+
+应用是通过 [Electron](https://github.com/electron/electron) 作为核心框架，构建出跨平台应用。在开发启动应用之前，请先拉取仓库，以及安装开发环境依赖。
+
+```sh
+# node version >= 5x
+node -v
+
+# 全局安装 electron
+npm i electron -g
+
+# 进入拉取的仓库文件夹
+cd ./legoflow
+
+# 安装依赖 node_modules
+npm i
+```
+
+通过执行该命令以开发方式启动应用。
+
+```sh
+npm start
+```
+
+通过执行该命令打包应用，若打包过程中出现错误，请参考 [electron-packager](https://github.com/electron-userland/electron-packager) 使用文档。
+
+```sh
+# 同时打包出 macOS & Windows 应用
+npm run package
+
+# 打包 macOS 应用
+npm run package:mac
+
+# 打开 Windows64 应用
+npm run package:win
+```
+
 ## 文档
 
-若想了解更多使用文档，请查看 [legoflow.com](https://legoflow.com)
+若想了解更多使用文档，请查看 [legoflow.com](https://legoflow.com).
 
 ## 下载
 
-百度云 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+→ 百度云 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
 
-开发服务器 地址地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+→ 开发服务器 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
 
-Github release 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+→ Github release 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
 
 ## 反馈
 
 遇到问题或者有更棒的想法，欢迎大家提出 issues.
 
-交流 Q 群 457756220
+交流 Q 群 **457756220**
 
 ## 许可
 
