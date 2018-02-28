@@ -39,7 +39,6 @@ module.exports = async ( data ) => {
         'ES.Next': isESNext,
         alias: { },
         global: { },
-        externals: { },
     };
 
     switch ( type ) {
@@ -69,4 +68,6 @@ module.exports = async ( data ) => {
     const gitignoreFile = path.resolve( __dirname, '../../project_type/.gitignore' );
 
     fs.copySync( gitignoreFile, path.resolve( projectPath, './.gitignore' ) );
+
+    return Object.assign( data, { path: projectPath } );
 };

@@ -25,7 +25,7 @@
     color: $mainColor;
     background-color: rgba( 0, 0, 0, 0 );
     border: none;
-    box-shadow: 0 2px 10px rgba( 0, 144, 255, .2);
+    box-shadow: 0 2px 10px rgba( 0, 144, 255, .2 );
     border-top: 1px solid $mainColorBorderColor;
     cursor: pointer;
     transition: all .2s ease;

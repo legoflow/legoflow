@@ -10,7 +10,7 @@ const ipc = electron.ipcMain;
 
 // 新建项目
 ipc.on( 'PROJECT_NEW', async ( event, data ) => {
-    const error = await require('../common/project_new')( data );
+    const result = await require('../common/project_new')( data );
 
-    !error ? event.sender.send( 'PROJECT_NEW_SUCCESS', data ) : __messager.event( error );
+    typeof result !== 'string'  ? event.sender.send( 'PROJECT_NEW_SUCCESS', result ) : __messager.event( result );
 } );

@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+
 const { dialog } = require('electron').remote;
 
 window.appUtil = {

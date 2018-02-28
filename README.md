@@ -34,8 +34,8 @@
 ## 功能
 
 * Webpack 4x 的 JS 模块编译，支持各类模块规范
-* Babel 7 ESNext JS 编译
-* Vue.js 2x 开发环境
+* Babel 7 ES.NEXT JS 编译
+* Vue.js 2.x 开发环境
 * Sass 编译
 * Autoprefixer 自动补全
 * 移动端 REM 适配方案
@@ -107,6 +107,3 @@ npm run package:win
 ## 许可
 
 [MIT](./LICENSE)
-
-
-

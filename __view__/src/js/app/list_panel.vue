@@ -15,8 +15,8 @@
                 <div class="panel-content-ico" @click="toggleShowLogPanel" @dblclick="autoShowLogPanel"></div>
             </div>
             <div class="panel-content-btns">
-                <button>开发</button>
-                <button>构建</button>
+                <button @click="dev">开发</button>
+                <button @click="build">构建</button>
             </div>
         </div>
     </div>
@@ -133,6 +133,7 @@
         font-size: 15px;
         color: $mainColor;
         letter-spacing: 1px;
+        cursor: pointer;
     }
 }
 </style>
@@ -162,6 +163,36 @@ export default {
             else {
                 this.isShowLogPanel = false;
             }
+        },
+        dev ( ) {
+            const project = this.project[ this.projectActiveIndex ];
+
+            const { workflow: { dev } } = window.ipc;
+
+            if ( !project.dev ) {
+                let devingProjectNumber = 0;
+
+                this.project.forEach( ( item ) => {
+                    item.dev ? ++devingProjectNumber : void 0;
+                } );
+
+                if ( devingProjectNumber >= 5 ) {
+                    alert( '最多可同时启动 5 个开发工作流项目' );
+                    return void 0;
+                }
+
+                dev.run( project )
+            }
+            else {
+                dev.stop( project );
+            }
+        },
+        build ( ) {
+            const project = this.project[ this.projectActiveIndex ];
+
+            const { workflow: { build } } = window.ipc;
+
+            !project.build ? build.run( project ) : build.stop( project );
         },
     },
     watch: {
