@@ -59,7 +59,7 @@ module.exports = ( app ) => {
 
         global.__messager = require('./lib/messager')( mainWindow );
 
-        debug ? mainWindow.loadURL( 'http://localhost:3000/#/setting' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/` );
+        debug ? mainWindow.loadURL( 'http://localhost:3000/#/app' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/app` );
 
         debug ? mainWindow.webContents.openDevTools({ mode: 'right' }) : void 0;
 

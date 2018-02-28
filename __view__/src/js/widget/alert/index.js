@@ -28,7 +28,11 @@ Object.defineProperty( window, 'alert', {
                 alertQueue.push( vm );
                 vm.queue = alertQueue;
 
-                document.body.appendChild( vm.$el );
+                const appElement = document.getElementById( 'app' );
+
+                const container = appElement || document.body;
+
+                container.appendChild( vm.$el );
             }
 
 			if ( alertQueue.length > 0 ){

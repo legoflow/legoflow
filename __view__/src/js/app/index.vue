@@ -63,9 +63,9 @@ export default {
     mounted ( ) {
         window.ipc.mainWindow.show( );
 
-        setTimeout(() => {
-            this.$store.commit( 'SHOW_UPDATE' );
-        }, 3000);
+        // setTimeout(() => {
+        //     this.$store.commit( 'SHOW_UPDATE' );
+        // }, 3000);
     },
 };
 </script>

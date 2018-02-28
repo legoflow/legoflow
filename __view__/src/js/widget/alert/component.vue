@@ -42,8 +42,8 @@
 #alert {
 	position: fixed;
 	top: 15px;
-	left: 10px;
-	width: 260px;
+	left: 4%;
+	width: 92%;
 	z-index: 9;
 	text-align: center;
 	box-shadow: 0px 0 10px rgba( 0, 0, 0, .15 );
