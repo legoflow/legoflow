@@ -13,10 +13,16 @@
 	src: url('../assets/font/monaco.ttf') format('truetype');
 }
 
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
 html, body {
     padding: 0;
     margin: 0;
-    width: 280px;
+    width: 100%;
     height: 100%;
 }
 

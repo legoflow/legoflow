@@ -4,11 +4,11 @@ const path = require('path');
 const fs = require('fs-extra');
 
 String.prototype.pathNorm = function ( ) {
-    return this.toString().replace( /\\/g, '/' );
+    return this.toString( ).replace( /\\/g, '/' );
 }
 
 String.prototype.toConfig = function ( ) {
-    const p = this.toString();
+    const p = this.toString( );
 
     if ( !fs.existsSync( p ) ) {
         console.error( `${ p } undefined.` );

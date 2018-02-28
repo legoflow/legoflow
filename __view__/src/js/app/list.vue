@@ -3,19 +3,19 @@
         <div class="list" ref="list">
             <div
                 :class="[ 'list-acitve', project[ projectActiveIndex ].dev || project[ projectActiveIndex ].build ? 'running' : void 0 ]"
-                :style="{ transform: `translate3d( 0, ${ projectActiveIndex * 50 }px, 0 )` }"
+                :style="{ transform: `translate3d( 0, ${ projectActiveIndex * 49 }px, 0 )` }"
                 ref="active"
             >
                 <div class="list-acitve-del"></div>
                 <div class="list-active-running"></div>
             </div>
-            <div class="list-item" v-for="( item, $index ) in project" key="$index" @click="chooseProjectAcitveIndex( $index )">
+            <div class="list-item" v-for="( item, $index ) in project" :key="item.id" @click="chooseProjectAcitveIndex( $index )">
                 <div class="list-item-name">
                     {{ item.name }}<span>v{{ item.version }}</span>
                 </div>
             </div>
         </div>
-        <view-list-panel></view-list-panel>
+        <list-panel></list-panel>
     </div>
 </template>
 
@@ -32,7 +32,7 @@
 
 .list-acitve {
     position: absolute;
-    top: 0;
+    top: -1px;
     left: 0;
     width: 100%;
     height: 50px;
@@ -40,7 +40,7 @@
     transition: transform .2s ease;
     cursor: default;
     z-index: 2;
-    border-bottom: 1px solid $borderColor;
+    pointer-events: none;
     .list-active-running {
         position: absolute;
         top: 0;
@@ -67,6 +67,7 @@
         cursor: pointer;
         opacity: 1;
         transition: opacity .1s ease;
+        pointer-events: initial;
         &:before {
             position: absolute;
             top: 1px;
@@ -93,10 +94,13 @@
 .list-item {
     position: relative;
     padding: 0 10px;
+    margin-top: -1px;
     width: 100%;
     height: 50px;
     border-bottom: 1px solid $borderColor;
+    border-top: 1px solid $borderColor;
     cursor: pointer;
+    background-color: $whiteColor;
 }
 
 .list-item-name {
@@ -121,12 +125,14 @@
 </style>
 
 <script>
-import ViewListPanel from './view_list_panel';
+import ListPanel from './list_panel';
+
+let sortable = void 0;
 
 export default {
     computed: Vuex.mapState( [ 'viewIndex', 'project', 'projectActiveIndex' ] ),
     components: {
-        ViewListPanel,
+        ListPanel,
     },
     data ( ) {
         return {
@@ -155,11 +161,40 @@ export default {
 
             return false;
         } );
+
+        // 可排序
+        this.sortable( );
     },
     methods: {
         chooseProjectAcitveIndex ( index ) {
             this.$store.commit( 'SET_PROJECT_ACTIVE_INDEX', index );
-        }
+        },
+        sortable ( ) {
+            if ( sortable ) {
+                sortable.destroy( );
+            }
+
+            const list = this.$refs.list;
+
+            if ( !this.$refs.list ) {
+				return void 0;
+            }
+
+		    Vue.nextTick( ( ) => {
+		        sortable = Sortable.create( list, {
+			    	onEnd: ( e ) => {
+                        let { oldIndex, newIndex } = e;
+
+                        --oldIndex;
+                        --newIndex;
+
+                        this.$store.dispatch( 'sortList', { oldIndex, newIndex } );
+
+						e.preventDefault( );
+					},
+			    } );
+		    } )
+        },
     },
     watch: {
         projectActiveIndex ( v ) {
@@ -173,6 +208,12 @@ export default {
             else if ( top + 10 <= scrollTop ) {
                 this.$refs.list.scrollTop = top;
             }
+        },
+        project: {
+            immediate: true,
+            handler ( v ) {
+                this.sortable( );
+            },
         },
     },
 };

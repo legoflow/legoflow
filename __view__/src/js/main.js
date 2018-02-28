@@ -1,21 +1,33 @@
 'use strict';
 
 // widget
+import './widget/alert';
 Vue.component( 'widget-form', require('./widget/form') );
 
-import layoutApp from './layout/app';
+// router component
+import App from './app';
+import Setting from './setting';
 
+// store
 import store from './store';
 
-new Vue({
-    el: 'app',
+// routes
+const routes = [
+    { path: '/app', component: App },
+    { path: '/setting', component: Setting },
+]
+
+// router config
+const router = new VueRouter( {
+    routes,
+} )
+
+window.vm = new Vue( {
     store,
-    components: {
-        layoutApp,
-    },
+    router,
     render ( h ) {
         return (
-            <layout-app></layout-app>
+            <router-view></router-view>
         )
     },
-})
+} ).$mount( 'app' );

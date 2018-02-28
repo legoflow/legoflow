@@ -2,7 +2,7 @@
     <div class="form-item">
         <label>{{ item.label }}</label>
         <div class="form-item-content">
-            <input type="text" :placeholder="item.placeholder" :value="item.value">
+            <input type="text" :placeholder="item.placeholder" v-model="valueCopy">
         </div>
     </div>
 </template>
@@ -24,6 +24,19 @@ input {
 
 <script>
 export default {
-    props: [ 'item' ],
+    props: [ 'item', 'index', 'value' ],
+    data ( ) {
+        return {
+            valueCopy: this.value,
+        }
+    },
+    watch: {
+        valueCopy ( v ) {
+            this.$emit( 'choose', { index: this.index, value: v } );
+        },
+        value ( v ) {
+            this.valueCopy = _.cloneDeep( this.value );
+        },
+    },
 };
 </script>

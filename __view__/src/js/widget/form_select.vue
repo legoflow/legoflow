@@ -7,7 +7,7 @@
                     {{ typeof chooseIndex !== 'undefined' ? item.options[ chooseIndex ].label : ( item.placeholder || '' ) }}
                 </span>
                 <div class="options" v-show="isShowOptions">
-                    <div class="options-item" v-for="( item, $index ) in item.options" key="$index" @click="choose( $index )">{{ item.label }}</div>
+                    <div class="options-item" v-for="( item, $index ) in item.options" :key="$index" @click="choose( $index )">{{ item.label }}</div>
                 </div>
             </div>
         </div>
@@ -72,20 +72,37 @@
 
 <script>
 export default {
-    props: [ 'item' ],
+    props: [ 'item', 'index', 'value' ],
     data ( ) {
         return {
             chooseIndex: void 0,
             isShowOptions: false,
         }
     },
+    created ( ) {
+        this.setChooseIndexFromValue( );
+    },
     methods: {
+        setChooseIndexFromValue ( ) {
+            const { value, item } = this;
+
+            if ( value && item.options ) {
+                item.options.forEach( ( i, index ) => {
+                    i.value == value ? this.chooseIndex = index : void 0;
+                } );
+            }
+        },
         toggleOptions ( ) {
             this.isShowOptions = !this.isShowOptions;
         },
         choose ( index ) {
-            this.chooseIndex = index;
-        }
+            this.$emit( 'choose', { index: this.index, value: this.item.options[ index ].value } )
+        },
+    },
+    watch: {
+        value ( v ) {
+            this.setChooseIndexFromValue( );
+        },
     },
 };
 </script>

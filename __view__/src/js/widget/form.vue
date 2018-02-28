@@ -2,9 +2,12 @@
     <div class="form">
         <component
             v-for="( item, $index ) in form"
-            key="$index"
+            :key="$index"
             :is="typeComponentAdapter( item.type )"
             :item="item"
+            :index="$index"
+            :value="values[ $index ]"
+            @choose="choose"
         ></component>
     </div>
 </template>
@@ -62,7 +65,15 @@ export default {
         WidgetFormFolder,
         WidgetFormRadio,
     },
-    props: [ 'form' ],
+    props: [ 'form', 'initValues' ],
+    data ( ) {
+        return {
+            values: [ ],
+        }
+    },
+    created ( ) {
+        this.loadValues( );
+    },
     methods: {
         typeComponentAdapter ( type ) {
             switch ( type ) {
@@ -83,7 +94,17 @@ export default {
                     break;
                 }
             }
-        }
+        },
+        choose ( { index, value, } ) {
+            Vue.set( this.values, index, value );
+        },
+        loadValues ( ) {
+            this.initValues ? this.values = _.cloneDeep( this.initValues ) : void 0;
+
+            this.values.forEach( ( item, index ) => {
+                this.form[ index ].value = item;
+            } )
+        },
     },
 };
 </script>

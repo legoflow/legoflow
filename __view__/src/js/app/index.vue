@@ -4,12 +4,13 @@
         <div class="view" :style="{ transform: `translate3d( ${ `${ viewIndex * -100 }%` }, 0, 0 )` }">
             <component
                 v-for="( item, $index ) in view"
-                key="$index"
+                :key="$index"
                 :is="item.component"
                 :style="{ left: 100 * $index + '%' }"
             >
             </component>
         </div>
+        <update-component></update-component>
     </div>
 </template>
 
@@ -17,8 +18,9 @@
 @import "~var";
 
 #app {
-    width: 100%;
+    width: 280px;
     height: 100%;
+    transform: translate( 0, 0 );
 }
 
 .view {
@@ -39,25 +41,31 @@
 
 <script>
 import HeaderMacComponent from './header_mac';
-import ViewNewComponent from './view_new';
-import ViewListComponent from './view_list';
-import ViewLogComponent from './view_log';
+import NewComponent from './new';
+import ListComponent from './list';
+import LogComponent from './log';
+import UpdateComponent from './update';
 
 export default {
     computed: Vuex.mapState( [ 'view', 'viewIndex' ] ),
     components: {
         HeaderMacComponent,
-        ViewNewComponent,
-        ViewListComponent,
-        ViewLogComponent,
+        NewComponent,
+        ListComponent,
+        LogComponent,
+        UpdateComponent,
     },
     data ( ) {
         return {
-            headerComponent: app.system == 'mac' ? 'HeaderMacComponent' : 'HeaderWinComponent',
+            headerComponent: window.config.system == 'mac' ? 'HeaderMacComponent' : 'HeaderWinComponent',
         }
     },
     mounted ( ) {
-        console.log( app );
+        window.ipc.mainWindow.show( );
+
+        setTimeout(() => {
+            this.$store.commit( 'SHOW_UPDATE' );
+        }, 3000);
     },
 };
 </script>

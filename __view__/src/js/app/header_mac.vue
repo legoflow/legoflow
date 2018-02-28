@@ -6,7 +6,7 @@
         </div>
         <div class="menu">
             <div class="menu-active" v-show="isShowMenuActive" :style="{ transform: `translate3d( ${ menuActiveX }, 0, 0 )` }"></div>
-            <div class="menu-item" v-for="( item, $index ) in view" key="$index" @click="chooseItem( $index )">{{ item.label }}</div>
+            <div class="menu-item" v-for="( item, $index ) in view" :key="$index" @click="chooseItem( $index )">{{ item.label }}</div>
         </div>
     </header>
 </template>
@@ -20,6 +20,7 @@ header {
     height: 45px;
     line-height: 45px;
     background-color: $mainColor;
+    z-index: 9999;
 }
 
 .menu {

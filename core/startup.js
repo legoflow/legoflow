@@ -2,7 +2,10 @@
 
 const { BrowserWindow } = require('electron');
 
+const webSetting = require('./common/web_setting');
+
 let mainWindow = void 0;
+let settingWindow = void 0;
 
 module.exports = ( app ) => {
     global.__util = require('./lib/util');
@@ -14,14 +17,13 @@ module.exports = ( app ) => {
         root: app.getAppPath( ).pathNorm( ),
         system: process.platform == 'win32' ? 'win' : 'mac',
         env: process.argv[ 2 ] || 'build',
-        user: '',
     }, config );
 
-    return ( ) => {
+    return async ( ) => {
         const { system, debug, root } = __config;
 
         let option = {
-            resizable : false,
+            resizable: false,
             fullscreen: false,
             show: false,
         }
@@ -49,9 +51,15 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
+        debug ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
+
+        webSetting( mainWindow );
+
+        await webSetting.updateConfig( );
+
         global.__messager = require('./lib/messager')( mainWindow );
 
-        debug ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
+        debug ? mainWindow.loadURL( 'http://localhost:3000/#/setting' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/` );
 
         debug ? mainWindow.webContents.openDevTools({ mode: 'right' }) : void 0;
 
@@ -59,10 +67,30 @@ module.exports = ( app ) => {
 
         mainWindow.on( 'closed', app.quit );
 
+        // render setting window
+        settingWindow = new BrowserWindow( {
+            width: 300,
+            height: 400,
+            resizable: false,
+            fullscreen: false,
+            fullscreenable: false,
+            maximizable: false,
+            center: true,
+            show: false,
+        } );
+
+        settingWindow.setMenu( null );
+
+        debug ? settingWindow.loadURL( 'http://localhost:3000/#/setting' ) : settingWindow.loadURL( `file://${ root }/view/index.html/#/setting` );
+
+        app.on( 'before-quit', ( ) => settingWindow.webContents.send( 'APP_QUIT' ) );
+
         // to create tray
         require('./tray')( mainWindow );
 
         // render IPC
-        require('./ipc')( app, mainWindow );
+        require('./ipc')( app, mainWindow, settingWindow );
     };
 };
+
+

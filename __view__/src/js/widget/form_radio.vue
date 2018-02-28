@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <div :class="[ 'radio', checked ? 'checked' : void 0 ]"></div>
+        <div :class="[ 'radio', value ? 'checked' : void 0 ]"></div>
         <div class="radio-label" @click="toggleChecked">
             {{ item.label }}
         </div>
@@ -56,19 +56,10 @@
 
 <script>
 export default {
-    props: [ 'item' ],
-    created ( ) {
-        const { checked } = this.item;
-        typeof checked !== 'undefined' ? this.checked = checked : void 0;
-    },
-    data ( ) {
-        return {
-            checked: false,
-        }
-    },
+    props: [ 'item', 'index', 'value' ],
     methods: {
         toggleChecked ( ) {
-            this.checked = !this.checked;
+            this.$emit( 'choose', { index: this.index, value: !this.value } );
         }
     },
 };
