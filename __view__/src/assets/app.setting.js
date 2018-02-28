@@ -4,6 +4,7 @@ const USER = '@user';
 const PORT = '@port';
 const EDITOR = '@editor';
 const AUTO_OPEN_CHROME = '@autoOpenChrome';
+const PROJECT = '@project';
 
 if ( !window.localStorage[ USER ] ) {
     window.localStorage[ USER ] = '';
@@ -21,6 +22,10 @@ if ( !window.localStorage[ AUTO_OPEN_CHROME ] ) {
     window.localStorage[ AUTO_OPEN_CHROME ] = 'true';
 }
 
+if ( !window.localStorage[ PROJECT ] ) {
+    window.localStorage[ PROJECT ] = '[]';
+}
+
 window.appSetting = {
     get ( key ) {
         switch ( key ) {
@@ -28,12 +33,14 @@ window.appSetting = {
             case 'port': return window.localStorage[ PORT ];
             case 'editor': return window.localStorage[ EDITOR ];
             case 'autoOpenChrome': return JSON.parse( window.localStorage[ AUTO_OPEN_CHROME ] );
+            case 'project': return JSON.parse( window.localStorage[ PROJECT ] );
             default:
                 return {
                     user: window.localStorage[ USER ],
                     port: window.localStorage[ PORT ],
                     editor: window.localStorage[ EDITOR ],
                     autoOpenChrome: JSON.parse( window.localStorage[ AUTO_OPEN_CHROME ] ),
+                    project: JSON.parse( window.localStorage[ PROJECT ] ),
                 };
         }
     },
@@ -43,6 +50,7 @@ window.appSetting = {
             case 'port': window.localStorage[ PORT ] = value;
             case 'editor': window.localStorage[ EDITOR ] = value;
             case 'autoOpenChrome': window.localStorage[ AUTO_OPEN_CHROME ] = value;
+            case 'project': window.localStorage[ PROJECT ] = JSON.stringify( value );
         }
 
         window.ipc.updateConfig( );
@@ -52,5 +60,6 @@ window.appSetting = {
         delete window.localStorage[ PORT ];
         delete window.localStorage[ EDITOR ];
         delete window.localStorage[ AUTO_OPEN_CHROME ];
+        delete window.localStorage[ PROJECT ];
     },
 }

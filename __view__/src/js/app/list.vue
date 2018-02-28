@@ -1,12 +1,14 @@
 <template>
     <div class="view-content" ref="content">
+        <div class="list-empty" v-if="project.length === 0">请点击 "新建" 以创建项目</div>
         <div class="list" ref="list">
             <div
+                v-if="project.length > 0"
                 :class="[ 'list-acitve', project[ projectActiveIndex ].dev || project[ projectActiveIndex ].build ? 'running' : void 0 ]"
                 :style="{ transform: `translate3d( 0, ${ projectActiveIndex * 49 }px, 0 )` }"
                 ref="active"
             >
-                <div class="list-acitve-del"></div>
+                <div class="list-acitve-del" @click="deleteProject"></div>
                 <div class="list-active-running"></div>
             </div>
             <div class="list-item" v-for="( item, $index ) in project" :key="item.id" @click="chooseProjectAcitveIndex( $index )">
@@ -28,6 +30,18 @@
     width: 100%;
     height: calc( 100% - 45px );
     overflow: auto;
+}
+
+.list-empty {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: rgba( 0, 0, 0, .15 );
+    -webkit-touch-callout: none;
+    user-select: none;
 }
 
 .list-acitve {
@@ -194,6 +208,9 @@ export default {
 					},
 			    } );
 		    } )
+        },
+        deleteProject ( ) {
+            this.$store.commit( 'DEL_PROJECT', this.projectActiveIndex );
         },
     },
     watch: {

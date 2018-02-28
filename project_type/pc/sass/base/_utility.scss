@@ -1,0 +1,316 @@
+/**
+ * @file: 通用辅助工具类
+ * @author: David
+ */
+
+
+/* ==========================================================================
+   基础工具@basis
+   ========================================================================== */
+
+/**
+ * 闭合浮动
+ */
+.u-clearfix {
+    @include clearfix;
+}
+
+/* 浮动 */
+.u-left {
+    @include float(left, true);
+}
+.u-right {
+    @include float(right, true);
+}
+
+/* 隐藏 */
+.u-hide {
+    display: none;
+}
+
+
+/* ==========================================================================
+   字体排版@type
+   @字体策略参考：http://zenozeng.github.io/fonts.css/
+   ========================================================================== */
+
+/**
+ * 文字溢出显示省略号,需指定宽度
+ */
+.u-ellipsis {
+    display: block;
+    @include ellipsis;
+}
+
+/* 强制不换行 */
+.u-nowrap {
+    @include nowrap;
+}
+
+/* 连续字符换行 */
+.u-wrap {
+    @include break;
+}
+
+/**
+ * 禁用中文输入法
+ * @note: 仅 IE 5+，Firefox 3+ 支持
+ * @doc:  https://developer.mozilla.org/en-US/docs/Web/CSS/ime-mode
+ * 1. 默认关闭输入法，但用户还可以手动开启，Firefox Linux 版不支持。
+*/
+.u-imeInactive {
+    ime-mode: inactive !important; /* 1 */
+}
+
+/**
+ * OS X 字体平滑
+ * 1. Fiefox 25 开始支持「-moz-osx-font-smoothing:auto(默认)|grayscale」
+ */
+.u-antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; /* 1 */
+}
+
+/**
+ * 雅黑
+ * 对于西文，OS X使用"Helvetica Neue", Helvetica； Windows使用Arial；
+ */
+.u-heiti,
+%u-heiti {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang sc", Lantinghei SC, "Microsoft YaHei", "Hiragino Sans GB", "Microsoft Sans Serif", "Wenquanyi Micro Hei", "ST Heiti", SimHei, sans-serif;
+}
+
+/**
+ * 宋体
+ * 使用宋体时字号不宜超过14px，并且不宜设置字体平滑
+ */
+.u-songti,
+%u-songti {
+    font-family: "Songti SC", STSong, SimSun, "WenQuanYi Bitmap Song", serif;
+}
+
+/**
+ * 楷体
+ * 对于西文，使用Georgia
+ */
+.u-kaiti,
+%u-kaiti {
+    font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, "TW\-Kai", serif;;
+}
+
+/* 等宽字体 */
+.u-monospace,
+%u-monospace {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+
+/* ==========================================================================
+   通用组件@component
+   @参考: Neat.css | MIT License
+   ========================================================================== */
+
+/**
+ * @component: 消除空隙的inline-block
+ * @usage: 结构如下
+    <div class="u-inb">
+        <span class="u-inb__item">xxx</span>
+        <span class="u-inb__item">xxx</span>
+        <span class="u-inb__item">xxx</span>
+        <span class="u-inb__item">xxx</span>
+    </div>
+ * 1. 针对所有现代浏览器
+ * 2. fixed IE6/7 1px
+ * 3. fixed Safari 5- 等不支持 font-size: 0 的浏览器
+ * 4. 字号大小
+ */
+
+.u-inb {
+    font-size: 0; /* 1 */
+    *word-spacing: -1px; /* 2 */
+}
+@media (-webkit-min-device-pixel-ratio:0) {
+    .u-inb {
+        letter-spacing: -5px; /* 3 */
+    }
+}
+.u-inb__item {
+    @include inline-block(top, true);
+    font-size: 12px; /* 4 */
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: initial;
+}
+
+/**
+ * @component: 未知高度垂直居中组件，支持图片，单行或多行文字，以及图文混排
+ * @usage: 结构如下
+    <div class="u-center">
+        <div class="u-center__inner">
+            <p>xxxxxxx</p>
+            <p>xxxxxxx</p>
+        </div>
+        <span class="u-center__hack"></span>
+    </div>
+ * 1. 继承父级高度
+ * 2. 保证连续字符也能居中
+ * 3. 防止设置边距导致居中失效
+ * 4. 保证连续字符换行
+ * 5. 保证文字垂直居中
+ * 6. 使用空标签生成一个高度100%的参照元素
+ */
+
+.u-center {
+    height: 100%; /* 1 */
+    text-align: center;
+    font-size: 0;
+    *word-spacing: -1px;
+}
+@media (-webkit-min-device-pixel-ratio:0) {
+    .u-center {
+        letter-spacing: -5px;
+    }
+}
+.u-center__inner {
+    width: 100%; /* 2 */
+    padding: 0 !important; /* 3 */
+    margin: 0 !important;
+    font-size: 12px;
+    letter-spacing: normal;
+    word-spacing: normal;
+    white-space: normal; /* 4 */
+    word-wrap: break-word;
+}
+.u-center__inner,
+.u-center__hack {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle; /* 5 */
+}
+/* 6 */
+.u-center__hack {
+    width: 0;
+    height: 100%;
+}
+
+/**
+ * @component: 自适应两端对齐组件
+ * @update: 2016-02-03 14:43:18
+ * @usage: 结构如下
+    <div class="u-justify">
+        <span class="u-justify__item">欢</span>
+        <span class="u-justify__item">聚</span>
+        <span class="u-justify__item">时</span>
+        <span class="u-justify__item">代</span>
+    </div>
+    1. 针对所有现代浏览器
+    2. fixed IE6/7 1px
+    3. for IE 6-7
+    4. IE 6-7 触发 hasLayout 使一行也能两端对齐
+    5. IE 8+
+    6. 不支持 text-align-last 的浏览器用伪元素模拟
+    7. margin-left:100% 仅 WebKit 支持
+    8. fixed Safari 5- 等不支持 font-size: 0 的浏览器
+    9. 子元素取消两端对齐
+    10. 字号大小
+ */
+.u-justify {
+    font-size: 0; /* 1 */
+    *word-spacing: -1px; /* 2 */
+
+    text-align: justify;
+    text-justify: inter-ideograph; /* 3 */
+    *zoom: 1; /* 4 */
+    line-height: initial;
+    -moz-text-align-last: justify;
+    -webkit-text-align-last: justify;
+    text-align-last: justify; /* 5 */
+
+    /* 6 */
+    &:after {
+        content: "";
+        display: inline-block;
+        width: 100%; /* 7 */
+    }
+}
+@media (-webkit-min-device-pixel-ratio:0) {
+    .u-justify {
+        letter-spacing: -5px; /* 8 */
+    }
+}
+/* 9 */
+.u-justify__item {
+    @include inline-block(top, true);
+    font-size: 12px; /* 10 */
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: initial;
+
+    -moz-text-align-last: auto;
+    -webkit-text-align-last: auto;
+    text-align-last: auto;
+    text-justify: auto;
+    text-align: left;
+}
+
+
+/**
+ * @component: CSS三角形
+ */
+$border-width: 6px; // 三角形边长
+$arrow-color: #666; // 三角形颜色
+.u-arrow {
+    width: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    @include inline-block(-2px, true);
+    border: 0 solid transparent;
+    border-width: $border-width;
+    font-size: 0;
+    &.ext-top {
+        border-bottom-style: solid;
+        border-bottom-color: $arrow-color;
+    }
+    &.ext-bottom {
+        border-top-style: solid;
+        border-top-color: $arrow-color;
+    }
+    &.ext-left {
+        border-right-style: solid;
+        border-right-color: $arrow-color;
+    }
+    &.ext-right {
+        border-left-style: solid;
+        border-left-color: $arrow-color;
+    }
+
+    /* ◤左上角 */
+    &.ext-leftTop {
+        border-top-style: solid;
+        border-top-color: $arrow-color;
+        border-left-width: 0 !important;
+    }
+
+    /* ◥右上角 */
+    &.ext-rightTop {
+        border-top-style: solid;
+        border-top-color: $arrow-color;
+        border-right-width: 0 !important;
+    }
+
+    /* ◣左下角 */
+    &.ext-leftBtm {
+        border-bottom-style: solid;
+        border-bottom-color: $arrow-color;
+        border-left-width: 0 !important;
+    }
+
+    /* ◢右下角 */
+    &.ext-rightBtm {
+        border-bottom-style: solid;
+        border-bottom-color: $arrow-color;
+        border-right-width: 0 !important;
+    }
+}

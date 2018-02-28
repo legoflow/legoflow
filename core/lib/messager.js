@@ -3,18 +3,18 @@
 module.exports = ( mainWindow ) => {
     const messager = { };
 
-    const sender = ( type, msg ) => {
+    const sender = ( type, data ) => {
         // send to view
-        mainWindow.webContents.send( 'messager', { type, msg, });
+        mainWindow.webContents.send( 'MESSAGER', { type, data });
 
-        console[ console[ type ] ? type : 'log' ]( `[logger ${ type }]: `, msg );
+        console[ console[ type ] ? type : 'log' ]( `[MESSAGER ${  type.toUpperCase( ) }]:`, data );
     }
 
-    messager.info = msg => sender( 'info', msg );
+    messager.info = data => sender( 'info', data );
 
-    messager.error = msg => sender( 'error', msg );
+    messager.error = data => sender( 'error', data );
 
-    messager.event = msg => sender( 'event', msg );
+    messager.event = data => sender( 'event', data );
 
     return messager;
 };

@@ -86,6 +86,8 @@ export default {
         setChooseIndexFromValue ( ) {
             const { value, item } = this;
 
+            this.chooseIndex = void 0;
+
             if ( value && item.options ) {
                 item.options.forEach( ( i, index ) => {
                     i.value == value ? this.chooseIndex = index : void 0;

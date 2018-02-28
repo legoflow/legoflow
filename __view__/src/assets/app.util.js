@@ -1,5 +1,7 @@
 'use strict';
 
+const { dialog } = require('electron').remote;
+
 window.appUtil = {
     debounce ( time, action ) {
         var timer = void 0;
@@ -13,5 +15,19 @@ window.appUtil = {
                 action.apply( ctx, args );
             }, time );
         }
-    }
+    },
+    openDialog ( ) {
+        return new Promise( ( resolve, reject ) => {
+            dialog.showOpenDialog( { properties: [ 'openDirectory' ] }, ( path ) => {
+                resolve( path ? path[ 0 ] : void 0 );
+            } )
+        } );
+    },
+    UUID ( ) {
+        function s4 ( ) {
+            return Math.floor( ( 1 + Math.random( ) )  * 0x10000 ).toString( 16 ).substring( 1 );
+        }
+
+        return s4( ) + s4( ) + new Date( ).getTime( );
+    },
 }

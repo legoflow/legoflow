@@ -12,10 +12,10 @@ window.ipc = {
     },
     mainWindow: {
         min ( ) {
-            ipcRenderer.send( 'MIAN_WINDOW_MIN' );
+            ipcRenderer.send( 'MAIN_WINDOW_MIN' );
         },
         show ( ) {
-            ipcRenderer.send( 'MIAN_WINDOW_SHOW' );
+            ipcRenderer.send( 'MAIN_WINDOW_SHOW' );
         },
         hide ( ) {
             ipcRenderer.send( 'MAIN_WINDOW_HIDE' );
@@ -32,4 +32,18 @@ window.ipc = {
     updateConfig ( ) {
         ipcRenderer.send( 'UPDATE_CONFIG' );
     },
+    project: {
+        new ( data ) {
+            ipcRenderer.send( 'PROJECT_NEW', data );
+        },
+    },
 }
+
+ipcRenderer.on( 'MESSAGER', ( event, data ) => {
+    window.vm && window.vm.messager( data );
+} )
+
+// 新建项目成功
+ipcRenderer.on( 'PROJECT_NEW_SUCCESS', ( event, data ) => {
+    window.vm && window.vm.projectNewSuccess( data );
+} )

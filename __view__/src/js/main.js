@@ -22,7 +22,7 @@ const router = new VueRouter( {
     routes,
 } )
 
-window.vm = new Vue( {
+new Vue( {
     store,
     router,
     render ( h ) {

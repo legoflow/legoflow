@@ -55,6 +55,10 @@ export default {
         LogComponent,
         UpdateComponent,
     },
+    created ( ) {
+        window.vm = this;
+        window.eventBus = new Vue( );
+    },
     data ( ) {
         return {
             headerComponent: window.config.system == 'mac' ? 'HeaderMacComponent' : 'HeaderWinComponent',
@@ -66,6 +70,39 @@ export default {
         // setTimeout(() => {
         //     this.$store.commit( 'SHOW_UPDATE' );
         // }, 3000);
+    },
+    methods: {
+        projectNewSuccess ( { name, path, version } ) {
+            const id = window.appUtil.UUID( );
+
+            const project = {
+                id, name, path, version,
+                dev: false, build: false,
+            };
+
+            this.$store.commit( 'ADD_PROJECT', { index: 0, project } );
+            this.$store.commit( 'SET_VIEW_INDEX', 1 );
+
+            window.eventBus.$emit( 'PROJECT_NEW_RESET' );
+
+            alert( '新建项目成功' );
+        },
+        messager ( { type, data } ) {
+            switch ( type ) {
+                case 'info': {
+
+                    break;
+                }
+                case 'error': {
+
+                    break;
+                }
+                case 'event': {
+                    alert( data );
+                    break;
+                }
+            }
+        },
     },
 };
 </script>

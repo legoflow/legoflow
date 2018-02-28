@@ -1,0 +1,30 @@
+/*
+ * 基础模块 & 全局变量配置
+ * 
+ * 字体策略
+ * 1. 默认：使用无衬线体，OSX中文使用苹方与冬青黑体，Windows中文使用微软雅黑，Linux中文使用文泉雅黑；
+ * 2. 黑体：通过字体辅助类.u-heiti 或者 @extend %u-heiti来调用；
+ * 3. 宋体：通过字体辅助类.u-songti 或者 @extend %u-songti来调用；
+ * 3. 楷体：通过字体辅助类.u-kaiti 或者 @extend %u-kaiti来调用；
+ * 4. 参考链接：http://www.zhihu.com/question/19911793   http://zenozeng.github.io/fonts.css/
+ *
+ */
+
+// 文本配置
+$b-font-size       : 12px !default;
+$b-font-family     : "San Francisco", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif !default;
+$b-font-weight     : 300 !default;
+$b-line-height     : 1.5 !default;
+$b-link-decoration : underline !default;
+
+// 颜色配置
+$c-text       : #333 !default;
+$c-background : #fff !default;
+$c-link       : #333 #fa0 !default;
+
+// 基础模块
+@import "mixins";
+@import "normalize";
+@import "reset";
+@import "utility";
+// @import "print";

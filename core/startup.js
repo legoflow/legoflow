@@ -46,7 +46,6 @@ module.exports = ( app ) => {
         if ( debug ) {
             option.width  = 800;
             option.height = 480;
-            option.show = true;
         }
 
         mainWindow = new BrowserWindow( option );
