@@ -47,7 +47,7 @@ import LogComponent from './log';
 import UpdateComponent from './update';
 
 export default {
-    computed: Vuex.mapState( [ 'view', 'viewIndex' ] ),
+    computed: Vuex.mapState( [ 'view', 'viewIndex', 'project' ] ),
     components: {
         HeaderMacComponent,
         NewComponent,
@@ -77,7 +77,7 @@ export default {
 
             const project = {
                 id, name, path, version,
-                dev: false, build: false,
+                dev: { launch: false, run: false }, build: false,
             };
 
             this.$store.commit( 'ADD_PROJECT', { index: 0, project } );
@@ -100,6 +100,53 @@ export default {
                 case 'event': {
                     alert( data );
                     break;
+                }
+            }
+        },
+        projectWorkflow ( { type, state, data } ) {
+            const { id } = data;
+
+            let project = void 0;
+            let index = void 0;
+
+            this.project.forEach( ( item, i ) => {
+                if ( item.id === id ) {
+                    project = item;
+                    index = i;
+                }
+            } );
+
+            if ( !project ) {
+                return void 0;
+            }
+
+            if ( type === 'dev' ) {
+                switch ( state ) {
+                    case 'launch': {
+                        this.$store.commit( 'SET_PROJECT_WORKFLOW_DEV_IN_STATE', { index, attr: 'launch' } );
+                        break;
+                    }
+                    case 'run': {
+                        this.$store.commit( 'SET_PROJECT_WORKFLOW_DEV_IN_STATE', { index, attr: 'run' } );
+                        break;
+                    }
+                    case 'stop': {
+                        this.$store.commit( 'SET_PROJECT_WORKFLOW_DEV_IN_STATE', { index, attr: 'stop' } );
+                        break;
+                    }
+                }
+            }
+
+            if ( type === 'build' ) {
+                switch ( state ) {
+                    case 'run': {
+                        this.$store.commit( 'SET_PROJECT_WORKFLOW_BUILD_IN_STATE', { index, value: true } );
+                        break;
+                    }
+                    case 'stop': {
+                        this.$store.commit( 'SET_PROJECT_WORKFLOW_BUILD_IN_STATE', { index, value: false } );
+                        break;
+                    }
                 }
             }
         },

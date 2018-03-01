@@ -34,21 +34,26 @@ String.prototype.toConfig = function ( ) {
 }
 
 // 路径字符串 转配置
-String.prototype.getConfig = function ( ) {
+String.prototype.getConfig = function ( _config_ ) {
     const folder = this.toString( );
 
     const jsonConfig = path.resolve( folder, './legoflow.json' );
     const jsConfig = path.resolve( folder, './legoflow.js' );
 
+    let config = void 0;
+
     if ( fs.existsSync( jsonConfig ) ) {
-        return jsonConfig.toConfig( );
+        config = jsonConfig.toConfig( );
+    }
+    else if ( fs.existsSync( jsConfig ) ) {
+        config = jsConfig.toConfig( );
     }
 
-    if ( fs.existsSync( jsConfig ) ) {
-        return jsConfig.toConfig( );
+    if ( config ) {
+        config = Object.assign( config, __config, _config_ );
     }
 
-    return void 0;
+    return config;
 }
 
 const util = { };

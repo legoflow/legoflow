@@ -34,4 +34,12 @@ export default {
     SHOW_UPDATE ( state ) {
         state.isShowUpdateComponent = true;
     },
+    SET_PROJECT_WORKFLOW_DEV_IN_STATE ( state, { index, attr } ) {
+        for ( let item in state.project[ index ].dev ) {
+            item === attr ? state.project[ index ].dev[ item ] = true : state.project[ index ].dev[ item ] = false;
+        }
+    },
+    SET_PROJECT_WORKFLOW_BUILD_IN_STATE ( state, { index, value } ) {
+        state.project[ index ].build = value;
+    },
 };

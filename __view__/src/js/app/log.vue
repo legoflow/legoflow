@@ -87,10 +87,10 @@
         }
     }
     .success {
-        color: $successColor !important;
+        color: $greenColor !important;
     }
     .error {
-        color: $errorColor !important;
+        color: $redColor !important;
     }
 }
 

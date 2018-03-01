@@ -39,7 +39,7 @@ ipc.on( 'WORKFLOW_DEV_RUN', ( event, data ) => {
 
     const { id, name, path } = data;
 
-    let config = path.getConfig( );
+    const config = path.getConfig( data );
 
     if ( !config ) {
         __messager.event( '找不到配置文件' );
@@ -47,14 +47,20 @@ ipc.on( 'WORKFLOW_DEV_RUN', ( event, data ) => {
         return void 0;
     }
 
-    config = Object.assign( config, __config );
+    // console.log( config );
 
-    console.log( config );
+    event.sender.send( 'WORKFLOW_DEV_RUN_LAUNCH', config );
 
-    event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
+    setTimeout( ( ) => {
+        event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
+    }, 5000 )
 } )
 
 // 关闭开发工作流
 ipc.on( 'WORKFLOW_DEV_STOP', ( event, data ) => {
+    const { id, name, path } = data;
 
+    const config = path.getConfig( data );
+
+    event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
 } )

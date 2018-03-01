@@ -4,7 +4,10 @@
         <div class="list" ref="list">
             <div
                 v-if="project.length > 0"
-                :class="[ 'list-acitve', project[ projectActiveIndex ].dev || project[ projectActiveIndex ].build ? 'running' : void 0 ]"
+                :class="[
+                    'list-acitve',
+                    project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run || project[ projectActiveIndex ].build ? 'running' : void 0
+                ]"
                 :style="{ transform: `translate3d( 0, ${ projectActiveIndex * 49 }px, 0 )` }"
                 ref="active"
             >

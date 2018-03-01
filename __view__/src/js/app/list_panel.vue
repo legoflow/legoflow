@@ -15,8 +15,26 @@
                 <div class="panel-content-ico" @click="toggleShowLogPanel" @dblclick="autoShowLogPanel"></div>
             </div>
             <div class="panel-content-btns">
-                <button @click="dev">开发</button>
-                <button @click="build">构建</button>
+                <button :class="[
+                        project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run ) ? 'is-running' : '',
+                        project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run ) && isMoveOnDevBtn ? 'stop-state' : '',
+                    ]"
+                    @click="dev"
+                    @mouseleave="( ) => isMoveOnDevBtn = false"
+                    @mouseenter="( ) => isMoveOnDevBtn = true"
+                >
+                    {{ devBtnText( ) }}
+                </button>
+                <button :class="[
+                        project[ projectActiveIndex ] && project[ projectActiveIndex ].build ? 'is-running' : '',
+                        project[ projectActiveIndex ] && project[ projectActiveIndex ].build && isMoveOnBuildBtn ? 'stop-state' : '',
+                    ]"
+                    @click="build"
+                    @mouseleave="( ) => isMoveOnBuildBtn = false"
+                    @mouseenter="( ) => isMoveOnBuildBtn = true"
+                >
+                    {{ buildBtnText( ) }}
+                </button>
             </div>
         </div>
     </div>
@@ -134,8 +152,19 @@
         color: $mainColor;
         letter-spacing: 1px;
         cursor: pointer;
+        transition: all .1s ease;
     }
 }
+
+.is-running {
+    background-color: $mainColor !important;
+    color: $whiteColor !important;
+}
+
+.stop-state {
+    background-color: $redColor !important;
+}
+
 </style>
 
 <script>
@@ -145,6 +174,8 @@ export default {
         return {
             isAutoToggleLogPanel: true,
             isShowLogPanel: false,
+            isMoveOnDevBtn: false,
+            isMoveOnBuildBtn: false,
         };
     },
     methods: {
@@ -169,11 +200,11 @@ export default {
 
             const { workflow: { dev } } = window.ipc;
 
-            if ( !project.dev ) {
+            if ( !project.dev.launch && !project.dev.run ) {
                 let devingProjectNumber = 0;
 
                 this.project.forEach( ( item ) => {
-                    item.dev ? ++devingProjectNumber : void 0;
+                    item.dev.launch && project.dev.run ? ++devingProjectNumber : void 0;
                 } );
 
                 if ( devingProjectNumber >= 5 ) {
@@ -181,7 +212,7 @@ export default {
                     return void 0;
                 }
 
-                dev.run( project )
+                dev.run( project );
             }
             else {
                 dev.stop( project );
@@ -193,6 +224,30 @@ export default {
             const { workflow: { build } } = window.ipc;
 
             !project.build ? build.run( project ) : build.stop( project );
+        },
+        devBtnText ( ) {
+            if ( !this.project[ this.projectActiveIndex ] ) {
+                return '开发';
+            }
+
+            const isDevLaunch = this.project[ this.projectActiveIndex ].dev.launch;
+            const isDevRun = this.project[ this.projectActiveIndex ].dev.run;
+
+            if ( !isDevLaunch && !isDevRun ) { return '开发' };
+            if ( isDevLaunch && !this.isMoveOnDevBtn ) { return '启动中' };
+            if ( isDevRun && !this.isMoveOnDevBtn ) { return '监听中' };
+            if ( this.isMoveOnDevBtn && ( isDevLaunch || isDevRun ) ) { return '停止' };
+        },
+        buildBtnText ( ) {
+            if ( !this.project[ this.projectActiveIndex ] ) {
+                return '构建';
+            }
+
+            const isBuildRun = this.project[ this.projectActiveIndex ].build;
+
+            if ( !isBuildRun ) { return '构建' };
+            if ( isBuildRun && !this.isMoveOnDevBtn ) { return '构建中' };
+            if ( this.isMoveOnDevBtn && isBuildRun ) { return '停止' };
         },
     },
     watch: {
