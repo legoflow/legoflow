@@ -8,7 +8,7 @@ let mainWindow = void 0;
 let settingWindow = void 0;
 
 module.exports = ( app ) => {
-    global.__util = require('./lib/util');
+    global.__util = require('./common/util');
 
     const { config } = require('../package.json');
 
@@ -56,7 +56,7 @@ module.exports = ( app ) => {
 
         await webSetting.updateConfig( );
 
-        global.__messager = require('./lib/messager')( mainWindow );
+        global.__messager = require('./common/messager')( mainWindow );
 
         debug ? mainWindow.loadURL( 'http://localhost:3000/#/app' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/app` );
 

@@ -1,5 +1,9 @@
 'use strict';
 
+const ps = require('ps-node');
+const path = require('path');
+const { fork } = require('child_process');
+
 const ipcWorkflowFactory = require('../common/ipc_workflow_factory');
 
 let app, mainWindow;
@@ -31,21 +35,88 @@ const register = ( { id } ) => {
 	return port;
 }
 
+// 停止指定开发进程
+const killer = ( id ) => {
+    let pid = void 0;
+    let key = void 0;
+
+    for ( let _key_ in __workflowDevPid ) {
+         if ( __workflowDevPid[ _key_ ].id === id ) {
+            pid = __workflowDevPid[ _key_ ].pid;
+            key = _key_;
+         }
+    }
+
+    if ( typeof pid === 'undefined' ) {
+        return void 0;
+    }
+
+    return new Promise( ( resolve, reject ) => {
+        ps.kill( pid, ( e ) => {
+            if ( e ) {
+                reject( );
+            }
+            else {
+                __workflowDevPid[ key ] = '';
+                resolve( );
+            }
+        } );
+    } );
+}
+
 // 启动开发工作流
 ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     const webpackPort = register( config );
 
-    // console.log( config );
-
     event.sender.send( 'WORKFLOW_DEV_RUN_LAUNCH', config );
 
-    setTimeout( ( ) => {
+    const thread = fork( path.resolve( __dirname, '../workflow/dev' ) );
+
+    __workflowDevPid[ webpackPort ].pid = thread.pid;
+
+    thread.send( config );
+
+    let messager = void 0;
+
+    const SUCCESS_EXEC = ( ) => {
         event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
-    }, 5000 )
+    }
+
+    const STOP_EXEC = ( { msg } ) => {
+        messager ? messager( { type: 'error', msg } ) : void 0;
+
+        event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
+    }
+
+    messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
+
+    thread.on( 'message', messager );
+
+    // setTimeout( ( ) => {
+    //     event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
+    // }, 5000 )
 } );
 
 
 // 关闭开发工作流
 ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', ( event, config ) => {
-    event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
+    const result = killer( config.id );
+
+    const FAIL_EXEC = ( ) => {
+        __messager.event( '停止开发工作流失败' );
+    }
+
+    if ( !result ) {
+        FAIL_EXEC( );
+
+        return void 0;
+    }
+
+    result
+        .then( ( ) => {
+            event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
+        } )
+        .catch( ( e ) => {
+            FAIL_EXEC( );
+        } )
 } )

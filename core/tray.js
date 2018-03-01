@@ -19,10 +19,10 @@ module.exports = ( mainWindow ) => {
 
     tray.on( 'click', mainWindow.show );
 
-    tray.on( 'drop-files', ( e, path ) => {
-        e.preventDefault();
+    tray.on( 'drop-files', ( event, path ) => {
+        event.preventDefault( );
 
-        mainWindow.show();
+        mainWindow.show( );
 
         // TODO: 通知 view
     })
