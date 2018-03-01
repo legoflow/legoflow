@@ -1,12 +1,10 @@
 'use strict';
 
+const ipcWorkflowFactory = require('../common/ipc_workflow_factory');
+
 let app, mainWindow;
 
 module.exports = ( _app, _mainWindow ) => { app = _app, mainWindow = _mainWindow; }
-
-const electron = require('electron');
-
-const ipc = electron.ipcMain;
 
 global.__workflowDevPid = { };
 
@@ -34,18 +32,8 @@ const register = ( { id } ) => {
 }
 
 // 启动开发工作流
-ipc.on( 'WORKFLOW_DEV_RUN', ( event, data ) => {
-    const webpackPort = register( data );
-
-    const { id, name, path } = data;
-
-    const config = path.getConfig( data );
-
-    if ( !config ) {
-        __messager.event( '找不到配置文件' );
-
-        return void 0;
-    }
+ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
+    const webpackPort = register( config );
 
     // console.log( config );
 
@@ -54,13 +42,10 @@ ipc.on( 'WORKFLOW_DEV_RUN', ( event, data ) => {
     setTimeout( ( ) => {
         event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
     }, 5000 )
-} )
+} );
+
 
 // 关闭开发工作流
-ipc.on( 'WORKFLOW_DEV_STOP', ( event, data ) => {
-    const { id, name, path } = data;
-
-    const config = path.getConfig( data );
-
+ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', ( event, config ) => {
     event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
 } )

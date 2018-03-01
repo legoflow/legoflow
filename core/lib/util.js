@@ -56,6 +56,8 @@ String.prototype.getConfig = function ( _config_ ) {
     return config;
 }
 
-const util = { };
+const util = {
+
+};
 
 module.exports = util;
