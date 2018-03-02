@@ -17,11 +17,20 @@
   },
   "homepage": "https://github.com/legoflow/legoflow#readme",
   "dependencies": {
+    "cross-port-killer": "^1.0.1",
+    "del": "^3.0.0",
     "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.5",
+    "network": "^0.4.1",
     "ps-node": "^0.1.6",
     "shelljs": "^0.7.8"
   },
   "config": {
-    "debug": true
+    "debug": true,
+    "webpack": {
+      "originPort": 6600,
+      "originPortDev": 6500
+    }
   }
 }

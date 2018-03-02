@@ -16,6 +16,8 @@ module.exports = function ( key, main ) {
             return void 0;
         }
 
+        config.projectPath = config.path;
+
         main( event, config );
     } );
 };

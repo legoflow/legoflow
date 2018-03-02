@@ -12,7 +12,7 @@ module.exports = ( _app, _mainWindow ) => { app = _app, mainWindow = _mainWindow
 
 global.__workflowDevPid = { };
 
-let canUserPortForWebpack = __config.env === 'dev' ? 5680 : 5580;
+let canUserPortForWebpack = __config.env === 'dev' ? __config.webpack.originPortDev : __config.webpack.originPort;
 
 // 注册
 const register = ( { id } ) => {
@@ -68,6 +68,8 @@ const killer = ( id ) => {
 ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     const webpackPort = register( config );
 
+    config.webpackPort = webpackPort;
+
     event.sender.send( 'WORKFLOW_DEV_RUN_LAUNCH', config );
 
     const thread = fork( path.resolve( __dirname, '../workflow/dev' ) );
@@ -91,10 +93,6 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
 
     thread.on( 'message', messager );
-
-    // setTimeout( ( ) => {
-    //     event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
-    // }, 5000 )
 } );
 
 
@@ -107,13 +105,10 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', ( event, config ) => {
     }
 
     if ( !result ) {
-        FAIL_EXEC( );
-
-        return void 0;
+        FAIL_EXEC( ); return void 0;
     }
 
-    result
-        .then( ( ) => {
+    result.then( ( ) => {
             event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
         } )
         .catch( ( e ) => {

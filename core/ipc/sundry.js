@@ -1,6 +1,7 @@
 'use strict';
 
 const webSetting = require('../common/web_setting');
+const threadKiller = require('../common/thread_killer');
 
 let app, mainWindow, settingWindow;
 
@@ -14,9 +15,15 @@ const ipc = electron.ipcMain;
 
 // 应用重启
 ipc.on( 'APP_RESTART', ( event ) => {
-    // global.__kill.workflow( );
+    threadKiller( );
+
     app.relaunch( );
     app.exit( 0 );
+} )
+
+// 停止全部工作流进程
+ipc.on( 'THREAD_KILL', ( event ) => {
+    threadKiller( );
 } )
 
 // 最小化应用窗口
