@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "type": "pc",
+    "REM": false,
+    "ES.Next": true,
+    "alias": {
+        "$": "./src/assets/jquery.min.js",
+        "jquery": "./src/assets/jquery.min.js",
+        "jQuery": "./src/assets/jquery.min.js"
+    },
+    "global": {
+        "$": "jquery",
+        "jquery": "jquery",
+        "jQuery": "jquery"
+    }
+}

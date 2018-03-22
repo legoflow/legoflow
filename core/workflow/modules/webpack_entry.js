@@ -5,15 +5,16 @@ const glob = require('glob');
 
 module.exports = ( type, { hot, entry, projectPath, ip, webpackPort } ) => {
     let files = entry || [ ];
-    let entrys = [ ];
+    let entrys = { };
 
     if ( !entry ) {
         const jsFolderPath = path.resolve( projectPath, './src/js' );
-        files = glob.sync( `${ jsFolderPath }/*.js` ) || [ ];
+
+        files = glob.sync( `${ jsFolderPath }/*.*(js)` ) || [ ];
     }
 
     files.forEach( ( item, index ) => {
-        const basename = path.basename( item );
+        let basename = path.basename( item, '.js' );
 
         if ( item.indexOf( '_' ) !== 0 ) {
             if ( type === 'dev' ) {

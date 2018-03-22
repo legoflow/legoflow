@@ -3,6 +3,8 @@
 const messager = require('./modules/messager');
 const webpackEntry = require('./modules/webpack_entry');
 
+const devWebpack = require('./dev/webpack');
+
 const network = require('network');
 
 let config = void 0;
@@ -31,7 +33,14 @@ const run = async ( _config ) => {
 
     const entryFiles = webpackEntry( 'dev', config );
 
-    console.log( entryFiles );
+    config.entry = entryFiles;
+
+    try {
+        await devWebpack( config );
+    } catch ( err ) {
+        console.error( '[DEV@WEBPACK ERROR]', err );
+    }
+
 
     messager.success( `http://${ config.ip }:${ config.port }` );
 }
@@ -39,7 +48,7 @@ const run = async ( _config ) => {
 process.on( 'message', run );
 
 process.on( 'uncaughtException', ( err ) => {
-    console.error( '[WORKFLOW DEV UNCAUGHT EXCEPTION]', err );
+    console.error( '[DEV@UNCAUGHT EXCEPTION]', err );
 
     messager.error( err );
 } );

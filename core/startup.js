@@ -44,6 +44,7 @@ module.exports = ( app ) => {
         }
 
         if ( debug ) {
+            option.show = true;
             option.width  = 800;
             option.height = 480;
         }
@@ -52,6 +53,8 @@ module.exports = ( app ) => {
 
         debug ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
 
+        debug ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
+
         webSetting( mainWindow );
 
         await webSetting.updateConfig( );
@@ -59,8 +62,6 @@ module.exports = ( app ) => {
         global.__messager = require('./common/messager')( mainWindow );
 
         debug ? mainWindow.loadURL( 'http://localhost:3000/#/app' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/app` );
-
-        debug ? mainWindow.webContents.openDevTools({ mode: 'right' }) : void 0;
 
         mainWindow.setMenu( null );
 
