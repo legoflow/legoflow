@@ -151,23 +151,29 @@ module.exports = async ( config ) => {
 
     const compiler = webpack( webpackOptions );
 
-    new webpackDevServer( compiler, {
+    let webpackDevServerOptions =  {
         contentBase: srcFolderPath,
         hot: isHotReload,
         historyApiFallback: false,
         compress: false,
-        // quiet: true,
         noInfo: false,
         lazy: false,
+        quiet: true,
         filename: 'bundle.js',
         watchOptions: {
             aggregateTimeout: 100,
             poll: 1000,
         }
-    } )
-    .listen( webpackPort, ip, ( err ) => {
-        if ( err ) throw err;
+    }
 
-        console.log( '[WEBPACK SERVER]', `http://${ ip }:${ webpackPort }` );
-    } );
+    if ( config.env === 'dev' ) {
+        webpackDevServerOptions.quiet = false;
+    }
+
+    new webpackDevServer( compiler, webpackDevServerOptions )
+        .listen( webpackPort, ip, ( err ) => {
+            if ( err ) throw err;
+
+            console.log( '[WEBPACK SERVER]', `http://${ ip }:${ webpackPort }` );
+        } );
 };

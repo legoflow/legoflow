@@ -13,5 +13,3 @@ console.log( require('./modules/test-tpl.tpl')( { name: 'test' } ) );
 import testTS from './modules/test-ts.ts';
 
 testTS( '1' );
-
-import './modules/b.ts';

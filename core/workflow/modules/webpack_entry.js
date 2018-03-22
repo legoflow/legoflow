@@ -10,11 +10,18 @@ module.exports = ( type, { hot, entry, projectPath, ip, webpackPort } ) => {
     if ( !entry ) {
         const jsFolderPath = path.resolve( projectPath, './src/js' );
 
-        files = glob.sync( `${ jsFolderPath }/*.*(js)` ) || [ ];
+        files = glob.sync( `${ jsFolderPath }/*.*(js|ts)` ) || [ ];
     }
 
     files.forEach( ( item, index ) => {
-        let basename = path.basename( item, '.js' );
+        let basename = void 0;
+
+        if ( item.indexOf( '.js' ) > 0 ) {
+            basename = path.basename( item, '.js' );
+        }
+        else if ( item.indexOf( '.ts' ) > 0 ) {
+            basename = path.basename( item, '.ts' );
+        }
 
         if ( item.indexOf( '_' ) !== 0 ) {
             if ( type === 'dev' ) {
