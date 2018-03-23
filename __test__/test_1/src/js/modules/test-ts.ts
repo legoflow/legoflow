@@ -1,11 +1,11 @@
 'use strict';
 
 const add = ( x: number ) => {
-    console.log( x + x );
+    return ( x + x );
 }
 
 export default function ( x: number ) {
-    add( x );
+    return add( x );
 }
 
 // add( '1' )

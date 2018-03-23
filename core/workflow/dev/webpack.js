@@ -104,30 +104,7 @@ module.exports = async ( config ) => {
                     test: /\.html$/,
                     use: [ 'html-loader', ],
                 },
-                {
-                    test: /\.ts$/,
-                    use: [
-                        {
-                            loader: 'awesome-typescript-loader',
-                            options: {
-                                silent: true,
-                                configFileName: tsConfigJsonPath,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.js$/,
-                    use: [
-                        {
-                            loader: 'awesome-typescript-loader',
-                            options: {
-                                silent: true,
-                                configFileName: tsConfigJsonPath,
-                            },
-                        },
-                    ],
-                },
+
             ]
         },
         resolve: {
@@ -147,6 +124,40 @@ module.exports = async ( config ) => {
 
     if ( isHotReload ) {
         webpackOptions.plugins.push( new webpack.HotModuleReplacementPlugin( ) );
+    }
+
+    if ( config[ 'ES.Next' ] ) {
+        webpackOptions.module.rules.push(
+            {
+                test: /\.*(ts|tsx|js|jsx)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-es2015',
+                                '@babel/preset-stage-0',
+                                [
+                                    '@babel/preset-env',
+                                    { 'targets': { 'browsers': [ 'android >= 4' ] } },
+                                ],
+                            ],
+                            plugins: [
+                                '@babel/plugin-transform-runtime',
+                            ],
+                        },
+                    },
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
+                            silent: true,
+                            configFileName: tsConfigJsonPath,
+                        },
+                    },
+                ],
+            }
+        );
     }
 
     const compiler = webpack( webpackOptions );

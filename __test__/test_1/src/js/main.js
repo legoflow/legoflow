@@ -1,15 +1,33 @@
 'use strict';
 
+const LOG_TO_HTML = ( msg ) => {
+    const p = document.createElement( 'p' );
+    p.innerHTML = msg;
+    document.body.appendChild( p );
+}
+
 require('./modules/test-js.js')( );
 
-console.log( require('./modules/1.png').substring( 0, 30 ) );
+LOG_TO_HTML( require('./modules/1.png').substring( 0, 30 ) );
 
-// console.log( require('./modules/a.scss') );
+LOG_TO_HTML( require('./modules/test-scss.scss') );
 
-console.log( require('./modules/test-html.html') );
+LOG_TO_HTML( require('./modules/test-html.html') );
 
-console.log( require('./modules/test-tpl.tpl')( { name: 'test' } ) );
+LOG_TO_HTML( require('./modules/test-tpl.tpl')( { name: 'test' } ) );
 
 import testTS from './modules/test-ts.ts';
 
-testTS( '1' );
+LOG_TO_HTML( testTS( '1' ) );
+
+const testPromise = ( name ) => {
+    return new Promise( ( resolve, reject ) => {
+        setTimeout( ( ) => {
+            resolve( `Hello, ${ name }` );
+        }, 3000 );
+    } );
+}
+
+( async ( ) => {
+    LOG_TO_HTML( await testPromise( 'legoflow' ) );
+} )( );
