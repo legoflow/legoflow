@@ -4,6 +4,9 @@ const messager = require('./modules/messager');
 const webpackEntry = require('./modules/webpack_entry');
 
 const devWebpack = require('./dev/webpack');
+const devGulp = require('./dev/gulp');
+
+const axios = require('axios');
 
 const network = require('network');
 
@@ -14,6 +17,19 @@ let getLocalIPCounter = 0;
 network.get_private_ip( ( err, ip ) => {
     if ( err ) throw err; localIP = ip;
 } )
+
+const webpackTimer = ( ip, port, resolve ) => {
+    axios( `http://${ ip }:${ port }` ).then( ( response ) => {
+        if ( response.status == 200 && response.data.length > 0 ) {
+            resolve( );
+        }
+        else{
+            setTimeout( ( ) => {
+                webpackTimer( ip, port, resolve );
+            }, 1000 );
+        }
+    } );
+}
 
 const run = async ( _config ) => {
     if ( !localIP && getLocalIPCounter < 10 ) {
@@ -37,10 +53,15 @@ const run = async ( _config ) => {
 
     try {
         await devWebpack( config );
+
+        await ( ( ) => new Promise( ( resolve, reject ) => {
+            webpackTimer( config.ip, config.webpackPort, resolve );
+        } ) )( )
+
+        await devGulp( config );
     } catch ( err ) {
         console.error( '[DEV@WEBPACK ERROR]', err );
     }
-
 
     messager.success( `http://${ config.ip }:${ config.port }` );
 }

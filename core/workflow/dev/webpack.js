@@ -4,12 +4,12 @@ const path = require('path');
 const _ = require('lodash');
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
+const autoprefixer = require('autoprefixer');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 const getTsConfigJson = require('../modules/get_tsconfig_json');
 
-const { CheckerPlugin } = require('awesome-typescript-loader');
-
-module.exports = async ( config ) => {
+const start = ( config, resolve, reject ) => {
     let { entry, ip, alias, webpackPort, projectPath, root, user, hot } = config;
 
     const isESNext = config[ 'ES.Next' ];
@@ -50,6 +50,26 @@ module.exports = async ( config ) => {
                 args['process.args'] = _.assign( args[ 'process.args' ], configUserDevArgs[ key ] );
             }
         }
+    }
+
+    const babelOptions = {
+        presets: [
+            '@babel/preset-es2015',
+            '@babel/preset-stage-0',
+            [
+                '@babel/preset-env',
+                { 'targets': { 'browsers': [ 'android >= 4' ] } },
+            ],
+        ],
+        plugins: [
+            'babel-plugin-transform-vue-jsx',
+            '@babel/plugin-proposal-decorators',
+            [ '@babel/plugin-proposal-class-properties', { loose: true } ],
+            '@babel/plugin-proposal-optional-chaining',
+            '@babel/plugin-proposal-nullish-coalescing-operator',
+            '@babel/plugin-proposal-pipeline-operator',
+            '@babel/plugin-transform-runtime',
+        ],
     }
 
     const webpackOptions = {
@@ -104,7 +124,23 @@ module.exports = async ( config ) => {
                     test: /\.html$/,
                     use: [ 'html-loader', ],
                 },
-
+                {
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                    exclude: /node_modules/,
+                    options: {
+                        loaders: {
+                            scss: 'vue-style-loader!css-loader!sass-loader',
+                            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+                            js: {
+                                loader: 'babel-loader',
+                                options: babelOptions,
+                            },
+                        },
+                        preserveWhitespace: false,
+                        postcss: [ autoprefixer( { browsers: [ '> 0.01%' ] } ) ],
+                    },
+                },
             ]
         },
         resolve: {
@@ -129,30 +165,31 @@ module.exports = async ( config ) => {
     if ( config[ 'ES.Next' ] ) {
         webpackOptions.module.rules.push(
             {
-                test: /\.*(ts|tsx|js|jsx)$/,
+                test: /\.*(js|jsx)$/,
                 exclude: /node_modules/,
                 use: [
                     {
                         loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                '@babel/preset-es2015',
-                                '@babel/preset-stage-0',
-                                [
-                                    '@babel/preset-env',
-                                    { 'targets': { 'browsers': [ 'android >= 4' ] } },
-                                ],
-                            ],
-                            plugins: [
-                                '@babel/plugin-transform-runtime',
-                            ],
-                        },
+                        options: babelOptions,
                     },
+                ]
+            },
+            {
+                test: /\.*(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: [
                     {
                         loader: 'awesome-typescript-loader',
                         options: {
                             silent: true,
                             configFileName: tsConfigJsonPath,
+                            useBabel: true,
+                            babelCore: '@babel/core',
+                            babelOptions: {
+                                babelrc: false,
+                                presets: babelOptions.presets,
+                                plugins: babelOptions.plugins,
+                            },
                         },
                     },
                 ],
@@ -181,10 +218,19 @@ module.exports = async ( config ) => {
         webpackDevServerOptions.quiet = false;
     }
 
-    new webpackDevServer( compiler, webpackDevServerOptions )
-        .listen( webpackPort, ip, ( err ) => {
-            if ( err ) throw err;
+    new webpackDevServer( compiler, webpackDevServerOptions ).listen( webpackPort, ip, ( err ) => {
+        if ( err ) throw err;
 
-            console.log( '[WEBPACK SERVER]', `http://${ ip }:${ webpackPort }` );
-        } );
+        console.log( '[WEBPACK SERVER]', `http://${ ip }:${ webpackPort }` );
+
+        resolve( );
+    } );
 };
+
+module.exports = ( config ) => {
+    console.log( '[DEV WEBPACK]' );
+
+    return new Promise( ( resolve, reject ) => {
+        start( config, resolve, reject );
+    } );
+}
