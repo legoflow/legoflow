@@ -42,4 +42,27 @@ export default {
     SET_PROJECT_WORKFLOW_BUILD_IN_STATE ( state, { index, value } ) {
         state.project[ index ].build = value;
     },
+    SET_PANEL_LOG ( state, { id, type, value } ) {
+        if ( !state.panelLog[ id ] ) {
+            Vue.set( state.panelLog, id, { dev: '', build: '' } );
+        }
+
+        state.panelLog[ id ][ type ] = value;
+    },
+    SET_LOG ( state, { data, msg } ) {
+        const { id, name } = data;
+
+        const lastProject = state.log[ state.log.length - 1 ];
+
+        if ( !lastProject || ( lastProject && lastProject.id !== id ) ) {
+            state.log.unshift( {
+                id,
+                name,
+                msgList: [ msg ],
+            } )
+        }
+        else {
+            state.log[ state.log.length - 1 ].msgList.push( msg );
+        }
+    },
 };

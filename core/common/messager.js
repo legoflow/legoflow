@@ -7,9 +7,9 @@ module.exports = ( mainWindow ) => {
 
     const sender = ( type, data ) => {
         // send to view
-        mainWindow.webContents.send( 'MESSAGER', { type, data });
+        mainWindow.webContents.send( 'MESSAGER', { type, data } );
 
-        console[ console[ type ] ? type : 'log' ]( `[MESSAGER ${  type.toUpperCase( ) }]:`, data );
+        console[ console[ type ] ? type : 'log' ]( `[MESSAGER ${ type.toUpperCase( ) }]:`, data );
     }
 
     messager.log = data => sender( 'info', data );
@@ -18,7 +18,7 @@ module.exports = ( mainWindow ) => {
 
     messager._workflow_adapter_ = ( config, success, stop ) => {
         return ( data ) => {
-            const { type, msg } = data;
+            const { type, msg, log } = data;
 
             let newData = _.cloneDeep( data );
 
@@ -28,8 +28,13 @@ module.exports = ( mainWindow ) => {
             switch ( type ) {
                 case 'info': { messager.log( newData ); break; }
                 case 'error': { messager.log( newData ); break; }
-                case 'success': { success( data ); break; }
-                case 'stop': { stop( data ); break; }
+                case 'success': {
+                    success( msg, ( _msg_ ) => {
+                        messager.log( { type: 'workflow_success', config, msg: _msg_ } );
+                    } );
+                    break;
+                }
+                case 'stop': { stop( msg ); break; }
                 case 'notice': { __notifier( msg ); break; }
             }
         };

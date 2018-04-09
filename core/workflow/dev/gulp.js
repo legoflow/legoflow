@@ -41,13 +41,13 @@ const parsePath = ( p ) => {
 }
 
 /// ---------------------------------- browser ----------------------------------
+let bsPort = void 0;
+let bsHotFileUrl = '';
+
 const BROWSER_OPEN = ( resolve, reject ) => {
     const { system, port, autoOpenChrome, ip, webpackPort } = config;
 
     const browser = system === 'mac' ? 'google chrome' : 'chrome';
-
-    let localPort = void 0;
-    let bsHotFileUrl = '';
 
     const options = {
         https: false,
@@ -62,7 +62,7 @@ const BROWSER_OPEN = ( resolve, reject ) => {
             target: `http://${ ip }:${ webpackPort }`,
         },
         scriptPath ( path, port, options ) {
-            localPort = port;
+            bsPort = port;
 
             bsHotFileUrl = `http://${ ip }:${ port }${ path.toString( ) }`;
 
@@ -100,10 +100,11 @@ snippet = `
 
 // ---------------------------------- sass ----------------------------------
 let sassCompileError = false;
-let sassCompileSuccess = true;
+let sassCompileSuccess = false;
 
 const sassErrorNotifier = function ( msg ) {
     sassCompileError = true;
+    sassCompileSuccess = false;
 
     console.log( 'Sass 编译错误 >> ', msg );
 
@@ -151,6 +152,7 @@ const SASS_TASK = ( files ) => {
                     console.info( 'Sass 编译成功' );
 
                     sassCompileError = false;
+                    sassCompileSuccess = false;
 
                     messager.notice( 'Sass 编译成功' );
                 }
@@ -248,4 +250,6 @@ module.exports = async ( _config_, _messager_ ) => {
             console.log( 'Entry 文件变动, 请重启工作流' );
         }
     } );
+
+    return { bsPort };
 };

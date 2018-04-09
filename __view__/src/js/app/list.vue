@@ -12,11 +12,14 @@
                 ref="active"
             >
                 <div class="list-acitve-del" @click="deleteProject"></div>
-                <div class="list-active-running"></div>
             </div>
             <div class="list-item" v-for="( item, $index ) in project" :key="item.id" @click="chooseProjectAcitveIndex( $index )">
                 <div class="list-item-name">
                     {{ item.name }}<span>v{{ item.version }}</span>
+                    <div
+                        class="list-item-active-state"
+                        :style="{ 'opacity': project[ $index ].dev.launch || project[ $index ].dev.run || project[ $index ].build ? '1' : '0' }"
+                    ></div>
                 </div>
             </div>
         </div>
@@ -58,19 +61,6 @@
     cursor: default;
     z-index: 2;
     pointer-events: none;
-    .list-active-running {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 22px;
-        margin: auto;
-        width: 12px;
-        height: 12px;
-        background-color: $mainColor;
-        border-radius: 50%;
-        opacity: 0;
-        transition: opacity .1s ease;
-    }
     .list-acitve-del {
         position: absolute;
         top: 0;
@@ -100,9 +90,6 @@
 }
 
 .running {
-    .list-active-running {
-        opacity: 1;
-    }
     .list-acitve-del {
         opacity: 0;
     }
@@ -118,6 +105,20 @@
     border-top: 1px solid $borderColor;
     cursor: pointer;
     background-color: $whiteColor;
+}
+
+.list-item-active-state {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 22px;
+    margin: auto;
+    width: 12px;
+    height: 12px;
+    background-color: $mainColor;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity .1s ease;
 }
 
 .list-item-name {

@@ -20,7 +20,9 @@ const register = ( { id } ) => {
 
 	for ( let key in __workflowDevPid ) {
 		if ( __workflowDevPid[ key ] === '' ) {
-			port = key;
+            port = key;
+
+            __workflowDevPid[ key ] = { id, pid: void 0 };
 		}
     }
 
@@ -80,8 +82,12 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
 
     let messager = void 0;
 
-    const SUCCESS_EXEC = ( ) => {
-        event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', config );
+    const SUCCESS_EXEC = ( data, logger ) => {
+        const dataObject = JSON.parse( data );
+
+        logger( `启动成功: http://${ dataObject.ip }:${ dataObject.bsPort }` );
+
+        event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', data );
     }
 
     const STOP_EXEC = ( { msg } ) => {
@@ -91,6 +97,8 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     }
 
     messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
+
+    messager( { type: 'info', msg: '启动中，请稍候...' } );
 
     thread.on( 'message', messager );
 } );
@@ -108,10 +116,13 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', ( event, config ) => {
         FAIL_EXEC( ); return void 0;
     }
 
-    result.then( ( ) => {
-            event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
-        } )
-        .catch( ( e ) => {
-            FAIL_EXEC( );
-        } )
+    event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
+
+    // TODO: 中间态
+    // result.then( ( ) => {
+    //         //
+    //     } )
+    //     .catch( ( e ) => {
+    //         FAIL_EXEC( );
+    //     } )
 } )

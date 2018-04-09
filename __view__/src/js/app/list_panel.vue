@@ -2,10 +2,10 @@
     <div class="panel">
         <div class="panel-log" :style="{ transform: isShowLogPanel ? 'translate3d( 0, -70px, 0 )' : void 0 }">
             <div class="log-item log-dev">
-                开发:<span>http://legoflow.com</span>
+                开发:<span :class="{ 'log-url': panelLogDev.indexOf( 'http://' ) == 0 }" @click="( ) => isOpen( panelLogDev )">{{ panelLogDev }}</span>
             </div>
             <div class="log-item log-build">
-                构建:<span>完成</span>
+                构建:<span>{{ panelLogBuild }}</span>
             </div>
         </div>
         <div class="panel-content">
@@ -60,6 +60,11 @@
     z-index: 3;
     background-color: #FBFBFB;
     transition: transform .2s ease;
+    .log-url {
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        user-select: none;
+    }
     .log-item {
         position: relative;
         padding: 0 10px 0 10px;
@@ -89,6 +94,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             display: inline-block;
+            text-decoration: none;
         }
     }
 }
@@ -169,13 +175,15 @@
 
 <script>
 export default {
-    computed: Vuex.mapState( [ 'viewIndex', 'project', 'projectActiveIndex' ] ),
+    computed: Vuex.mapState( [ 'viewIndex', 'project', 'projectActiveIndex', 'panelLog' ] ),
     data ( ) {
         return {
             isAutoToggleLogPanel: true,
             isShowLogPanel: false,
             isMoveOnDevBtn: false,
             isMoveOnBuildBtn: false,
+            panelLogDev: '',
+            panelLogBuild: '',
         };
     },
     methods: {
@@ -183,12 +191,22 @@ export default {
             this.isShowLogPanel = !this.isShowLogPanel;
             this.isAutoToggleLogPanel = false;
         },
+        autoToggleShowLogPanel ( ) {
+            if ( !this.isAutoToggleLogPanel ) {
+                return void 0;
+            }
+
+            if ( this.panelLogDev || this.panelLogBuild ) {
+                this.isShowLogPanel = true;
+            }
+            else {
+                this.isShowLogPanel = false;
+            }
+        },
         autoShowLogPanel ( ) {
             this.isAutoToggleLogPanel = true;
 
-            const { project, projectActiveIndex } = this;
-
-            if ( project[ projectActiveIndex ].dev || project[ projectActiveIndex ].build ) {
+            if ( this.panelLogDev || this.panelLogBuild ) {
                 this.isShowLogPanel = true;
             }
             else {
@@ -249,15 +267,36 @@ export default {
             if ( isBuildRun && !this.isMoveOnDevBtn ) { return '构建中' };
             if ( this.isMoveOnDevBtn && isBuildRun ) { return '停止' };
         },
+        setLocalPanelLog ( ) {
+            const { panelLog, project, projectActiveIndex } = this;
+
+            const log = panelLog[ project[ projectActiveIndex ].id ];
+
+            if ( log ) {
+                this.panelLogDev = log.dev;
+                this.panelLogBuild = log.build;
+            }
+            else {
+                this.panelLogDev = '';
+                this.panelLogBuild = '';
+            }
+        },
+        isOpen ( text ) {
+            window.ipc.util.chromeOpen( text );
+        }
     },
     watch: {
         projectActiveIndex ( v ) {
-            if ( !this.isAutoToggleLogPanel ) {
-                return void 0;
+            this.setLocalPanelLog( );
+            this.autoToggleShowLogPanel( );
+        },
+        panelLog: {
+            deep: true,
+            handler ( ) {
+                this.setLocalPanelLog( );
+                this.autoToggleShowLogPanel( );
             }
-
-            this.autoShowLogPanel( );
-        }
+        },
     },
 };
 </script>

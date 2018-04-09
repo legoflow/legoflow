@@ -10,7 +10,10 @@ const { CheckerPlugin } = require('awesome-typescript-loader');
 const getTsConfigJson = require('../modules/get_tsconfig_json');
 const babelOptions = require('../modules/babel_options');
 
-const start = ( config, resolve, reject ) => {
+let config = void 0;
+let messager = void 0;
+
+const start = ( resolve, reject ) => {
     let { entry, ip, alias, webpackPort, projectPath, root, user, hot, args } = config;
 
     const isESNext = config[ 'ES.Next' ];
@@ -175,6 +178,9 @@ const start = ( config, resolve, reject ) => {
     } );
 };
 
-module.exports = ( config ) => new Promise( ( resolve, reject ) => {
-    start( config, resolve, reject );
+module.exports = ( _config_, _messager_ ) => new Promise( ( resolve, reject ) => {
+    config = _config_;
+    messager = _messager_;
+
+    start( resolve, reject );
 } );

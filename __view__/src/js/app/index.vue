@@ -77,7 +77,7 @@ export default {
 
             const project = {
                 id, name, path, version,
-                dev: { launch: false, run: false }, build: false,
+                dev: { launch: false, run: false, stop: false }, build: false,
             };
 
             this.$store.commit( 'ADD_PROJECT', { index: 0, project } );
@@ -90,6 +90,13 @@ export default {
         messager ( { type, data } ) {
             switch ( type ) {
                 case 'info': {
+                    let { type, config, msg } = data;
+
+                    if ( type.indexOf( 'workflow_' ) === 0 ) {
+                        type = type.replace( 'workflow_', '' );
+
+                        this.$store.commit( 'SET_LOG', { data: config, msg: { type, msg } } );
+                    }
 
                     break;
                 }
@@ -104,6 +111,10 @@ export default {
             }
         },
         projectWorkflow ( { type, state, data } ) {
+            if ( typeof data === 'string' ) {
+                data = JSON.parse( data );
+            }
+
             const { id } = data;
 
             let project = void 0;
@@ -127,11 +138,13 @@ export default {
                         break;
                     }
                     case 'run': {
+                        this.$store.dispatch( 'setPanelLogForDevRun', data );
                         this.$store.commit( 'SET_PROJECT_WORKFLOW_DEV_IN_STATE', { index, attr: 'run' } );
                         break;
                     }
                     case 'stop': {
-                        this.$store.commit( 'SET_PROJECT_WORKFLOW_DEV_IN_STATE', { index, attr: 'stop' } );
+                        this.$store.dispatch( 'setPanelLogForDevStop', data );
+                        this.$store.commit( 'SET_PROJECT_WORKFLOW_DEV_IN_STATE', { index, attr: 'none' } );
                         break;
                     }
                 }

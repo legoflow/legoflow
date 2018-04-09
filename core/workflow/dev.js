@@ -59,12 +59,16 @@ const run = async ( _config_ ) => {
             webpackDevServerLaunchTimer( config.ip, config.webpackPort, resolve );
         } ) )( )
 
-        await devGulp( config, messager );
+        const { bsPort } = await devGulp( config, messager );
+
+        config.bsPort = bsPort;
+
+        messager.success( config );
     } catch ( err ) {
         console.error( '[DEV@WEBPACK ERROR]', err );
-    }
 
-    messager.success( `http://${ config.ip }:${ config.port }` );
+        messager.error( err );
+    }
 }
 
 process.on( 'message', run );

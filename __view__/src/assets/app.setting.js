@@ -46,11 +46,25 @@ window.appSetting = {
     },
     set ( key, value ) {
         switch ( key ) {
-            case 'user': window.localStorage[ USER ] = value;
-            case 'port': window.localStorage[ PORT ] = value;
-            case 'editor': window.localStorage[ EDITOR ] = value;
-            case 'autoOpenChrome': window.localStorage[ AUTO_OPEN_CHROME ] = value;
-            case 'project': window.localStorage[ PROJECT ] = JSON.stringify( value );
+            case 'user': { window.localStorage[ USER ] = value; break; }
+            case 'port': { window.localStorage[ PORT ] = value; break; }
+            case 'editor': { window.localStorage[ EDITOR ] = value; break; }
+            case 'autoOpenChrome': { window.localStorage[ AUTO_OPEN_CHROME ] = value; break; }
+            case 'project': {
+                const data = _.cloneDeep( value );
+
+                data.forEach( ( item, index ) => {
+                    for ( let k in data[ index ].dev ) {
+                        data[ index ].dev[ k ] = false;
+                    }
+
+                    data[ index ].build = false;
+                } );
+
+                window.localStorage[ PROJECT ] = JSON.stringify( data );
+
+                break;
+            };
         }
 
         window.ipc.updateConfig( );

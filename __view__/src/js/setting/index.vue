@@ -63,10 +63,10 @@ export default {
             isAppQuit = undefined;
         } )
 
-        // window.onbeforeunload = ( e ) => {
-        //     window.ipc.settingWindow.hide( );
-        //     return isAppQuit;
-        // }
+        window.onbeforeunload = ( e ) => {
+            window.ipc.settingWindow.hide( );
+            return isAppQuit;
+        }
     },
     methods: {
         save: debounce( 300, function ( ) {

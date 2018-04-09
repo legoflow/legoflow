@@ -45,3 +45,13 @@ ipc.on( 'SETTING_WINDOW_SHOW', ( ) => settingWindow.show( ) );
 ipc.on( 'UPDATE_CONFIG', async ( event ) => {
     await webSetting.updateConfig( );
 } );
+
+// 使用 chrome 打开
+ipc.on( 'UTIL_CHROME_OPEN', ( event, url ) => {
+    if ( __config.system === 'mac' ) {
+        require('child_process').exec( `open -a "google chrome" ${ url }` );
+    }
+    else {
+        require('child_process').exec( `start chrome "${ url }"` );
+    }
+} )

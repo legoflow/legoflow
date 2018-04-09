@@ -30,7 +30,17 @@ window.ipc = {
             run ( data ) { ipcRenderer.send( 'WORKFLOW_BUILD_RUN', data ) },
             stop ( data ) { ipcRenderer.send( 'WORKFLOW_BUILD_STOP', data ) },
         },
-    }
+    },
+    util: {
+        chromeOpen ( url ) {
+            if (
+                url.indexOf( 'http://' ) == 0 ||
+                url.indexOf( 'https://' ) == 0
+            ) {
+                ipcRenderer.send( 'UTIL_CHROME_OPEN', url );
+            }
+        },
+    },
 }
 
 // messager

@@ -14,5 +14,6 @@ export default {
     project: window.appSetting.get( 'project' ),
     projectActiveIndex: 0,
     log: [ ],
+    panelLog: { },
     isShowUpdateComponent: false,
 };

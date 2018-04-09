@@ -1,46 +1,11 @@
 <template>
     <div class="view-content log">
-        <div class="log-card">
+        <div class="log-card" v-for="( item1, $index1 ) in log" :key="$index1">
             <div class="log-card-titile">
-                项目 A
+                {{ item1.name }}
             </div>
-            <div class="log-card-log">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log error">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log error">
-                啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么啊思密达卡马克是多么
-            </div>
-        </div>
-        <div class="log-card">
-            <div class="log-card-titile">
-                项目 A
-            </div>
-            <div class="log-card-log success">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log success">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log success">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log success">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log success">
-                啊思密达卡马克是多么
-            </div>
-            <div class="log-card-log success">
-                啊思密达卡马克是多么
+            <div class="log-card-log" v-for="( item2, $index2 ) in item1.msgList" :key="$index2" :class="{ 'error': item2.type === 'error', 'success': item2.type === 'success' }">
+                {{ item2.msg }}
             </div>
         </div>
     </div>
@@ -101,6 +66,6 @@
 
 <script>
 export default {
-
+    computed: Vuex.mapState( [ 'log' ] ),
 };
 </script>
