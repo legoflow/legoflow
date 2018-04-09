@@ -1,6 +1,6 @@
 {
     "version": "2.0.0",
-    "type": "pc",
+    "type": "vue",
     "REM": false,
     "ES.Next": true,
     "alias": {

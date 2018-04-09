@@ -2,6 +2,7 @@
 
 const path = require('path');
 
+const fs = require('fs-extra');
 const browserSync = require('browser-sync');
 const gulp = require('gulp');
 const ejs = require('gulp-ejs');
@@ -11,19 +12,32 @@ const sassVariables = require('gulp-sass-variables');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
+const through = require('through2');
 
 const dist = require('gulp-dist');
 const imgSize = require('gulp-image-size');
 const filterStyleFile = require('gulp-filter-style-file');
+const watch = require('gulp-watch');
 
 const reload = browserSync.reload;
 
 let config = void 0;
+let messager = void 0;
 
 const toPromise = ( func ) => {
     return new Promise( ( resolve, reject ) => {
         func( resolve, reject )
     } );
+}
+
+const parsePath = ( p ) => {
+    const extname = path.extname( p );
+
+    return {
+        dirname: path.dirname( p ),
+        basename: path.basename( p, extname),
+        extname,
+    };
 }
 
 /// ---------------------------------- browser ----------------------------------
@@ -73,8 +87,6 @@ snippet = `
         options.open = false;
     }
 
-    console.log( options );
-
     browserSync( options, ( err, arg ) => {
         if ( err ) {
             console.error( 'browserOpen error: ' + err );
@@ -87,23 +99,22 @@ snippet = `
 }
 
 // ---------------------------------- sass ----------------------------------
-let sassSuccessFlag = true;
+let sassCompileError = false;
+let sassCompileSuccess = true;
 
-const sassErrorNotifier = ( msg ) => {
-    sassSuccessFlag = true;
+const sassErrorNotifier = function ( msg ) {
+    sassCompileError = true;
 
     console.log( 'Sass 编译错误 >> ', msg );
 
-    // console.error( `Sass 编译错误: ${ msg.file.split( '/' ).pop( ) }文件 line${ msg.line } >> ${ msg.message.replace(/\"/g,'\'') }` );
+    messager.error( `Sass 编译错误: ${ msg.file.split( '/' ).pop( ) }文件 line${ msg.line } >> ${ msg.message.replace(/\"/g,'\'') }` );
 
-    // notifier.notify({
-    //     title: 'LegoFlow',
-    //     message: `Sass编译错误: ${ msg.file.split( '/' ).pop( ) }文件 line${ msg.line }`,
-    //     sound: true,
-    // } );
+    messager.notice( `Sass编译错误: ${ msg.file.split( '/' ).pop( ) }文件 line${ msg.line }` );
+
+    this.emit( 'end' );
 }
 
-const SASS_TASK = ( ) => {
+const SASS_TASK = ( files ) => {
     const { projectPath } = config;
 
     const sassPath = `${ projectPath }/src/sass/**/*.scss`;
@@ -114,6 +125,11 @@ const SASS_TASK = ( ) => {
         .pipe( sourcemaps.init( ) )
         .pipe( filterStyleFile( ) )
         .pipe( sass( ).on( 'error', sassErrorNotifier ) )
+        .pipe( through.obj( ( file, enc, cb ) => {
+            sassCompileSuccess = true;
+
+            cb( null, file );
+        } ) )
         .pipe( autoprefixer({
                 browsers: [ 'last 2 versions', 'Android >= 4.0' ],
                 cascade: true,
@@ -123,33 +139,24 @@ const SASS_TASK = ( ) => {
         .pipe( sourcemaps.write( ) )
         .pipe( gulp.dest( distPath ) )
         .on( 'end', ( ) => {
-            if ( typeof obj !== 'undefined' && sassSuccessFlag ) {
+            if ( typeof files !== 'undefined' && sassCompileSuccess && sassCompileError ) {
                 let extname = '';
                 let basename = '';
 
                 try {
-                    const name = parsePath( obj.relative );
-                    extname = name.extname;
-                    basename = name.basename;
-                } catch ( e ) {
-                    extname = '';
-                    basename = '';
-                }
+                    const { extname, basename } = parsePath( files.relative );
+                } catch ( e ) { }
 
                 if ( basename !== '_img' && extname !== 'scss' ) {
                     console.info( 'Sass 编译成功' );
 
-                    sassSuccessFlag = false;
+                    sassCompileError = false;
 
-                    // notifier.notify( {
-                    //     title: 'LegoFlow',
-                    //     message: 'Sass 编译成功',
-                    //     sound: true,
-                    // } );
+                    messager.notice( 'Sass 编译成功' );
                 }
             }
         } )
-        // .pipe( reload( { stream: true } ) )
+        .pipe( reload( { stream: true } ) )
 }
 
 // ---------------------------------- ejs ----------------------------------
@@ -184,16 +191,61 @@ const EJS_TASK = ( ) => {
         )
 }
 
-module.exports = async ( _config_ ) => {
-    console.log( '[DEV GULP]' );
+// ---------------------------------- imgSass ----------------------------------
+let imgSassTaskTimer = void 0;
 
+const IMG_SASS_TASK = ( ) => {
+    imgSassTaskTimer ? clearTimeout( imgSassTaskTimer ) : void 0;
+
+    imgSassTaskTimer = setTimeout( async ( ) => {
+        await imgSize( config );
+
+        reload( { stream: true } );
+    }, 500 )
+}
+
+module.exports = async ( _config_, _messager_ ) => {
     config = _config_;
+    messager = _messager_;
+
+    const { projectPath } = config;
 
     await imgSize( config );
 
     SASS_TASK( );
 
+    watch( `${ projectPath }/src/sass/**/*.scss`, SASS_TASK );
+
+    // 判断如果不是 ejs 编译出来的 html 才自动刷新
+    gulp.watch( `${ projectPath }/src/*.html`, ( event ) => {
+        const htmlPath = event.path.replace( /\\/g, '/' );
+        const name = htmlPath.split( '/' ).pop( ).replace( '.html', '.ejs' );
+
+        if ( fs.existsSync( `${ projectPath }/src/ejs/${ name }` ) ) {
+            reload( htmlPath );
+        }
+    } );
+
+    watch( `${ projectPath }/legoflow.*`, ( ) => {
+        console.log( '配置修改后, 重启工作流后生效' );
+    } );
+
     await toPromise( BROWSER_OPEN );
 
     EJS_TASK( );
+
+    watch( `${ projectPath }/src/img/**`, IMG_SASS_TASK );
+
+    gulp.watch( `${ projectPath }/src/ejs/**/*.ejs`, EJS_TASK );
+
+    // 入口文件增加或删除提示重启加入webpack构建中
+    watch( `${ projectPath }/src/js/*.js`, {
+        events: [ 'add', 'unlink' ],
+    }, ( result ) => {
+        const name = result.basename;
+
+        if ( name.indexOf( '.js' ) > 0 && name.indexOf( '_' ) !== 0 ){
+            console.log( 'Entry 文件变动, 请重启工作流' );
+        }
+    } );
 };

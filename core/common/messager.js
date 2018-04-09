@@ -30,6 +30,7 @@ module.exports = ( mainWindow ) => {
                 case 'error': { messager.log( newData ); break; }
                 case 'success': { success( data ); break; }
                 case 'stop': { stop( data ); break; }
+                case 'notice': { __notifier( msg ); break; }
             }
         };
     }

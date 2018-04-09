@@ -21,6 +21,9 @@ module.exports = {
     stop ( msg ) {
         sender( { type: 'stop', msg } );
     },
+    notice ( msg ) {
+        sender( { type: 'notice', msg } );
+    },
 };
 
 

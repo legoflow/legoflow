@@ -8,69 +8,16 @@ const autoprefixer = require('autoprefixer');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 
 const getTsConfigJson = require('../modules/get_tsconfig_json');
+const babelOptions = require('../modules/babel_options');
 
 const start = ( config, resolve, reject ) => {
-    let { entry, ip, alias, webpackPort, projectPath, root, user, hot } = config;
+    let { entry, ip, alias, webpackPort, projectPath, root, user, hot, args } = config;
 
     const isESNext = config[ 'ES.Next' ];
     const isHotReload = config[ 'hot.reload' ] || false;
 
-    const tsConfigJsonPath = path.resolve( root, './store/tsconfig.json' );
-
     const srcFolderPath = path.resolve( projectPath, './src' );
-    const jsFolderPath = path.resolve( projectPath, './src/js' );
     const userNodeModulesFolderPath = path.resolve( root, './node_modules_user/node_modules' );
-
-    const defalutAlias  = {
-        js: jsFolderPath,
-        '@user': userNodeModulesFolderPath,
-    };
-
-    for ( let i in alias ) {
-         if ( alias[ i ].indexOf( './' ) === 0 ) {
-            alias[ i ] = path.resolve( projectPath, alias[ i ] );
-         }
-    }
-
-    alias = _.merge( defalutAlias, alias );
-
-    let args = {
-        'process.env': '"dev"',
-        'process.args': { },
-    }
-
-    const configUserDevArgs = config[ 'user.dev.args' ];
-
-    if ( typeof configUserDevArgs != 'undefined' ) {
-        for ( let key in configUserDevArgs ) {
-            if ( key === user && key !== '*' ) {
-                args[ 'process.args' ] = _.assign( args[ 'process.args' ], configUserDevArgs[ key ] );
-            }
-            else if ( key === '*' ) {
-                args['process.args'] = _.assign( args[ 'process.args' ], configUserDevArgs[ key ] );
-            }
-        }
-    }
-
-    const babelOptions = {
-        presets: [
-            '@babel/preset-es2015',
-            '@babel/preset-stage-0',
-            [
-                '@babel/preset-env',
-                { 'targets': { 'browsers': [ 'android >= 4' ] } },
-            ],
-        ],
-        plugins: [
-            'babel-plugin-transform-vue-jsx',
-            '@babel/plugin-proposal-decorators',
-            [ '@babel/plugin-proposal-class-properties', { loose: true } ],
-            '@babel/plugin-proposal-optional-chaining',
-            '@babel/plugin-proposal-nullish-coalescing-operator',
-            '@babel/plugin-proposal-pipeline-operator',
-            '@babel/plugin-transform-runtime',
-        ],
-    }
 
     const webpackOptions = {
         mode: 'development',
@@ -139,6 +86,7 @@ const start = ( config, resolve, reject ) => {
                         },
                         preserveWhitespace: false,
                         postcss: [ autoprefixer( { browsers: [ '> 0.01%' ] } ) ],
+                        // TODO: markup-inline-loader
                     },
                 },
             ]
@@ -162,7 +110,7 @@ const start = ( config, resolve, reject ) => {
         webpackOptions.plugins.push( new webpack.HotModuleReplacementPlugin( ) );
     }
 
-    if ( config[ 'ES.Next' ] ) {
+    if ( isESNext ) {
         webpackOptions.module.rules.push(
             {
                 test: /\.*(js|jsx)$/,
@@ -182,7 +130,7 @@ const start = ( config, resolve, reject ) => {
                         loader: 'awesome-typescript-loader',
                         options: {
                             silent: true,
-                            configFileName: tsConfigJsonPath,
+                            configFileName: getTsConfigJson( config ),
                             useBabel: true,
                             babelCore: '@babel/core',
                             babelOptions: {
@@ -227,10 +175,6 @@ const start = ( config, resolve, reject ) => {
     } );
 };
 
-module.exports = ( config ) => {
-    console.log( '[DEV WEBPACK]' );
-
-    return new Promise( ( resolve, reject ) => {
-        start( config, resolve, reject );
-    } );
-}
+module.exports = ( config ) => new Promise( ( resolve, reject ) => {
+    start( config, resolve, reject );
+} );

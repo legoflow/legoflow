@@ -9,6 +9,7 @@ let settingWindow = void 0;
 
 module.exports = ( app ) => {
     global.__util = require('./common/util');
+    global.__notifier = require('./common/notifier');
 
     const { config } = require('../package.json');
 
