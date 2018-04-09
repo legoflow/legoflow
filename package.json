@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./script/start"
+    "start": "node ./script/start",
+    "dev": "node ./script/start dev"
   },
   "repository": {
     "type": "git",
@@ -75,7 +76,6 @@
     "webpack-dev-server": "^3.1.2"
   },
   "config": {
-    "debug": true,
     "webpack": {
       "originPort": 6600,
       "originPortDev": 6500
@@ -83,7 +83,7 @@
   },
   "devDependencies": {
     "electron": "^1.7.9",
-    "electron-override-modules": "0.0.3",
+    "electron-override-modules": "0.0.4",
     "electron-rebuild": "^1.7.3"
   }
 }

@@ -21,7 +21,7 @@ module.exports = ( app ) => {
     }, config );
 
     return async ( ) => {
-        const { system, debug, root } = __config;
+        const { system, env, root } = __config;
 
         let option = {
             resizable: false,
@@ -44,7 +44,7 @@ module.exports = ( app ) => {
             }
         }
 
-        if ( debug ) {
+        if ( env === 'dev' ) {
             option.show = true;
             option.width  = 800;
             option.height = 480;
@@ -52,9 +52,9 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
-        debug ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
+        env === 'dev' ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
 
-        debug ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
+        env === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
 
         webSetting( mainWindow );
 
@@ -62,7 +62,7 @@ module.exports = ( app ) => {
 
         global.__messager = require('./common/messager')( mainWindow );
 
-        debug ? mainWindow.loadURL( 'http://localhost:3000/#/app' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/app` );
+        env === 'dev' ? mainWindow.loadURL( 'http://localhost:3000/#/app' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/app` );
 
         mainWindow.setMenu( null );
 
@@ -82,7 +82,7 @@ module.exports = ( app ) => {
 
         settingWindow.setMenu( null );
 
-        debug ? settingWindow.loadURL( 'http://localhost:3000/#/setting' ) : settingWindow.loadURL( `file://${ root }/view/index.html/#/setting` );
+        env === 'dev' ? settingWindow.loadURL( 'http://localhost:3000/#/setting' ) : settingWindow.loadURL( `file://${ root }/view/index.html/#/setting` );
 
         app.on( 'before-quit', ( ) => settingWindow.webContents.send( 'APP_QUIT' ) );
 

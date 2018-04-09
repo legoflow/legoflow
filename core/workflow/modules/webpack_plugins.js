@@ -10,6 +10,7 @@ module.exports = ( config ) => {
         new CheckerPlugin( ),
     ]
 
+    // hot reload
     const isHotReload = config[ 'hot.reload' ] || false;
 
     if ( isHotReload && config.workflow == 'dev' ) {
