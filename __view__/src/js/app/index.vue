@@ -95,7 +95,18 @@ export default {
                     if ( type.indexOf( 'workflow_' ) === 0 ) {
                         type = type.replace( 'workflow_', '' );
 
-                        this.$store.commit( 'SET_LOG', { data: config, msg: { type, msg } } );
+                        if ( type.indexOf( 'dev' ) == 0 ) {
+                            type = type.replace( 'dev_', '' );
+
+                            this.$store.commit( 'SET_LOG', { data: config, msg: { type, msg } } );
+                        }
+                        else if ( type.indexOf( 'build' ) == 0 ) {
+                            type = type.replace( 'build_', '' );
+
+                            this.$store.commit( 'SET_PANEL_LOG', { id: config.id, type: 'build', value: msg } );
+
+                            this.$store.commit( 'SET_LOG', { data: config, msg: { type, msg } } );
+                        }
                     }
 
                     break;

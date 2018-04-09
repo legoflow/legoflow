@@ -35,6 +35,8 @@ const killer = ( id ) => {
 ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
     const { id } = config.id;
 
+    config.workflow = 'build';
+
     const thread = fork( path.resolve( __dirname, '../workflow/build' ) );
 
     __workflowDevPid[ id ] = thread.pid;
@@ -43,8 +45,10 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
 
     let messager = void 0;
 
-    const SUCCESS_EXEC = ( ) => {
-        event.sender.send( 'WORKFLOW_BUILD_RUN_SUCCESS', config );
+    event.sender.send( 'WORKFLOW_BUILD_RUN_SUCCESS', config );
+
+    const SUCCESS_EXEC = ( data, logger ) => {
+        logger( '构建完成' );
     }
 
     const STOP_EXEC = ( { msg } ) => {
@@ -53,7 +57,9 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
         event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
     }
 
-    messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
+    messager = __messager._workflow_adapter_( 'build', config, SUCCESS_EXEC, STOP_EXEC );
+
+    messager( { type: 'info', msg: '构建中，请稍候...' } );
 
     thread.on( 'message', messager );
 } )
@@ -70,10 +76,13 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_STOP', ( event, config ) => {
         FAIL_EXEC( ); return void 0;
     }
 
-    result.then( ( ) => {
-            event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
-        } )
-        .catch( ( e ) => {
-            FAIL_EXEC( );
-        } )
+    event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
+
+    // TODO: 中间态
+    // result.then( ( ) => {
+    //         event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
+    //     } )
+    //     .catch( ( e ) => {
+    //         FAIL_EXEC( );
+    //     } )
 } )

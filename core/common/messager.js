@@ -16,13 +16,13 @@ module.exports = ( mainWindow ) => {
 
     messager.event = data => sender( 'event', data );
 
-    messager._workflow_adapter_ = ( config, success, stop ) => {
+    messager._workflow_adapter_ = ( what, config, success, stop ) => {
         return ( data ) => {
             const { type, msg, log } = data;
 
             let newData = _.cloneDeep( data );
 
-            newData.type = `workflow_${ type }`;
+            newData.type = `workflow_${ what }_${ type }`;
             newData.config = config;
 
             switch ( type ) {
@@ -30,7 +30,7 @@ module.exports = ( mainWindow ) => {
                 case 'error': { messager.log( newData ); break; }
                 case 'success': {
                     success( msg, ( _msg_ ) => {
-                        messager.log( { type: 'workflow_success', config, msg: _msg_ } );
+                        messager.log( { type: `workflow_${ what }_success`, config, msg: _msg_ } );
                     } );
                     break;
                 }

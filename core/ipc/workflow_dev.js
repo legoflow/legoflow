@@ -71,6 +71,7 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     const webpackPort = register( config );
 
     config.webpackPort = webpackPort;
+    config.workflow = 'dev';
 
     event.sender.send( 'WORKFLOW_DEV_RUN_LAUNCH', config );
 
@@ -96,7 +97,7 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
         event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
     }
 
-    messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
+    messager = __messager._workflow_adapter_( 'dev', config, SUCCESS_EXEC, STOP_EXEC );
 
     messager( { type: 'info', msg: '启动中，请稍候...' } );
 
