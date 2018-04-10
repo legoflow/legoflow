@@ -51,7 +51,7 @@ const start = ( resolve, reject ) => {
             return void 0;
         }
 
-        messager.info('JS 构建完成');
+        messager.info( 'JS 构建完成' );
 
         resolve( );
     } )

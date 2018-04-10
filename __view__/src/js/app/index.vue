@@ -168,6 +168,7 @@ export default {
                         break;
                     }
                     case 'stop': {
+                        this.$store.dispatch( 'setPanelLogForBuildStop', data );
                         this.$store.commit( 'SET_PROJECT_WORKFLOW_BUILD_IN_STATE', { index, value: false } );
                         break;
                     }

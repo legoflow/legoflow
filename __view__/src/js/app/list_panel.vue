@@ -264,8 +264,8 @@ export default {
             const isBuildRun = this.project[ this.projectActiveIndex ].build;
 
             if ( !isBuildRun ) { return '构建' };
-            if ( isBuildRun && !this.isMoveOnDevBtn ) { return '构建中' };
-            if ( this.isMoveOnDevBtn && isBuildRun ) { return '停止' };
+            if ( isBuildRun && !this.isMoveOnBuildBtn ) { return '构建中' };
+            if ( this.isMoveOnBuildBtn && isBuildRun ) { return '停止' };
         },
         setLocalPanelLog ( ) {
             const { panelLog, project, projectActiveIndex } = this;

@@ -84,14 +84,12 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     let messager = void 0;
 
     const SUCCESS_EXEC = ( data, logger ) => {
-        const dataObject = JSON.parse( data );
-
-        logger( `启动成功: http://${ dataObject.ip }:${ dataObject.bsPort }` );
-
         event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', data );
     }
 
-    const STOP_EXEC = ( { msg } ) => {
+    const STOP_EXEC = ( msg ) => {
+        killer( config.id );
+
         messager ? messager( { type: 'error', msg } ) : void 0;
 
         event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );

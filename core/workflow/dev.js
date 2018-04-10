@@ -3,8 +3,8 @@
 const messager = require('./modules/messager');
 const webpackEntry = require('./modules/webpack_entry');
 
-const devWebpack = require('./dev/webpack');
-const devGulp = require('./dev/gulp');
+const webpack = require('./dev/webpack');
+const gulp = require('./dev/gulp');
 
 const axios = require('axios');
 
@@ -53,13 +53,13 @@ const run = async ( _config_ ) => {
     process.argv.config = config;
 
     try {
-        await devWebpack( config, messager );
+        await webpack( config, messager );
 
         await ( ( ) => new Promise( ( resolve, reject ) => {
             webpackDevServerLaunchTimer( config.ip, config.webpackPort, resolve );
         } ) )( )
 
-        const { bsPort } = await devGulp( config, messager );
+        const { bsPort } = await gulp( config, messager );
 
         config.bsPort = bsPort;
 

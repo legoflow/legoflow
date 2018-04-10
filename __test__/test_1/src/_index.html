@@ -11,15 +11,21 @@
     <meta http-equiv="Expires" content="0">
     <title> </title>
     <meta name="description" content="">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.css" inline>
 </head>
 
 <body>
 
     <app></app>
 
+    <!-- @if env='build' !>
+    <script> console.log( 'build env' ) </script>
+    <!-- @endif -->
+
+    <!-- @bundle ./js/base.min.js -->
     <script src="./assets/vue.min.js"></script>
     <script src="./assets/vuex.min.js"></script>
+    <!-- @endbundle -->
 
     <script src="./js/main.js"></script>
     <script src="./js/test.js"></script>

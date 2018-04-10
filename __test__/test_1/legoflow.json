@@ -12,5 +12,6 @@
         "$": "jquery",
         "jquery": "jquery",
         "jQuery": "jquery"
-    }
+    },
+    "cache": "version"
 }

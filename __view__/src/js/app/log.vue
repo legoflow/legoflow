@@ -47,6 +47,7 @@
         line-height: 20px;
         border-bottom: 1px solid $borderColor;
         color: $assistFontColor;
+        word-wrap: break-word;
         &:last-of-type {
             border-bottom: none;
         }

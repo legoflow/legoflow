@@ -25,3 +25,20 @@ p {
     font-size: 18px;
     font-weight: 600;
 }
+
+.test-1 {
+    @extend %1;
+}
+
+.test-2 {
+    @extend %2;
+}
+
+.test-3 {
+    @extend %3;
+}
+
+.test-4 {
+    @extend %4;
+}
+

@@ -33,13 +33,13 @@ const killer = ( id ) => {
 
 // 启动构建工作流
 ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
-    const { id } = config.id;
+    const { id } = config;
 
     config.workflow = 'build';
 
     const thread = fork( path.resolve( __dirname, '../workflow/build' ) );
 
-    __workflowDevPid[ id ] = thread.pid;
+    __workflowBuildPid[ id ] = thread.pid;
 
     thread.send( config );
 
@@ -49,9 +49,13 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
 
     const SUCCESS_EXEC = ( data, logger ) => {
         logger( '构建完成' );
+
+        event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
     }
 
-    const STOP_EXEC = ( { msg } ) => {
+    const STOP_EXEC = ( msg ) => {
+        killer( id );
+
         messager ? messager( { type: 'error', msg } ) : void 0;
 
         event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );

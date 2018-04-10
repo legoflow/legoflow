@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center"> LegoFlow </h1>
+<h1 align="center"> LegoFlow 2 </h1>
 
 <p align="center">
     <a href="https://opensource.org/licenses/MIT">
