@@ -72,7 +72,20 @@ export default {
         // }, 3000);
     },
     methods: {
-        projectNewSuccess ( { name, path, version } ) {
+        projectNewAndAdd ( { name, path, version } ) {
+            // 检查是否有相同路径
+            let isExists = false;
+
+            this.project.forEach( ( item ) => {
+                item.path === path ? isExists = true : void 0;
+            } )
+
+            if ( isExists ) {
+                alert( '已存在相同路径项目' );
+
+                return void 0;
+            }
+
             const id = window.appUtil.UUID( );
 
             const project = {

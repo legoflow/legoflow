@@ -31,3 +31,19 @@ new Vue( {
         )
     },
 } ).$mount( 'app' );
+
+document.body.ondragover = document.body.ondragleave = document.body.ondragend = ( ) => {
+	return false;
+}
+
+document.body.ondrop = ( e ) => {
+    if ( e.dataTransfer.effectAllowed == 'move' ) {
+		return 0;
+	}
+
+	const path = e.dataTransfer.files[ 0 ].path;
+
+    window.ipc.project.add( { path } );
+
+	return false;
+}

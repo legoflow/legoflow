@@ -30,6 +30,10 @@ export default {
     ADD_PROJECT ( state, { index, project } ) {
         !index ? state.project.unshift( project ) : state.project.splice( index, 0, project );
         window.appSetting.set( 'project', state.project );
+
+        if ( state.project.length === 1 ) {
+            state.projectActiveIndex = 0;
+        }
     },
     SHOW_UPDATE ( state ) {
         state.isShowUpdateComponent = true;

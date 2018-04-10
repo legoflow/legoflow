@@ -20,6 +20,7 @@ window.ipc = {
     updateConfig ( ) { ipcRenderer.send( 'UPDATE_CONFIG' ) },
     project: {
         new ( data ) { ipcRenderer.send( 'PROJECT_NEW', data ) },
+        add ( data ) { ipcRenderer.send( 'PROJECT_ADD', data ) },
     },
     workflow: {
         dev: {
@@ -50,7 +51,11 @@ ipcRenderer.on( 'MESSAGER', ( event, data ) => {
 
 // 新建项目成功
 ipcRenderer.on( 'PROJECT_NEW_SUCCESS', ( event, data ) => {
-    window.vm && window.vm.projectNewSuccess( data );
+    window.vm && window.vm.projectNewAndAdd( data );
+} )
+
+ipcRenderer.on( 'PROJECT_ADD_SUCCESS', ( event, data ) => {
+    window.vm && window.vm.projectNewAndAdd( data );
 } )
 
 // 开发工作流启动中

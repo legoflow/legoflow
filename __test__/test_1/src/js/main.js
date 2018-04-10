@@ -47,7 +47,8 @@ new Vue( {
         },
     } ),
     components: { vueComponent },
-    render ( ) {
-        return ( <div id="vue"><vue-component/></div> );
-    },
+    // render ( ) {
+    //     return ( <div id="vue"><vue-component/></div> );
+    // },
+    template: '<div id="vue"><vue-component/></div>',
 } )

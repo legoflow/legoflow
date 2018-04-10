@@ -2,20 +2,20 @@
 
 module.exports = {
     presets: [
-        '@babel/preset-es2015',
-        '@babel/preset-stage-0',
+        require.resolve('@babel/preset-es2015'),
+        require.resolve('@babel/preset-stage-0'),
         [
-            '@babel/preset-env',
+            require.resolve('@babel/preset-env'),
             { 'targets': { 'browsers': [ 'android >= 4' ] } },
         ],
     ],
     plugins: [
-        [ '@babel/plugin-transform-react-jsx', { pragma: 'h' } ],
-        '@babel/plugin-proposal-decorators',
-        [ '@babel/plugin-proposal-class-properties', { loose: true } ],
-        '@babel/plugin-proposal-optional-chaining',
-        '@babel/plugin-proposal-nullish-coalescing-operator',
-        '@babel/plugin-proposal-pipeline-operator',
-        '@babel/plugin-transform-runtime',
+        [ require.resolve('@babel/plugin-transform-react-jsx'), { pragma: 'h' } ],
+        require.resolve('@babel/plugin-proposal-decorators'),
+        [ require.resolve('@babel/plugin-proposal-class-properties'), { loose: true } ],
+        require.resolve('@babel/plugin-proposal-optional-chaining'),
+        require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
+        require.resolve('@babel/plugin-proposal-pipeline-operator'),
+        require.resolve('@babel/plugin-transform-runtime'),
     ],
 };

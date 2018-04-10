@@ -13,7 +13,7 @@ module.exports = ( config ) => {
             test: /\.(png|jpg|gif|svg|jpeg)$/,
             use: [
                 {
-                    loader: 'url-loader',
+                    loader: require.resolve('url-loader'),
                     options: { limit: 1024 * 100 * 100 * 100 * 100 },
                 }
             ]
@@ -22,13 +22,13 @@ module.exports = ( config ) => {
             test: /\.scss$/,
             use: [
                 {
-                    loader: 'to-string-loader'
+                    loader: require.resolve('to-string-loader')
                 },
                 {
-                    loader: 'css-loader',
+                    loader: require.resolve('css-loader'),
                 },
                 {
-                    loader: 'postcss-loader',  options: {
+                    loader: require.resolve('postcss-loader'),  options: {
                         plugins: ( ) => [
                             require('autoprefixer')( {
                                 browsers: [
@@ -39,28 +39,28 @@ module.exports = ( config ) => {
                       }
                 },
                 {
-                    loader: 'sass-loader',
+                    loader: require.resolve('sass-loader'),
                 }
             ]
         },
         {
             test: /\.tpl$/,
-            use: [ 'art-template-loader', ],
+            use: [ require.resolve('art-template-loader'), ],
         },
         {
             test: /\.html$/,
-            use: [ 'html-loader', ],
+            use: [ require.resolve('html-loader'), ],
         },
         {
             test: /\.vue$/,
-            loader: 'vue-loader',
+            loader: require.resolve('vue-loader'),
             exclude: /node_modules/,
             options: {
                 loaders: {
                     scss: 'vue-style-loader!css-loader!sass-loader',
                     sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
                     js: {
-                        loader: 'babel-loader',
+                        loader: require.resolve('babel-loader'),
                         options: babelOptions,
                     },
                 },
@@ -78,7 +78,7 @@ module.exports = ( config ) => {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: require.resolve('babel-loader'),
                         options: babelOptions,
                     },
                 ]
@@ -88,12 +88,12 @@ module.exports = ( config ) => {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'awesome-typescript-loader',
+                        loader: require.resolve('awesome-typescript-loader'),
                         options: {
                             silent: true,
                             configFileName: getTsConfigJson( config ),
                             useBabel: true,
-                            babelCore: '@babel/core',
+                            babelCore: require.resolve('@babel/core'),
                             babelOptions: {
                                 babelrc: false,
                                 presets: babelOptions.presets,

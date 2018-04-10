@@ -6,6 +6,8 @@
 
 <style lang="scss" scoped>
 #app {
+    font-size: 30px;
+    font-weight: 600;
     color: red;
     transition: all .2 esase;
 }

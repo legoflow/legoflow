@@ -14,3 +14,10 @@ ipc.on( 'PROJECT_NEW', async ( event, data ) => {
 
     typeof result !== 'string'  ? event.sender.send( 'PROJECT_NEW_SUCCESS', result ) : __messager.event( result );
 } );
+
+// 增加项目
+ipc.on( 'PROJECT_ADD', async ( event, data ) => {
+    const result = await require('../common/project_add')( data );
+
+    typeof result !== 'string'  ? event.sender.send( 'PROJECT_ADD_SUCCESS', result ) : __messager.event( result );
+} );

@@ -7,6 +7,8 @@ const webSetting = require('./common/web_setting');
 let mainWindow = void 0;
 let settingWindow = void 0;
 
+require('./clean')( );
+
 module.exports = ( app ) => {
     global.__util = require('./common/util');
     global.__notifier = require('./common/notifier');
@@ -38,7 +40,7 @@ module.exports = ( app ) => {
             case 'mac': {
                 option.frame = false;
                 option.autoHideMenuBar = true,
-                option.width = 290;
+                option.width = 280;
                 option.height = 480;
                 break;
             }
@@ -62,7 +64,12 @@ module.exports = ( app ) => {
 
         global.__messager = require('./common/messager')( mainWindow );
 
-        env === 'dev' ? mainWindow.loadURL( 'http://localhost:3000/#/app' ) : mainWindow.loadURL( `file://${ root }/view/index.html/#/app` );
+        if ( env === 'dev' ) {
+            mainWindow.loadURL( 'http://localhost:3000/#/app' )
+        }
+        else {
+            mainWindow.webContents.executeJavaScript( 'location.href = `${ location.href }app`' );
+        }
 
         mainWindow.setMenu( null );
 
@@ -82,7 +89,14 @@ module.exports = ( app ) => {
 
         settingWindow.setMenu( null );
 
-        env === 'dev' ? settingWindow.loadURL( 'http://localhost:3000/#/setting' ) : settingWindow.loadURL( `file://${ root }/view/index.html/#/setting` );
+        if ( env === 'dev' ) {
+            settingWindow.loadURL( 'http://localhost:3000/#/setting' )
+        }
+        else {
+            settingWindow.loadURL( `file://${ root }/view/index.html` );
+
+            settingWindow.webContents.executeJavaScript( 'location.href = `${ location.href }setting`' );
+        }
 
         app.on( 'before-quit', ( ) => settingWindow.webContents.send( 'APP_QUIT' ) );
 

@@ -270,6 +270,10 @@ export default {
         setLocalPanelLog ( ) {
             const { panelLog, project, projectActiveIndex } = this;
 
+            if ( !project[ projectActiveIndex ] ) {
+                return void 0;
+            }
+
             const log = panelLog[ project[ projectActiveIndex ].id ];
 
             if ( log ) {

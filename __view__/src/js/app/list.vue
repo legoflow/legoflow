@@ -6,7 +6,7 @@
                 v-if="project.length > 0"
                 :class="[
                     'list-acitve',
-                    project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run || project[ projectActiveIndex ].build ? 'running' : void 0
+                    project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run || project[ projectActiveIndex ].build ) ? 'running' : void 0
                 ]"
                 :style="{ transform: `translate3d( 0, ${ projectActiveIndex * 49 }px, 0 )` }"
                 ref="active"
@@ -214,6 +214,10 @@ export default {
 		    } )
         },
         deleteProject ( ) {
+            if ( this.projectActiveIndex == this.project.length - 1 ) {
+                this.$store.commit( 'SET_PROJECT_ACTIVE_INDEX', this.projectActiveIndex - 1 );
+            }
+
             this.$store.commit( 'DEL_PROJECT', this.projectActiveIndex );
         },
     },

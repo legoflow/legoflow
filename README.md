@@ -64,7 +64,7 @@ npm i electron -g
 cd ./legoflow
 
 # 安装依赖 node_modules
-npm i
+npm install
 ```
 
 通过执行该命令以开发方式启动应用。

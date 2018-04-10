@@ -25,7 +25,7 @@ String.prototype.toConfig = function ( ) {
 
     switch ( basename ) {
         case '.js': {
-            typeof config === 'function' ? config = config() : void 0;
+            typeof config === 'function' ? config = config( ) : void 0;
             break;
         }
     }
@@ -34,7 +34,7 @@ String.prototype.toConfig = function ( ) {
 }
 
 // 路径字符串 转配置
-String.prototype.getConfig = function ( _config_ ) {
+String.prototype.getConfig = function ( _config_ = { } ) {
     const folder = this.toString( );
 
     const jsonConfig = path.resolve( folder, './legoflow.json' );

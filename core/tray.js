@@ -1,17 +1,20 @@
 'use strict';
 
+const path = require('path');
 const fs = require('fs');
+
+const { Tray } = require('electron');
 
 let tray = void 0;
 
 module.exports = ( mainWindow ) => {
-    const { root, system } = __config;
+    const { root, system } = global.__config;
 
-    if ( !system !== 'mac' ) {
+    if ( system !== 'mac' ) {
         return void 0;
     }
 
-    const trayIcon = `${ __app.root }/icon/logo-tray.png`;
+    const trayIcon = path.resolve( __dirname, '../icon/logo-tray.png' );
 
     tray = new Tray( trayIcon );
 
@@ -19,11 +22,15 @@ module.exports = ( mainWindow ) => {
 
     tray.on( 'click', mainWindow.show );
 
-    tray.on( 'drop-files', ( event, path ) => {
-        event.preventDefault( );
+    tray.on( 'drop-files', async ( event, _path_ ) => {
+        const projectPath = _path_[ 0 ];
 
         mainWindow.show( );
 
-        // TODO: 通知 view
-    })
+        const result = await require('./common/project_add')( { path: projectPath } );
+
+        typeof result !== 'string' ? mainWindow.webContents.send( 'PROJECT_ADD_SUCCESS', result ) : __messager.event( result );
+
+        event.preventDefault( );
+    } )
 };
