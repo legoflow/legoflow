@@ -1,0 +1,12 @@
+name: test_2-1
+version: 2.0.0-beta.1
+type: mobile
+REM: true
+ES.Next: true
+alias:
+    $: ./src/assets/jquery.min.js
+    zepto: ./src/assets/zepto.min.js
+global:
+    $: zepto
+    zepto: zepto
+

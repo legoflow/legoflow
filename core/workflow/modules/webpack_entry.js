@@ -3,7 +3,7 @@
 const path = require('path');
 const glob = require('glob');
 
-module.exports = ( type, { hot, entry, projectPath, ip, webpackPort } ) => {
+module.exports = ( { hot, entry, projectPath, ip, webpackPort, workflow } ) => {
     let files = entry || [ ];
     let entrys = { };
 
@@ -24,10 +24,10 @@ module.exports = ( type, { hot, entry, projectPath, ip, webpackPort } ) => {
                 basename = path.basename( item, '.ts' );
             }
 
-            if ( type === 'dev' ) {
+            if ( workflow === 'dev' ) {
                 entrys[ basename ] = hot == true ? [ `webpack-dev-server/client?http://${ ip }:${ webpackPort }`, 'webpack/hot/dev-server', item ] : [ `webpack-dev-server/client?http://${ ip }:${ webpackPort }`, item ];
             }
-            else if ( type === 'build' ) {
+            else if ( workflow === 'build' ) {
                 entrys[ basename ] = item;
             }
         }

@@ -298,6 +298,8 @@ const MOVE_ASSETS = ( resolve, reject ) => {
 const HTML_TASK = ( resolve, reject ) => {
     const { banner } = config;
 
+    const resourcesDomain = config[ 'workflow.build' ][ 'html.resourcesDomain' ];
+
     gulp.src( `${ projectPath }/dist/*.html` )
         .pipe( useref( ) )
         .pipe( gulpif( '*.js', header( banner ) ) )
@@ -308,7 +310,7 @@ const HTML_TASK = ( resolve, reject ) => {
                 suffix: [ 'css', 'js', 'jpg', 'png', 'gif' ],
             } )
         )
-        .pipe( assets( config.assets || '', config ) )
+        .pipe( assets( resourcesDomain || '' ) )
         .pipe( gulp.dest( `${ projectPath }/dist` ) )
         .on( 'end', resolve )
 }

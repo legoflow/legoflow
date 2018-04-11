@@ -23,6 +23,7 @@ window.ipc = {
     project: {
         new ( data ) { ipcRenderer.send( 'PROJECT_NEW', data ) },
         add ( data ) { ipcRenderer.send( 'PROJECT_ADD', data ) },
+        update ( data ) { ipcRenderer.send( 'PROJECT_UPDATE', data ) },
     },
     workflow: {
         dev: {
@@ -67,6 +68,10 @@ ipcRenderer.on( 'PROJECT_NEW_SUCCESS', ( event, data ) => {
 
 ipcRenderer.on( 'PROJECT_ADD_SUCCESS', ( event, data ) => {
     window.vm && window.vm.projectNewAndAdd( data );
+} )
+
+ipcRenderer.on( 'PROJECT_UPDATE', ( event, data ) => {
+    window.vm && window.vm.projectUpdate( data );
 } )
 
 // 开发工作流启动中

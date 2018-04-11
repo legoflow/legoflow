@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs-extra');
+const YAML = require('yamljs');
 
 module.exports = async ( data ) => {
     let { name, type, path: projectPath, version, isESNext, isSourcePath } = data;
@@ -33,6 +34,7 @@ module.exports = async ( data ) => {
 
     // legoflow.json
     let legoflowJSON = {
+        name,
         version: __config.version,
         type,
         REM: false,
@@ -59,7 +61,7 @@ module.exports = async ( data ) => {
         }
 	}
 
-    fs.writeFileSync( path.resolve( projectPath, './legoflow.json' ), JSON.stringify( legoflowJSON, null, 4 ) );
+    fs.writeFileSync( path.resolve( projectPath, './legoflow.yml' ),  YAML.stringify( legoflowJSON, 4 ) );
 
     // cope type folder
     fs.copySync( projectTypePath, path.resolve( projectPath, './src' ) );

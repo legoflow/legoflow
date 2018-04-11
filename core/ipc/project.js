@@ -21,3 +21,18 @@ ipc.on( 'PROJECT_ADD', async ( event, data ) => {
 
     typeof result !== 'string'  ? event.sender.send( 'PROJECT_ADD_SUCCESS', result ) : __messager.event( result );
 } );
+
+// 更新项目信息
+ipc.on( 'PROJECT_UPDATE', ( event, data ) => {
+    const { id, name, path } = data;
+
+    const config = path.getConfig( data );
+
+    if ( !config ) {
+        __messager.event( '找不到配置文件' );
+
+        return void 0;
+    }
+
+    mainWindow.webContents.send( 'PROJECT_UPDATE', config );
+} )

@@ -8,13 +8,23 @@ const babelOptions = require('../modules/babel_options');
 module.exports = ( config ) => {
     const isESNext = config[ 'ES.Next' ];
 
+    const { workflow } = config;
+
+    const workflowConfig = config[ `workflow.${ workflow }` ] || { };
+
+    const imgSize = ( workflow == 'build' && workflowConfig[ 'bundle.imgSize' ] ) ? workflowConfig[ 'bundle.imgSize' ] : 1024 * 100;
+
     const rules = [
         {
             test: /\.(png|jpg|gif|svg|jpeg)$/,
             use: [
                 {
                     loader: require.resolve('url-loader'),
-                    options: { limit: 1024 * 100 * 100 * 100 * 100 },
+                    options: {
+                        limit: 1024 * imgSize,
+                        name: '../img/[name].[ext]?[hash]',
+                        root: 'img',
+                    },
                 }
             ]
         },

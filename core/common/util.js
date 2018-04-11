@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs-extra');
+const YAML = require('yamljs');
 
 // 路径标准化
 String.prototype.pathNorm = function ( ) {
@@ -17,16 +18,23 @@ String.prototype.toConfig = function ( ) {
         return void 0;
     }
 
-    const basename = path.extname( p );
+    const extname = path.extname( p );
 
-    delete require.cache[ p ];
+    let config = void 0;
 
-    let config = require( p );
+    if ( extname == '.yml' ) {
+        config = YAML.load( p );
+    }
+    else {
+        delete require.cache[ p ];
 
-    switch ( basename ) {
-        case '.js': {
-            typeof config === 'function' ? config = config( ) : void 0;
-            break;
+        config = require( p );
+
+        switch ( extname ) {
+            case '.js': {
+                typeof config === 'function' ? config = config( ) : void 0;
+                break;
+            }
         }
     }
 
@@ -38,26 +46,45 @@ String.prototype.getConfig = function ( _config_ = { } ) {
     const folder = this.toString( );
 
     const jsonConfig = path.resolve( folder, './legoflow.json' );
+    const ymlConfig = path.resolve( folder, './legoflow.yml' );
     const jsConfig = path.resolve( folder, './legoflow.js' );
+    const packageJson = path.resolve( folder, './package.json' );
 
     let config = void 0;
 
     if ( fs.existsSync( jsonConfig ) ) {
         config = jsonConfig.toConfig( );
     }
+    else if ( fs.existsSync( ymlConfig ) ) {
+        config = ymlConfig.toConfig( );
+    }
     else if ( fs.existsSync( jsConfig ) ) {
         config = jsConfig.toConfig( );
     }
 
+    const packageJsonData = packageJson.toConfig( );
+
+    const { name, version, author } = packageJsonData || { };
+
     if ( config ) {
-        config = Object.assign( config, __config, _config_ );
+        config = Object.assign( config, __config, _config_, {
+            name: config.name || name,
+            version: version || _config_.version,
+            user: author || __config.user,
+        } );
+
+        if ( !config[ 'workflow.dev' ] ) {
+            config[ 'workflow.dev' ] = { }
+        }
+
+        if ( !config[ 'workflow.build' ] ) {
+            config[ 'workflow.build' ] = { }
+        }
     }
 
     return config;
 }
 
-const util = {
-
-};
+const util = { };
 
 module.exports = util;

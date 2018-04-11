@@ -3,18 +3,19 @@
 const path = require('path');
 const _ = require('lodash');
 
-module.exports = ( what, _config_ ) => {
+module.exports = ( _config_ ) => {
     let config = _.cloneDeep( _config_ );
 
-    const { projectPath, root, env, user } = config;
+    const { projectPath, root, env, user, workflow } = config;
+
+    const workflowConfig = config[ `workflow.${ workflow }` ] || { };
 
     const defaultAlias  = {
         js: `${ projectPath }/src/js/`,
-        '@user': `${ root }/node_modules_user/node_modules`,
         '@local': `${ projectPath }/node_modules`,
     };
 
-    const nowENV = what === 'dev' ? ( config[ 'env.dev' ] || 'dev' ) : ( config[ 'env.build' ] || 'build' );
+    const nowENV = workflowConfig[ 'env' ] || workflow;
 
     if ( typeof env !== 'undefined' && typeof env[ nowENV ] !== 'undefined' ) {
         const __config__ = env[ nowENV ];
@@ -26,7 +27,7 @@ module.exports = ( what, _config_ ) => {
                 config[ key ] = value;
             }
             else {
-                config[ key ] = _.assign( config[ key ], value );
+                config[ key ] = _.merge( config[ key ], value );
             }
         }
     }
@@ -40,12 +41,12 @@ module.exports = ( what, _config_ ) => {
 
     // 用户自定义开发参数
     let args = {
-        'process.env': `"${ what }"`,
+        'process.env': `"${ workflow }"`,
         'process.config_env': `"${ nowENV }"`,
         'process.args': { },
     }
 
-    const envUserArgs = config[ `user.args.${ what }` ];
+    const envUserArgs = workflowConfig[ 'user.args' ];
 
     if ( typeof envUserArgs != 'undefined' ) {
         for ( let key in envUserArgs ) {

@@ -12,9 +12,9 @@ const gulp = require('./build/gulp');
 
 const run = async ( _config_ ) => {
     // common config reslove
-    let config = require('./modules/resolve_config')( 'build', _config_ );
+    let config = require('./modules/resolve_config')( _config_ );
 
-    const entryFiles = webpackEntry( 'build', config );
+    const entryFiles = webpackEntry( config );
 
     config.entry = entryFiles;
 

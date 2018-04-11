@@ -5,8 +5,6 @@ const Menu = window.remote.Menu;
 // 快捷键
 // window.keymapAction = { };
 
-// const user = window.localStorage.legoflow_user;
-
 let macMenu = [ {
     label: 'LegoFlow',
     submenu: [
@@ -16,7 +14,7 @@ let macMenu = [ {
             {
                 label: '检查更新',
                 click ( ) {
-                    // window.versionCheck( true );
+                    window.ipc.app.checkUpdate( );
                 },
             },
             { type: 'separator' },
@@ -28,27 +26,6 @@ let macMenu = [ {
                 },
             },
             { type: 'separator' },
-            {
-                label: 'user node_modules',
-                click ( ) {
-                    window.ipc.openRootPath( './node_modules_user' );
-                },
-            },
-            { type: 'separator' },
-            {
-                label: '清空端口线程',
-                click ( ) {
-                    alert( {
-                        msg: '是否确定删除所有端口线程',
-                        btns: [ '否', '是' ],
-                        callback ( index ) {
-                            if ( index === 1 ) {
-                                window.ipc.cleanPortFork( );
-                            }
-                        }
-                    } );
-                },
-            },
             { type: 'separator' },
             {
                 label: '隐藏',
@@ -61,6 +38,12 @@ let macMenu = [ {
                 click ( ) {
                     window.ipc.mainWindow.min( );
                 },
+            },
+            {
+                label: '重启',
+                click ( ) {
+                    window.ipc.app.restart( );
+                }
             },
             {
                 label: '退出',
@@ -92,28 +75,28 @@ let macMenu = [ {
             {
                 label: '官网',
                 click ( ) {
-                    window.shell.openExternal( 'https://legoflow.com/' );
+                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/tree/2.x' );
                     return false;
                 }
             },
             {
                 label: '使用教程',
                 click ( ) {
-                    window.shell.openExternal( 'https://github.com/legoflow/legoflow/wiki' );
+                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/wiki/%5B2.0%5D-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E' );
                     return false;
                 }
             },
             {
                 label: '更新日志',
                 click ( ) {
-                    window.shell.openExternal( 'https://legoflow.com/changelog' );
+                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md' );
                     return false;
                 }
             },
             {
                 label: '意见反馈',
                 click ( ) {
-                    window.shell.openExternal( 'https://github.com/legoflow/legoflow/issues' );
+                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/issues' );
                     return false;
                 }
             },
@@ -125,8 +108,3 @@ if ( config.system === 'mac' ) {
     let menu = Menu.buildFromTemplate( macMenu );
     Menu.setApplicationMenu( menu );
 }
-
-// 一天检测一次版本更新
-// setInterval(() => {
-//     window.versionCheck( false );
-// }, 1000 * 60 * 60 * 24 )

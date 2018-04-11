@@ -4,7 +4,9 @@ const electron = require('electron');
 
 const ipc = electron.ipcMain;
 
-module.exports = function ( key, main ) {
+let mainWindow = void 0;
+
+const factory = function ( key, main ) {
     ipc.on( key, ( event, data ) => {
         const { id, name, path } = data;
 
@@ -16,8 +18,16 @@ module.exports = function ( key, main ) {
             return void 0;
         }
 
+        mainWindow.webContents.send( 'PROJECT_UPDATE', config );
+
         config.projectPath = config.path;
 
         main( event, config );
     } );
+}
+
+factory.setMainWindow = ( _mainWindow ) => {
+    mainWindow = _mainWindow;
 };
+
+module.exports = factory;

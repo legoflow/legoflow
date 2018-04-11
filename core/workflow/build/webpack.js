@@ -38,6 +38,7 @@ const start = ( resolve, reject ) => {
         module: {
             rules: webpackRules( config ),
         },
+        externals: config.externals || { },
         resolve: webpackResolve( config ),
         plugins: webpackPlugins( config ),
     }

@@ -1,0 +1,19 @@
+name: test_1-1
+version: 2.0.0-beta.1
+type: vue
+REM: false
+ES.Next: true
+alias:
+    $: ./src/assets/jquery.min.js
+    jquery: ./src/assets/jquery.min.js
+    jQuery: ./src/assets/jquery.min.js
+global:
+    $: jquery
+    jquery: jquery
+    jQuery: jquery
+cache: version
+workflow.build:
+    html.resourcesDomain: https://legox.org
+workflow.dev:
+    watch.reload:
+        - ./src/test/**/*

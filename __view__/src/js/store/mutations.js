@@ -30,6 +30,15 @@ export default {
     },
     SET_PROJECT_ACTIVE_INDEX ( state, index ) {
         state.projectActiveIndex = index;
+
+        window.ipc.project.update( state.project[ index ] );
+    },
+    UPDATE_PROJECT ( state, { index, name, version, path } ) {
+        if ( state.project[ index ].path === path ) {
+            state.project[ index ].name = name;
+            state.project[ index ].version = version;
+            window.appSetting.set( 'project', state.project );
+        }
     },
     DEL_PROJECT ( state, index ) {
         state.project.splice( index, 1 );

@@ -111,6 +111,13 @@ export default {
                 }
             }
         },
+        projectUpdate ( { name, path, version } ) {
+             this.project.forEach( ( item, index ) => {
+                if ( item.path === path ) {
+                    this.$store.commit( 'UPDATE_PROJECT', { index, name, path, version, } );
+                }
+            } )
+        },
         projectNewAndAdd ( { name, path, version } ) {
             // 检查是否有相同路径
             let isExists = false;
@@ -220,7 +227,6 @@ export default {
                         break;
                     }
                     case 'stop': {
-                        this.$store.dispatch( 'setPanelLogForBuildStop', data );
                         this.$store.commit( 'SET_PROJECT_WORKFLOW_BUILD_IN_STATE', { index, value: false } );
                         break;
                     }

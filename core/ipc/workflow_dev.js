@@ -8,7 +8,10 @@ const ipcWorkflowFactory = require('../common/ipc_workflow_factory');
 
 let app, mainWindow;
 
-module.exports = ( _app, _mainWindow ) => { app = _app, mainWindow = _mainWindow; }
+module.exports = ( _app, _mainWindow ) => {
+    app = _app, mainWindow = _mainWindow;
+    ipcWorkflowFactory.setMainWindow( _mainWindow );
+}
 
 global.__workflowDevPid = { };
 
@@ -95,7 +98,7 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
         event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
     }
 
-    messager = __messager._workflow_adapter_( 'dev', config, SUCCESS_EXEC, STOP_EXEC );
+    messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
 
     messager( { type: 'info', msg: '启动中，请稍候...' } );
 

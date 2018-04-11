@@ -42,11 +42,11 @@ const run = async ( _config_ ) => {
     }
 
     // common config reslove
-    config = require('./modules/resolve_config')( 'dev', _config_ );
+    config = require('./modules/resolve_config')( _config_ );
 
     config.ip = localIP;
 
-    const entryFiles = webpackEntry( 'dev', config );
+    const entryFiles = webpackEntry( config );
 
     config.entry = entryFiles;
 

@@ -7,10 +7,9 @@ module.exports = ( config ) => {
 
     return {
         alias,
-            modules: [
-                path.resolve( root, './node_modules' ),
-                path.resolve( root, './node_modules_user/node_modules' ),
-            ],
-            extensions: [ '.js', '.ts', '.tsx', '.jsx', '.vue', '.art', '.scss', '.html', '.svg', '.json' ],
+        modules: [
+            path.resolve( root, './node_modules' ),
+        ],
+        extensions: [ '.js', '.ts', '.tsx', '.jsx', '.vue', '.art', '.scss', '.html', '.svg', '.json' ],
     };
 };

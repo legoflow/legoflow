@@ -218,6 +218,8 @@ module.exports = async ( _config_, _messager_ ) => {
 
     watch( `${ projectPath }/src/sass/**/*.scss`, SASS_TASK );
 
+    watch( `${ projectPath }/src/assets/*`, reload );
+
     // 判断如果不是 ejs 编译出来的 html 才自动刷新
     gulp.watch( `${ projectPath }/src/*.html`, ( event ) => {
         const htmlPath = event.path.replace( /\\/g, '/' );
@@ -227,6 +229,16 @@ module.exports = async ( _config_, _messager_ ) => {
             reload( htmlPath );
         }
     } );
+
+    const workflowConfig = config[ 'workflow.dev' ];
+
+    if ( workflowConfig.watch && workflowConfig.watch.length > 0 ) {
+        workflowConfig.watch.forEach( ( item, index ) => {
+            if ( item.indexOf( './' ) === 0 ) {
+                watch( path.resolve( projectPath, item ), reload );
+            }
+        } );
+    }
 
     watch( `${ projectPath }/legoflow.*`, ( ) => {
         console.log( '配置修改后, 重启工作流后生效' );
