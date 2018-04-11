@@ -7,7 +7,7 @@ module.exports = ( ) => {
     // kill workflow of dev
     for ( let key in global.__workflowDevPid ) {
         if ( __workflowDevPid[ key ] && __workflowDevPid[ key ].pid ) {
-            ps.kill( _workflowDevPid[ key ].pid );
+            ps.kill( __workflowDevPid[ key ].pid );
         }
     }
 

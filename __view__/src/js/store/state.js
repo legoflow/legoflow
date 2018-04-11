@@ -5,6 +5,8 @@ export default {
     port: window.appSetting.get( 'port' ),
     editor: window.appSetting.get( 'editor' ),
     autoOpenChrome: window.appSetting.get( 'autoOpenChrome' ),
+    nodeBin: window.appSetting.get( 'nodeBin' ),
+    lab: window.appSetting.get( 'lab' ),
     view: [
         { label: '新建', component: 'NewComponent' },
         { label: '列表', component: 'ListComponent' },
@@ -16,4 +18,6 @@ export default {
     log: [ ],
     panelLog: { },
     isShowUpdateComponent: false,
+    updateComponentLabel: '',
+    updateComponentSuccess: false,
 };

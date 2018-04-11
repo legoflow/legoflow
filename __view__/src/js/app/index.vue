@@ -65,13 +65,52 @@ export default {
         }
     },
     mounted ( ) {
-        window.ipc.mainWindow.show( );
+        let isShowApp = false;
 
-        // setTimeout(() => {
-        //     this.$store.commit( 'SHOW_UPDATE' );
-        // }, 3000);
+        window.onload = ( ) => {
+            isShowApp = true;
+
+            window.ipc.mainWindow.show( );
+
+            window.ipc.app.checkUpdate( );
+        }
+
+        setTimeout( ( ) => {
+            !isShowApp ? window.ipc.mainWindow.show( ) : void 0;
+        }, 1000 );
     },
     methods: {
+        async updateAlert ( { version } ) {
+            alert( {
+                msg: `是否更新版本 ${ version }`,
+                list: [ { label: '查看新版本功能', url: 'https://github.com/legoflow/legoflow' } ],
+                btns: [ '取消', '确定更新' ],
+                callback: ( index ) => {
+                    if ( index == 1 ) {
+                        window.ipc.app.update( );
+                    }
+                },
+            } )
+        },
+        update ( { type, msg } ) {
+            switch ( type ) {
+                case 'ing': {
+                    this.$store.commit( 'SET_UPDATE_COMPONENT_LABEL', msg );
+
+                    this.$store.commit( 'SHOW_UPDATE' );
+                    break;
+                }
+                case 'success': {
+                    this.$store.commit( 'SET_UPDATE_COMPONENT_SUCCESS', true );
+                    break;
+                }
+                case 'fail': {
+                    this.$store.commit( 'HIDE_UPDATE' );
+
+                    alert( { msg, btns: [ '知道了' ] } );
+                }
+            }
+        },
         projectNewAndAdd ( { name, path, version } ) {
             // 检查是否有相同路径
             let isExists = false;

@@ -1,6 +1,14 @@
 'use strict';
 
 export default {
+    SET_LAB ( state, data ) {
+        state.lab = data;
+        window.appSetting.set( 'lab', state.lab );
+    },
+    SET_NODE_BIN ( state, data ) {
+        state.nodeBin = data;
+        window.appSetting.set( 'nodeBin', state.nodeBin );
+    },
     SET_USER ( state, data ) {
         state.user = data;
         window.appSetting.set( 'user', state.user );
@@ -38,6 +46,9 @@ export default {
     SHOW_UPDATE ( state ) {
         state.isShowUpdateComponent = true;
     },
+    HIDE_UPDATE ( state ) {
+        state.isShowUpdateComponent = false;
+    },
     SET_PROJECT_WORKFLOW_DEV_IN_STATE ( state, { index, attr } ) {
         for ( let item in state.project[ index ].dev ) {
             item === attr ? state.project[ index ].dev[ item ] = true : state.project[ index ].dev[ item ] = false;
@@ -68,5 +79,11 @@ export default {
         else {
             state.log[ state.log.length - 1 ].msgList.push( msg );
         }
+    },
+    SET_UPDATE_COMPONENT_LABEL ( state, data ) {
+        state.updateComponentLabel = data;
+    },
+    SET_UPDATE_COMPONENT_SUCCESS ( state, data ) {
+        state.updateComponentSuccess = data;
     },
 };

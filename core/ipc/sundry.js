@@ -2,6 +2,7 @@
 
 const webSetting = require('../common/web_setting');
 const threadKiller = require('../common/thread_killer');
+const updater = require('../common/updater');
 
 let app, mainWindow, settingWindow;
 
@@ -54,4 +55,33 @@ ipc.on( 'UTIL_CHROME_OPEN', ( event, url ) => {
     else {
         require('child_process').exec( `start chrome "${ url }"` );
     }
+} )
+
+ipc.on( 'APP_CHECK_UPDATE', async ( event ) => {
+    const { version, isNeedUpdate } = await updater.check( );
+
+    if ( isNeedUpdate ) {
+        mainWindow.webContents.send( 'CAN_UPDATE', { version } );
+    }
+} );
+
+ipc.on( 'UPDATE', async ( event ) => {
+    const tips = [
+        '下载更新包...',
+        '解压中...',
+    ];
+
+    let step = 0;
+
+    updater.updating( ( msg, progress ) => {
+        mainWindow.webContents.send( 'UPDATE', { type: 'ing', msg: tips[ step ] || '保存中...' } );
+
+        ++step;
+    } )
+
+    updater.update( ).then( ( ) => {
+        mainWindow.webContents.send( 'UPDATE', { type: 'success' } );
+    } ).catch( ( e ) => {
+        mainWindow.webContents.send( 'UPDATE', { type: 'fail', msg: `更新失败: ${ e }` } );
+    } )
 } )

@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 
-const { dialog } = require('electron').remote;
+const electron = require('electron');
+const { shell } = electron;
+const { dialog } = electron.remote;
 
 window.appUtil = {
     debounce ( time, action ) {
@@ -31,5 +33,8 @@ window.appUtil = {
         }
 
         return s4( ) + s4( ) + new Date( ).getTime( );
+    },
+    openURL ( url ) {
+        shell.openExternal( url );
     },
 }

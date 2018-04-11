@@ -7,6 +7,8 @@ window.ipcRenderer = ipcRenderer;
 window.ipc = {
     app: {
         restart ( ) { ipcRenderer.send( 'APP_RESTART' ) },
+        checkUpdate ( ) { ipcRenderer.send( 'APP_CHECK_UPDATE' ) },
+        update ( )  { ipcRenderer.send( 'UPDATE' ) },
     },
     mainWindow: {
         min ( ) { ipcRenderer.send( 'MAIN_WINDOW_MIN' ) },
@@ -43,6 +45,15 @@ window.ipc = {
         },
     },
 }
+
+// update
+ipcRenderer.on( 'CAN_UPDATE', ( event, data ) => {
+    window.vm && window.vm.updateAlert( data );
+} )
+
+ipcRenderer.on( 'UPDATE', ( event, data ) => {
+    window.vm && window.vm.update( data );
+} )
 
 // messager
 ipcRenderer.on( 'MESSAGER', ( event, data ) => {

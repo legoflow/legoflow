@@ -1,9 +1,10 @@
 <template>
     <transition name="show">
         <div class="update" v-if="isShow">
-            <div class="update-content">
+            <div class="update-content" @click="isRestart">
                 <div class="update-loading-ico">
-                    <div class="sk-fading-circle">
+                    <div class="update-success-ico" v-if="isSuccess"></div>
+                    <div class="sk-fading-circle" v-if="!isSuccess">
                         <div class="sk-circle1 sk-circle"></div>
                         <div class="sk-circle2 sk-circle"></div>
                         <div class="sk-circle3 sk-circle"></div>
@@ -18,7 +19,7 @@
                         <div class="sk-circle12 sk-circle"></div>
                     </div>
                 </div>
-                {{ 'UPDATE...' }}
+                {{ isSuccess ? '已完成，点击重启' : ( !label ? 'UPDATE...' : label ) }}
             </div>
         </div>
     </transition>
@@ -50,10 +51,10 @@
 
 .update-content {
     position: relative;
-    padding-left: 30px;
+    padding-left: 34px;
     width: 200px;
     height: 50px;
-    line-height: 50px;
+    line-height: 52px;
     background-color: $whiteColor;
     border: 1px solid $borderColor;
     box-shadow: 0 0 10px rgba( 0, 0, 0, .1 );
@@ -64,6 +65,7 @@
     z-index: 2;
     -webkit-touch-callout: none;
     user-select: none;
+    cursor: pointer;
 }
 
 .update-loading-ico {
@@ -79,6 +81,20 @@
     justify-content: center;
     border: 1px solid $borderColor;
     box-shadow: 0 0 20px rgba( 0, 0, 0, .3 );
+}
+
+.update-success-ico {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+    background-image: url( ../image/success.png );
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .sk-fading-circle {
@@ -185,6 +201,17 @@ export default {
         isShow ( ) {
             return this.$store.state.isShowUpdateComponent;
         },
+        label ( ) {
+            return this.$store.state.updateComponentLabel;
+        },
+        isSuccess ( ) {
+            return this.$store.state.updateComponentSuccess;
+        },
+    },
+    methods: {
+        isRestart ( ) {
+            this.isSuccess ? window.ipc.app.restart( ) : void 0;
+        }
     },
 };
 </script>

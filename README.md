@@ -54,10 +54,10 @@
 应用是通过 [Electron](https://github.com/electron/electron) 作为核心框架，构建出跨平台应用。在开发启动应用之前，请先拉取仓库，以及安装开发环境依赖。
 
 ```sh
-# node version >= 5x
+# node version = 8.x
 node -v
 
-# 全局安装 electron
+# 全局安装 electron = 1.8.4
 npm i electron -g
 
 # 进入拉取的仓库文件夹

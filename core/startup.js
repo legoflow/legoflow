@@ -2,6 +2,7 @@
 
 const { BrowserWindow } = require('electron');
 
+const threadKiller = require('./common/thread_killer');
 const webSetting = require('./common/web_setting');
 
 let mainWindow = void 0;
@@ -21,6 +22,8 @@ module.exports = ( app ) => {
         system: process.platform == 'win32' ? 'win' : 'mac',
         env: process.argv[ 2 ] || 'build',
     }, config );
+
+    threadKiller( );
 
     return async ( ) => {
         const { system, env, root } = __config;
@@ -65,7 +68,7 @@ module.exports = ( app ) => {
         global.__messager = require('./common/messager')( mainWindow );
 
         if ( env === 'dev' ) {
-            mainWindow.loadURL( 'http://localhost:3000/#/app' )
+            mainWindow.loadURL( 'http://localhost:3000/#/app' );
         }
         else {
             mainWindow.webContents.executeJavaScript( 'location.href = `${ location.href }app`' );
@@ -78,7 +81,7 @@ module.exports = ( app ) => {
         // render setting window
         settingWindow = new BrowserWindow( {
             width: 300,
-            height: 400,
+            height: 430,
             resizable: false,
             fullscreen: false,
             fullscreenable: false,
@@ -90,7 +93,7 @@ module.exports = ( app ) => {
         settingWindow.setMenu( null );
 
         if ( env === 'dev' ) {
-            settingWindow.loadURL( 'http://localhost:3000/#/setting' )
+            settingWindow.loadURL( 'http://localhost:3000/#/setting' );
         }
         else {
             settingWindow.loadURL( `file://${ root }/view/index.html` );

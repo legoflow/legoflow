@@ -173,7 +173,7 @@ export default {
 			}, 500 );
 		},
 		open ( url ) {
-			window.shell.openExternal( url );
+			window.appUtil.openURL( url );
         },
 	},
 	destroyed ( ) {

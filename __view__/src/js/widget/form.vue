@@ -57,6 +57,7 @@ import WidgetFormInput from './from_input';
 import WidgetFormSelect from './form_select';
 import WidgetFormFolder from './form_folder';
 import WidgetFormRadio from './form_radio';
+import WidgetFormSeparate from './form_separate';
 
 export default {
     components: {
@@ -64,6 +65,7 @@ export default {
         WidgetFormSelect,
         WidgetFormFolder,
         WidgetFormRadio,
+        WidgetFormSeparate,
     },
     props: [ 'form', 'initValues' ],
     data ( ) {
@@ -79,19 +81,18 @@ export default {
             switch ( type ) {
                 case 'input': {
                     return 'widget-form-input';
-                    break;
                 }
                 case 'select': {
                     return 'widget-form-select';
-                    break;
                 }
                 case 'folder': {
                     return 'widget-form-folder';
-                    break;
                 }
                 case 'radio': {
                     return 'widget-form-radio';
-                    break;
+                }
+                case 'separate': {
+                    return 'widget-form-separate';
                 }
             }
         },
