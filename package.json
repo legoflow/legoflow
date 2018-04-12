@@ -41,7 +41,7 @@
         "babel-helper-vue-jsx-merge-props": "~2.0.3",
         "babel-loader": "~8.0.0-beta.2",
         "babel-plugin-syntax-jsx": "~6.18.0",
-        "babel-plugin-transform-vue-jsx": "~3.7.0",
+        "babel-plugin-transform-vue-jsx": "^4.0.1",
         "browser-sync": "~2.7.0",
         "cross-port-killer": "~1.0.1",
         "css-loader": "~0.28.11",

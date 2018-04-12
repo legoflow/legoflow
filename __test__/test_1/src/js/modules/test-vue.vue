@@ -5,10 +5,12 @@
 </template>
 
 <style lang="scss" scoped>
+@import "~varScss";
+
 #app {
     font-size: 30px;
     font-weight: 600;
-    color: red;
+    color: $fontColor;
     transition: all .2 esase;
 }
 </style>

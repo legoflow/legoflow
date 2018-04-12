@@ -188,7 +188,8 @@ const EJS_TASK = ( ) => {
         .pipe(
             dist( htmlPath, ( i ) => {
                 console.log(`EJS 文件数 ${ i }`);
-                // reload( projectPath + '/src/**/*.html' );
+
+                reload( projectPath + '/src/*.html' );
             } )
         )
 }
@@ -221,11 +222,13 @@ module.exports = async ( _config_, _messager_ ) => {
     watch( `${ projectPath }/src/assets/*`, reload );
 
     // 判断如果不是 ejs 编译出来的 html 才自动刷新
-    gulp.watch( `${ projectPath }/src/*.html`, ( event ) => {
+    watch( `${ projectPath }/src/*.html`, ( event ) => {
+        console.log( event );
+
         const htmlPath = event.path.replace( /\\/g, '/' );
         const name = htmlPath.split( '/' ).pop( ).replace( '.html', '.ejs' );
 
-        if ( fs.existsSync( `${ projectPath }/src/ejs/${ name }` ) ) {
+        if ( !fs.existsSync( `${ projectPath }/src/ejs/${ name }` ) ) {
             reload( htmlPath );
         }
     } );
@@ -250,7 +253,7 @@ module.exports = async ( _config_, _messager_ ) => {
 
     watch( `${ projectPath }/src/img/**`, IMG_SASS_TASK );
 
-    gulp.watch( `${ projectPath }/src/ejs/**/*.ejs`, EJS_TASK );
+    watch( `${ projectPath }/src/ejs/**/*.ejs`, EJS_TASK );
 
     // 入口文件增加或删除提示重启加入webpack构建中
     watch( `${ projectPath }/src/js/*.js`, {

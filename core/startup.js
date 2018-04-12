@@ -110,5 +110,3 @@ module.exports = ( app ) => {
         require('./ipc')( app, mainWindow, settingWindow );
     };
 };
-
-

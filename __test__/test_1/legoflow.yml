@@ -7,6 +7,7 @@ alias:
     $: ./src/assets/jquery.min.js
     jquery: ./src/assets/jquery.min.js
     jQuery: ./src/assets/jquery.min.js
+    varScss: ./src/sass/_var.scss
 global:
     $: jquery
     jquery: jquery
@@ -14,6 +15,7 @@ global:
 cache: version
 workflow.build:
     html.resourcesDomain: https://legox.org
+    shell: ./shell.js
 workflow.dev:
     watch.reload:
         - ./src/test/**/*

@@ -12,7 +12,7 @@ module.exports = ( config ) => {
 
     const workflowConfig = config[ `workflow.${ workflow }` ] || { };
 
-    const imgSize = ( workflow == 'build' && workflowConfig[ 'bundle.imgSize' ] ) ? workflowConfig[ 'bundle.imgSize' ] : 1024 * 100;
+    const imgSize = ( workflow == 'build' && workflowConfig[ 'bundle.limitImgSize' ] ) ? workflowConfig[ 'bundle.limitImgSize' ] : 1024 * 100;
 
     const rules = [
         {
