@@ -53,6 +53,8 @@ const run = async ( _config_ ) => {
     process.argv.config = config;
 
     try {
+        require('./modules/print_config')( config );
+
         await webpack( config, messager );
 
         await ( ( ) => new Promise( ( resolve, reject ) => {

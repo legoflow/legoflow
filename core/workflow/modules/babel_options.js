@@ -10,7 +10,8 @@ module.exports = {
         ],
     ],
     plugins: [
-        [ require.resolve('@babel/plugin-transform-react-jsx'), { pragma: 'h' } ],
+        // [ require.resolve('@babel/plugin-transform-react-jsx'), { pragma: 'h' } ],
+        require.resolve('babel-plugin-transform-vue-jsx'),
         require.resolve('@babel/plugin-proposal-decorators'),
         [ require.resolve('@babel/plugin-proposal-class-properties'), { loose: true } ],
         require.resolve('@babel/plugin-proposal-optional-chaining'),

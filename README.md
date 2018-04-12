@@ -13,17 +13,8 @@
     <a href="">
         <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg" />
     </a>
-    <a href="https://legoflow.com/" target="_blank">
-        <img alt="Home" src="https://img.shields.io/badge/home-legoflow.com-orange.svg" />
-    </a>
-    <a href="https://legoflow.com/wiki" target="_blank">
-        <img alt="Wiki" src="https://img.shields.io/badge/wiki-2.0-red.svg" />
-    </a>
     <a href="" target="_blank">
         <img alt="Download-macOS" src="https://img.shields.io/badge/download-macOS-brightgreen.svg" />
-    </a>
-    <a href="" target="_blank">
-        <img alt="Download-Windows64" src="https://img.shields.io/badge/download-Windows64-brightgreen.svg" />
     </a>
 </p>
 
@@ -76,31 +67,21 @@ npm start
 通过执行该命令打包应用，若打包过程中出现错误，请参考 [electron-packager](https://github.com/electron-userland/electron-packager) 使用文档。
 
 ```sh
-# 同时打包出 macOS & Windows 应用
-npm run package
-
 # 打包 macOS 应用
 npm run package:mac
-
-# 打开 Windows64 应用
-npm run package:win
 ```
 
-## 文档
+## 使用说明
 
-若想了解更多使用文档，请查看 [legoflow.com](https://legoflow.com).
+查看 [2.0 Beta 使用说明](https://github.com/legoflow/legoflow/issues/12)
 
 ## 下载
 
-→ 百度云 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
-
-→ 开发服务器 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
-
-→ Github release 下载地址:&emsp;[macOS]()&emsp;|&emsp;[Windows64]()
+→ Github release 下载地址:&emsp;[macOS]()
 
 ## 反馈
 
-遇到问题或者有更棒的想法，欢迎大家提出 issues.
+遇到问题或者有更棒的想法，欢迎大家提出 issues 或 PR.
 
 交流 Q 群 **457756220**
 

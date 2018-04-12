@@ -82,7 +82,7 @@ let macMenu = [ {
             {
                 label: '使用教程',
                 click ( ) {
-                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/wiki/%5B2.0%5D-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E' );
+                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/issues/12' );
                     return false;
                 }
             },

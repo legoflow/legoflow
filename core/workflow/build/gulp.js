@@ -72,7 +72,7 @@ const EJS_TASK = ( resolve, reject ) => {
         )
         .pipe( gulp.dest( `${ projectPath }/dist/` ) )
         .on( 'end', ( ) => {
-            messager.info( 'EJS 构建完成' );
+            messager.log( 'EJS 构建完成' );
 
             resolve( );
         } );
@@ -116,7 +116,7 @@ const SASS_TASK = ( resolve, reject ) => {
                 .pipe( concat( '_AllInOne_.css' ) )
                 .pipe( gulp.dest( dest ) )
                 .on( 'end', ( ) => {
-                    messager.info( 'Sass 构建完成' );
+                    messager.log( 'Sass 构建完成' );
 
                     resolve( );
                 } );
@@ -151,7 +151,7 @@ const SPRITE_TASK = ( resolve, reject ) => {
                 .on( 'end', ( ) => buildSprite( splites, ++index ) );
         }
         else {
-            messager.info( '雪碧图 构建完成' );
+            messager.log( '雪碧图 构建完成' );
 
             resolve( );
         }
@@ -226,7 +226,7 @@ const IMG_TASK = ( resolve, reject ) => {
                 del.sync( [ `${ projectPath }/dist/.img` ], { force: true } );
                 del.sync( [ `${ projectPath }/dist/css/_AllInOne_.css` ], { force: true } );
 
-                messager.info( '图片压缩完成' );
+                messager.log( '图片压缩完成' );
 
                 resolve( );
             } );
@@ -259,7 +259,7 @@ const INLINE_TASK = ( resolve, reject ) => {
         .pipe( inlinesource( ) )
         .pipe( gulp.dest( `${ projectPath }/dist` ) )
         .on( 'end', ( ) => {
-            messager.info( 'HTML 内联成功' );
+            messager.log( 'HTML 内联成功' );
 
             resolve( );
         } );
@@ -267,9 +267,11 @@ const INLINE_TASK = ( resolve, reject ) => {
 
 // ---------------------------------- css version ----------------------------------
 const CSS_VERSION = ( resolve, reject ) => {
+    const { cache } = config[ 'workflow.build' ];
+
     gulp.src( `${ projectPath }/dist/css/**/*.css` )
         .pipe( cssUrlVersion( {
-                paramType: config.cache || '',
+                paramType: cache || '',
                 version: config.version || '',
             } )
         )
@@ -288,7 +290,7 @@ const MOVE_ASSETS = ( resolve, reject ) => {
     gulp.src( `${ assetsPath }/**/*` )
         .pipe( gulp.dest( `${ projectPath }/dist/assets` ) )
         .on( 'end', ( ) => {
-            messager.info( 'assets 文件夹移动成功' );
+            messager.log( 'assets 文件夹移动成功' );
 
             resolve( );
         } );
@@ -300,12 +302,14 @@ const HTML_TASK = ( resolve, reject ) => {
 
     const resourcesDomain = config[ 'workflow.build' ][ 'html.resourcesDomain' ];
 
+    const { cache } = config[ 'workflow.build' ];
+
     gulp.src( `${ projectPath }/dist/*.html` )
         .pipe( useref( ) )
         .pipe( gulpif( '*.js', header( banner ) ) )
         .pipe( gulpif( '*.css', header( banner ) ) )
         .pipe( htmlVersion({
-                paramType: config.cache,
+                paramType: cache,
                 version: config.version,
                 suffix: [ 'css', 'js', 'jpg', 'png', 'gif' ],
             } )

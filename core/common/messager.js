@@ -1,5 +1,6 @@
 'use strict';
 
+const chalk = require('chalk');
 const _ = require('lodash');
 
 module.exports = ( mainWindow ) => {
@@ -9,10 +10,16 @@ module.exports = ( mainWindow ) => {
         // send to view
         mainWindow.webContents.send( 'MESSAGER', { type, data } );
 
-        console[ console[ type ] ? type : 'log' ]( `[MESSAGER ${ type.toUpperCase( ) }]:`, data );
+        let workflowMsg = void 0;
+
+        if ( data && data.type && data.type.indexOf( 'workflow_' ) === 0 ) {
+            workflowMsg = data.msg;
+        }
+
+        console[ console[ type ] ? type : 'log' ]( `[MESSAGER@${ type.toUpperCase( ) }]:`, workflowMsg || data );
     }
 
-    messager.log = data => sender( 'info', data );
+    messager.log = data => sender( 'log', data );
 
     messager.event = data => sender( 'event', data );
 
@@ -26,7 +33,7 @@ module.exports = ( mainWindow ) => {
             newData.config = config;
 
             switch ( type ) {
-                case 'info': { messager.log( newData ); break; }
+                case 'log': { messager.log( newData ); break; }
                 case 'error': { messager.log( newData ); break; }
                 case 'success': {
                     success( msg, ( _msg_ ) => {

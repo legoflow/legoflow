@@ -5,16 +5,16 @@ const del = require('del');
 const shell = require('shelljs');
 
 module.exports = ( { config: { projectPath }, messager, nodeBinExec } ) => {
-    messager.info( '删除原有 zip' );
+    messager.log( '删除原有 zip' );
 
     del.sync( [ `${ projectPath }/dist.zip` ], { force: true } );
 
-    messager.info( '打包中' );
+    messager.log( '打包中' );
 
     shell.cd( projectPath );
 
     if ( shell.exec( 'zip -r dist.zip dist' ).code === 0 ) {
-        messager.info( '打包完成' );
+        messager.log( '打包完成' );
 
         messager.success( );
     }

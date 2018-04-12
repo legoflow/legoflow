@@ -100,7 +100,7 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
 
     messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
 
-    messager( { type: 'info', msg: '启动中，请稍候...' } );
+    messager( { type: 'log', msg: '启动中，请稍候...' } );
 
     thread.on( 'message', messager );
 } );

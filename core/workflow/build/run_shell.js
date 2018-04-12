@@ -3,7 +3,7 @@
 const fs = require('fs-extra');
 
 module.exports = ( shell, config, messager ) => {
-    messager.info( '------- start to exec shell -------' );
+    messager.log( '------- start to exec shell -------' );
 
     delete require.cache[ shell ];
 

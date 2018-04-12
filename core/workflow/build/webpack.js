@@ -12,7 +12,9 @@ let config = void 0;
 let messager = void 0;
 
 const start = ( resolve, reject ) => {
-    let { entry, ip, alias, projectPath, root, user, args, publicPath, cache, version } = config;
+    let { entry, ip, alias, projectPath, root, user, args, publicPath, version } = config;
+
+    const { cache } = config[ 'workflow.build' ];
 
     let chunkFilename = '[name].js';
 
@@ -52,7 +54,7 @@ const start = ( resolve, reject ) => {
             return void 0;
         }
 
-        messager.info( 'JS 构建完成' );
+        messager.log( 'JS 构建完成' );
 
         resolve( );
     } )

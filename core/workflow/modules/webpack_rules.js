@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 const getTsConfigJson = require('../modules/get_tsconfig_json');
@@ -8,15 +9,20 @@ const babelOptions = require('../modules/babel_options');
 module.exports = ( config ) => {
     const isESNext = config[ 'ES.Next' ];
 
-    const { workflow } = config;
+    const { workflow, root } = config;
 
     const workflowConfig = config[ `workflow.${ workflow }` ] || { };
 
     const imgSize = ( workflow == 'build' && workflowConfig[ 'bundle.limitImgSize' ] ) ? workflowConfig[ 'bundle.limitImgSize' ] : 1024 * 100;
 
+    const appNodeModules = path.resolve( root, './node_modules' );
+
+    const exclude = [ appNodeModules ];
+
     const rules = [
         {
             test: /\.(png|jpg|gif|svg|jpeg)$/,
+            exclude,
             use: [
                 {
                     loader: require.resolve('url-loader'),
@@ -30,6 +36,7 @@ module.exports = ( config ) => {
         },
         {
             test: /\.scss$/,
+            exclude,
             use: [
                 {
                     loader: require.resolve('to-string-loader')
@@ -55,16 +62,18 @@ module.exports = ( config ) => {
         },
         {
             test: /\.tpl$/,
+            exclude,
             use: [ require.resolve('art-template-loader'), ],
         },
         {
             test: /\.html$/,
+            exclude,
             use: [ require.resolve('html-loader'), ],
         },
         {
             test: /\.vue$/,
+            exclude,
             loader: require.resolve('vue-loader'),
-            exclude: /node_modules/,
             options: {
                 loaders: {
                     scss: 'vue-style-loader!css-loader!sass-loader',
@@ -85,7 +94,7 @@ module.exports = ( config ) => {
         rules.push(
             {
                 test: /\.*(js|jsx)$/,
-                exclude: /node_modules/,
+                exclude,
                 use: [
                     {
                         loader: require.resolve('babel-loader'),
@@ -95,7 +104,7 @@ module.exports = ( config ) => {
             },
             {
                 test: /\.*(ts|tsx)$/,
-                exclude: /node_modules/,
+                exclude,
                 use: [
                     {
                         loader: require.resolve('awesome-typescript-loader'),

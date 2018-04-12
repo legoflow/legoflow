@@ -32,6 +32,8 @@ const run = async ( _config_ ) => {
     process.argv.config = config;
 
     try {
+        require('./modules/print_config')( config );
+
         del.sync( `${ config.path }/dist`, { force: true } );
 
         let { shell, onlyRunShell } = config[ 'workflow.build' ];

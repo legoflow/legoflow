@@ -66,7 +66,7 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
 
     messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
 
-    messager( { type: 'info', msg: '构建中，请稍候...' } );
+    messager( { type: 'log', msg: '构建中，请稍候...' } );
 
     thread.on( 'message', messager );
 } )
@@ -85,7 +85,7 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_STOP', ( event, config ) => {
 
     const messager = __messager._workflow_adapter_( config );
 
-    messager( { type: 'info', msg: '已停止' } );
+    messager( { type: 'log', msg: '已停止' } );
 
     event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
 

@@ -10,7 +10,7 @@ const sender = ( { type, msg } ) => {
 
 module.exports = {
     info ( msg ) {
-        sender( { type: 'info', msg } );
+        sender( { type: 'log', msg } );
     },
     error ( msg ) {
         sender( { type: 'error', msg } );

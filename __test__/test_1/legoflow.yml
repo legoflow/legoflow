@@ -12,8 +12,8 @@ global:
     $: jquery
     jquery: jquery
     jQuery: jquery
-cache: version
 workflow.build:
+    cache: version
     html.resourcesDomain: https://legox.org
     shell: ./shell.js
 workflow.dev:
