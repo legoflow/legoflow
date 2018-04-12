@@ -3,6 +3,35 @@
 const path = require('path');
 const fs = require('fs-extra');
 const YAML = require('yamljs');
+const lineReader = require('line-reader');
+
+const formatYamlFile = ( file ) => {
+    let newFileContent = '';
+    let row = 0;
+
+    return new Promise( ( resolve, reject ) => {
+        lineReader.eachLine( file, { encoding: 'utf8' }, ( line, last ) => {
+            ++row;
+
+            if ( typeof line[ 0 ] !== 'undefined' && /\S/.test( line[ 0 ]) && line[ 0 ] != '' ) {
+                if ( newFileContent == '' ) {
+                    newFileContent = line;
+                }
+                else {
+                    newFileContent += '\n';
+                    newFileContent += `\n${ line }`;
+                }
+            }
+            else {
+                newFileContent += `\n${ line }`;
+            }
+
+            if ( last ) {
+                resolve( newFileContent );
+            }
+        } );
+    } );
+}
 
 module.exports = async ( data ) => {
     let { name, type, path: projectPath, version, isESNext, isSourcePath } = data;
@@ -59,9 +88,14 @@ module.exports = async ( data ) => {
             legoflowJSON.externals = { vue: 'Vue' };
 		    break;
         }
-	}
+    }
 
-    fs.writeFileSync( path.resolve( projectPath, './legoflow.yml' ),  YAML.stringify( legoflowJSON, 4 ) );
+    const configFile = path.resolve( projectPath, './legoflow.yml' );
+
+    fs.writeFileSync( configFile, YAML.stringify( legoflowJSON, 4 ) );
+
+    // format YAML file
+    fs.writeFileSync( configFile, await formatYamlFile( configFile ) );
 
     // cope type folder
     fs.copySync( projectTypePath, path.resolve( projectPath, './src' ) );

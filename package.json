@@ -73,6 +73,7 @@
         "gulp-watch": "~5.0.0",
         "html-loader": "~0.5.5",
         "image-size": "~0.6.2",
+        "line-reader": "^0.4.0",
         "lodash": "~4.17.5",
         "moment": "^2.22.0",
         "network": "~0.4.1",

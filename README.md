@@ -58,13 +58,13 @@ cd ./legoflow
 npm install
 ```
 
-通过执行该命令以开发方式启动应用。
+启动应用
 
 ```sh
 npm start
 ```
 
-通过执行该命令打包应用，若打包过程中出现错误，请参考 [electron-packager](https://github.com/electron-userland/electron-packager) 使用文档。
+打包应用，若打包过程中出现错误，请参考 [electron-packager](https://github.com/electron-userland/electron-packager) 使用文档。
 
 ```sh
 # 打包 macOS 应用
@@ -73,7 +73,7 @@ npm run package:mac
 
 ## 使用说明
 
-查看 [2.0 Beta 使用说明](https://github.com/legoflow/legoflow/issues/12)
+查看 **[2.0 Beta 使用说明](https://github.com/legoflow/legoflow/issues/12)**
 
 ## 下载
 
