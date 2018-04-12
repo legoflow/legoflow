@@ -1,6 +1,10 @@
 # LegoFlow
 
-**[2.0 Future](https://github.com/legoflow/legoflow/issues/10)**
+___
+
+## [2.0 macOS Beta](https://github.com/legoflow/legoflow/tree/2.x)
+
+___
 
 简单、快捷、高效、开箱即用的 前端工作流客户端，无需各种配置系统环境。
 
