@@ -1,12 +1,12 @@
 # LegoFlow
 
-___
-
-## [2.0 macOS Beta](https://github.com/legoflow/legoflow/tree/2.x)
-
-___
-
 简单、快捷、高效、开箱即用的 前端工作流客户端，无需各种配置系统环境。
+
+___
+
+### [2.0 macOS Beta](https://github.com/legoflow/legoflow/tree/2.x)
+
+___
 
 * 开发者无需再配置各种版本混乱的 NodeJS 环境
 * 开发者无需再下载各个繁琐复杂的 node modules
