@@ -77,8 +77,6 @@ export default {
 
             const [ user, port, editor, autoOpenChrome, x, lab, nodeBin ] = values;
 
-            console.log( values );
-
             this.$store.commit( 'SET_USER', user );
             this.$store.commit( 'SET_PORT', port );
             this.$store.commit( 'SET_EDITOR', editor );

@@ -24,6 +24,10 @@ ipc.on( 'PROJECT_ADD', async ( event, data ) => {
 
 // 更新项目信息
 ipc.on( 'PROJECT_UPDATE', ( event, data ) => {
+    if ( !data ) {
+        return void 0;
+    }
+
     const { id, name, path } = data;
 
     const config = path.getConfig( data );

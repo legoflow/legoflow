@@ -6,11 +6,13 @@ const chalk = require('chalk');
 const override = require('electron-override-modules');
 
 const root = path.resolve( __dirname, '../' );
+const nodeModules = path.resolve( root, './node_modules' );
+const nodeModulesOverride = path.resolve( root, './node_modules_override' );
 
 override.config( {
     debug: true,
-    root,
-    entry: path.resolve( root, './override' ),
+    root: nodeModules,
+    entry: nodeModulesOverride,
 } );
 
 ( async ( ) => {

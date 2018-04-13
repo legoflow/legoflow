@@ -1,6 +1,7 @@
 'use strict';
 
 const { BrowserWindow } = require('electron');
+const path = require('path');
 
 const threadKiller = require('./common/thread_killer');
 const webSetting = require('./common/web_setting');
@@ -57,7 +58,9 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
-        env === 'dev' ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ root }/view/index.html` );
+        const viewFolder = path.resolve( __dirname, '../view' );
+
+        env === 'dev' ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
 
         env === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
 
@@ -96,7 +99,7 @@ module.exports = ( app ) => {
             settingWindow.loadURL( 'http://localhost:3000/#/setting' );
         }
         else {
-            settingWindow.loadURL( `file://${ root }/view/index.html` );
+            settingWindow.loadURL( `file://${ viewFolder }/index.html` );
 
             settingWindow.webContents.executeJavaScript( 'location.href = `${ location.href }setting`' );
         }

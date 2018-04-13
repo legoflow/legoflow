@@ -2,6 +2,15 @@
 
 * 构建 Windows64 版本
 
+## 2.0.0-alpha.1 (April 13, 2018)
+
+* 修复 窗口无法显示问题
+* 修复 窗口无法拖动问题
+* 修复 工作流无法成功启动问题
+* 修复 vue-style-loader 指向问题
+* 增加 JS 构建加入 Banner 注释
+* 增加 构建完成后判断是否自动打开 Chrome
+
 ## 2.0.0-alpha.0 (April 13, 2018)
 
 * 构建 macOS 版本 ([下载](https://github.com/legoflow/legoflow/releases/download/2.0.0-alpha.0/LegoFlow-2-macOS.dmg))

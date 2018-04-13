@@ -54,3 +54,6 @@ new Vue( {
     },
     // template: '<div id="vue"><vue-component/></div>',
 } )
+
+
+LOG_TO_HTML( `workflow env: ${ process.env }` );

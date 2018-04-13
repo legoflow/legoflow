@@ -37,7 +37,6 @@
 * 自动替换线上资源地址
 * JS 编译 Sass 文件 Autoprefixer 自动补全
 * JS 编译 [art-template](https://aui.github.io/art-template/zh-cn/index.html) 语法 tpl 文件
-* 提供工作流前后拦截器，自定义功能
 * ......
 
 ## 开发

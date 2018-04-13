@@ -21,6 +21,7 @@ header {
     line-height: 45px;
     background-color: $mainColor;
     z-index: 9999;
+    -webkit-app-region: drag;
 }
 
 .menu {
@@ -39,6 +40,7 @@ header {
         -webkit-touch-callout: none;
         user-select: none;
         cursor: pointer;
+        -webkit-app-region: no-drag;
     }
     .menu-active {
         position: absolute;

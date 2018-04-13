@@ -18,7 +18,7 @@ module.exports = ( mainWindow ) => {
 
     tray = new Tray( trayIcon );
 
-    tray.setToolTip( 'LegoFlow' );
+    tray.setToolTip( 'LegoFlow 2' );
 
     tray.on( 'click', mainWindow.show );
 

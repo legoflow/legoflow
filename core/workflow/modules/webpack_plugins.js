@@ -17,5 +17,15 @@ module.exports = ( config ) => {
         plugins.push( new webpack.HotModuleReplacementPlugin( ) );
     }
 
+    //  banner
+    if ( config.workflow === 'build' ) {
+        plugins.push(
+            new webpack.BannerPlugin( {
+                banner: config.banner,
+                raw: true,
+            } )
+        );
+    }
+
     return plugins;
 };
