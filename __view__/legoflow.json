@@ -17,7 +17,7 @@
     "other": "",
     "dist": "",
     "output": "",
-    "shell": "",
+    "shell": "./shell.js",
     "alias": {
         "var": "./src/sass/var.scss",
         "js": "./src/js"

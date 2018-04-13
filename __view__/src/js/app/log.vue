@@ -1,5 +1,6 @@
 <template>
     <div class="view-content log">
+        <div class="log-empty" v-if="log.length === 0">暂无日志</div>
         <div class="log-card" v-for="( item1, $index1 ) in log" :key="$index1">
             <div class="log-card-titile">
                 {{ item1.name }}
@@ -17,6 +18,18 @@
 .log {
     padding-bottom: 60px;
     overflow: auto;
+}
+
+.log-empty {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: rgba( 0, 0, 0, .15 );
+    -webkit-touch-callout: none;
+    user-select: none;
 }
 
 .log-card {

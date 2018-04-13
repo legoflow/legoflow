@@ -13,7 +13,7 @@
     <a href="">
         <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg" />
     </a>
-    <a href="" target="_blank">
+    <a href="https://github.com/legoflow/legoflow/releases" target="_blank">
         <img alt="Download-macOS" src="https://img.shields.io/badge/download-macOS-brightgreen.svg" />
     </a>
 </p>
@@ -45,16 +45,16 @@
 应用是通过 [Electron](https://github.com/electron/electron) 作为核心框架，构建出跨平台应用。在开发启动应用之前，请先拉取仓库，以及安装开发环境依赖。
 
 ```sh
-# node version = 8.x
+# node version = v8.x
 node -v
 
-# 全局安装 electron = 1.8.4
-npm i electron -g
+# 全局安装 electron v1.8.4
+npm i electron@1.8.4 -g
 
 # 进入拉取的仓库文件夹
 cd ./legoflow
 
-# 安装依赖 node_modules
+# 安装依赖
 npm install
 ```
 
@@ -73,11 +73,15 @@ npm run package:mac
 
 ## 使用说明
 
-查看 **[2.0 Beta 使用说明](https://github.com/legoflow/legoflow/issues/12)**
+查看 **[2.0 Alpha 使用说明](https://github.com/legoflow/legoflow/issues/12)**
+
+## 更新日志
+
+查看 [CHANGELOG](https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md)
 
 ## 下载
 
-→ Github release 下载地址:&emsp;[macOS]()
+→ Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)
 
 ## 反馈
 

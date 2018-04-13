@@ -72,7 +72,9 @@ export default {
 
             window.ipc.mainWindow.show( );
 
-            window.ipc.app.checkUpdate( );
+            setTimeout( ( ) => {
+                window.ipc.app.checkUpdate( );
+            }, 500 );
         }
 
         setTimeout( ( ) => {

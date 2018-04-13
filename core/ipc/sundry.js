@@ -85,3 +85,7 @@ ipc.on( 'UPDATE', async ( event ) => {
         mainWindow.webContents.send( 'UPDATE', { type: 'fail', msg: `更新失败: ${ e }` } );
     } )
 } )
+
+ipc.on( 'MAIN_WINDOW_OPEN_DEV_TOOLS', ( event ) => {
+    mainWindow.webContents.openDevTools( { mode: 'undocked' });
+} )

@@ -1,12 +1,12 @@
 {
     "name": "legoflow",
-    "version": "2.0.0-beta.1",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "start": "node ./script/start",
         "dev": "node ./script/start dev",
-        "pack:mac": "electron-packager ./ LegoFlow2 --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=icon/logo.icns --version 1.8.4 --ignore='(.DS_Store|__test__|__view__)'"
+        "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(.DS_Store|__test__|__view__|.gitignore|TODO|MARK|CHANGELOG.md|override|.editorconfig|dist)'"
     },
     "repository": {
         "type": "git",

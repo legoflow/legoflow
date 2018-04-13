@@ -14,6 +14,7 @@ window.ipc = {
         min ( ) { ipcRenderer.send( 'MAIN_WINDOW_MIN' ) },
         show ( ) { ipcRenderer.send( 'MAIN_WINDOW_SHOW' ) },
         hide ( ) { ipcRenderer.send( 'MAIN_WINDOW_HIDE' ) },
+        openDevTools ( ) { ipcRenderer.send( 'MAIN_WINDOW_OPEN_DEV_TOOLS' ) },
     },
     settingWindow: {
         hide ( ) { ipcRenderer.send( 'SETTING_WINDOW_HIDE' ) },
