@@ -4,7 +4,7 @@
 
 ___
 
-### [2.0 macOS Beta](https://github.com/legoflow/legoflow/tree/2.x)
+### [2.0 Alpha](https://github.com/legoflow/legoflow/tree/2.x)
 
 ___
 
