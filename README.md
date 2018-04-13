@@ -80,9 +80,9 @@ npm run package:mac
 
 ## 下载
 
-→ 开发者服务器 下载地址:&emsp;[macOS](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-macOS.dmg)
+→ 开发者服务器 下载地址:&emsp;[macOS](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-macOS.dmg)&emsp;|&emsp;Windows64
 
-→ Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)
+→ Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)&emsp;|&emsp;Windows64
 
 ## 反馈
 
