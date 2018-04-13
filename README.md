@@ -77,7 +77,7 @@ npm run package:mac
 
 ## 更新日志
 
-查看 [CHANGELOG](https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md)
+查看 **[CHANGELOG](https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md)**
 
 ## 下载
 
