@@ -2,6 +2,10 @@
 
 * 构建 Windows64 版本
 
+## 2.0.0-alpha.2
+
+* 增加 导出 Webpack 构建 Stats
+
 ## 2.0.0-alpha.1 (April 13, 2018)
 
 * 修复 窗口无法显示问题

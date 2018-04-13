@@ -86,6 +86,7 @@
         "raw-loader": "~0.5.1",
         "sass-loader": "~6.0.7",
         "shelljs": "~0.7.8",
+        "stats-webpack-plugin": "^0.6.2",
         "style-loader": "~0.20.3",
         "to-string-loader": "~1.1.5",
         "typescript": "~2.8.1",
