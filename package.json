@@ -7,7 +7,7 @@
         "start": "node ./script/start",
         "dev": "node ./script/start dev",
         "debug": "electron index.js build",
-        "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(.DS_Store|__test__|__view__|.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|.editorconfig)'"
+        "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(.DS_Store|__test__|__view__|.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|.editorconfig|test)'"
     },
     "repository": {
         "type": "git",
@@ -106,7 +106,7 @@
     },
     "devDependencies": {
         "electron": "^1.8.4",
-        "electron-override-modules": "~0.0.4",
+        "electron-override-modules": "0.0.5",
         "electron-packager": "~12.0.0",
         "electron-rebuild": "~1.7.3"
     }

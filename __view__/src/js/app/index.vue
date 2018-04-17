@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <component :is="headerComponent"></component>
-        <div class="view" :style="{ transform: `translate3d( ${ `${ viewIndex * -100 }%` }, 0, 0 )` }">
+        <div class="view" :style="{ transform: `translate3d( ${ `${ viewIndex * -100 }%` }, 0, 0 )` }" :class="[ system !== 'mac' ? 'win-view' : '' ]">
             <component
                 v-for="( item, $index ) in view"
                 :key="$index"
@@ -30,6 +30,10 @@
     transition: all .2s ease;
 }
 
+.win-view {
+    height: calc( 100% - 30px );
+}
+
 .view-content {
     position: absolute;
     top: 0;
@@ -41,6 +45,7 @@
 
 <script>
 import HeaderMacComponent from './header_mac';
+import HeaderWinComponent from './header_win';
 import NewComponent from './new';
 import ListComponent from './list';
 import LogComponent from './log';
@@ -50,6 +55,7 @@ export default {
     computed: Vuex.mapState( [ 'view', 'viewIndex', 'project' ] ),
     components: {
         HeaderMacComponent,
+        HeaderWinComponent,
         NewComponent,
         ListComponent,
         LogComponent,
@@ -62,6 +68,7 @@ export default {
     data ( ) {
         return {
             headerComponent: window.config.system == 'mac' ? 'HeaderMacComponent' : 'HeaderWinComponent',
+            system: window.config.system,
         }
     },
     mounted ( ) {
@@ -75,6 +82,22 @@ export default {
             setTimeout( ( ) => {
                 window.ipc.app.checkUpdate( );
             }, 500 );
+
+             Mousetrap.bind( 'left', ( ) => {
+                if ( this.viewIndex > 0 ) {
+                    this.$store.commit( 'SET_VIEW_INDEX', this.viewIndex - 1 );
+                }
+
+                return false;
+            } );
+
+            Mousetrap.bind( 'right', ( ) => {
+                if ( this.viewIndex < this.view.length - 1 ) {
+                    this.$store.commit( 'SET_VIEW_INDEX', this.viewIndex + 1 );
+                }
+
+                return false;
+            } );
         }
 
         setTimeout( ( ) => {
@@ -145,6 +168,8 @@ export default {
             this.$store.commit( 'SET_VIEW_INDEX', 1 );
 
             window.eventBus.$emit( 'PROJECT_NEW_RESET' );
+
+            this.$store.commit( 'SET_VIEW_INDEX', 1 );
 
             alert( '新建项目成功' );
         },

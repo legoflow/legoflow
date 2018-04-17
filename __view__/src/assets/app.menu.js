@@ -2,8 +2,12 @@
 
 const Menu = window.remote.Menu;
 
-// 快捷键
-// window.keymapAction = { };
+window.URL = {
+    home: 'https://github.com/legoflow/legoflow/tree/2.x',
+    wiki: 'https://github.com/legoflow/legoflow/issues/12',
+    changelog: 'https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md',
+    advice: 'https://github.com/legoflow/legoflow/issues',
+}
 
 let macMenu = [ {
     label: 'LegoFlow 2',
@@ -29,7 +33,9 @@ let macMenu = [ {
             {
                 label: '隐藏',
                 accelerator: 'CmdOrCtrl+W',
-                role: 'hide',
+                click ( ) {
+                    window.ipc.mainWindow.hide( );
+                },
             },
             {
                 label: '最小化',
@@ -42,7 +48,7 @@ let macMenu = [ {
                 label: '退出',
                 accelerator: 'CmdOrCtrl+Q',
                 click ( ) {
-                    remote.app.quit( );
+                    window.remote.app.quit( );
                 }
             },
             { type: 'separator' },
@@ -63,7 +69,6 @@ let macMenu = [ {
                 label: '打开',
                 accelerator: 'CmdOrCtrl+O',
                 click ( ) {
-                    return false;
                 },
             },
             { label: '粘贴', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
@@ -77,36 +82,31 @@ let macMenu = [ {
                 accelerator: 'Cmd+alt+i',
                 click ( ) {
                     window.ipc.mainWindow.openDevTools( );
-                    return false;
                 }
             },
             { type: 'separator' },
             {
                 label: '官网',
                 click ( ) {
-                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/tree/2.x' );
-                    return false;
+                    window.appUtil.openURL( window.URL.home );
                 }
             },
             {
                 label: '使用教程',
                 click ( ) {
-                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/issues/12' );
-                    return false;
+                    window.appUtil.openURL( window.URL.wiki );
                 }
             },
             {
                 label: '更新日志',
                 click ( ) {
-                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md' );
-                    return false;
+                    window.appUtil.openURL( window.URL.changelog );
                 }
             },
             {
                 label: '意见反馈',
                 click ( ) {
-                    window.appUtil.openURL( 'https://github.com/legoflow/legoflow/issues' );
-                    return false;
+                    window.appUtil.openURL( window.URL.advice );
                 }
             },
         ]

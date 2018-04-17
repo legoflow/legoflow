@@ -19,6 +19,9 @@ module.exports = ( config ) => {
 
     const exclude = [ appNodeModules ];
 
+    const vueScssLoadersString = `${ appNodeModules }/vue-style-loader!${ appNodeModules }/css-loader!${ appNodeModules }/sass-loader`;
+    const vueSassLoadersString = `${ appNodeModules }/vue-style-loader!${ appNodeModules }/css-loader!${ appNodeModules }/sass-loader?indentedSyntax`;
+
     const rules = [
         {
             test: /\.(png|jpg|gif|svg|jpeg)$/,
@@ -76,8 +79,8 @@ module.exports = ( config ) => {
             loader: require.resolve('vue-loader'),
             options: {
                 loaders: {
-                    scss: 'vue-style-loader!css-loader!sass-loader',
-                    sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+                    scss: vueScssLoadersString,
+                    sass: vueSassLoadersString,
                     js: {
                         loader: require.resolve('babel-loader'),
                         options: babelOptions,

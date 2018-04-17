@@ -12,6 +12,8 @@ let settingWindow = void 0;
 require('./clean')( );
 
 module.exports = ( app ) => {
+    const personConfig = JSON.parse( decodeURI( process.argv[ 3 ] || '{}' ) );
+
     global.__util = require('./common/util');
     global.__notifier = require('./common/notifier');
 
@@ -27,40 +29,39 @@ module.exports = ( app ) => {
     threadKiller( );
 
     return async ( ) => {
-        const { system, env, root } = __config;
+        let { system, env, root } = __config;
+
+        let devViewAddress = 'localhost:3000';
+
+        if ( env !== 'build' && personConfig.devViewAddress ) {
+            devViewAddress = personConfig.devViewAddress;
+
+            console.log( '[DEV VIEW ADDRESS]', devViewAddress );
+        }
 
         let option = {
             resizable: false,
             fullscreen: false,
             show: false,
+            width: 280,
+            height: 480,
         }
 
-        switch ( system ) {
-            case 'win': {
-                option.width = 305;
-                option.height = 502;
-                break;
-            }
-            case 'mac': {
-                option.frame = false;
-                option.autoHideMenuBar = true,
-                option.width = 280;
-                option.height = 480;
-                break;
-            }
+        if ( system === 'mac' ) {
+            option.frame = false;
+            option.autoHideMenuBar = true;
         }
 
         if ( env === 'dev' ) {
             option.show = true;
-            option.width  = 800;
-            option.height = 480;
+            option.width = 800;
         }
 
         mainWindow = new BrowserWindow( option );
 
         const viewFolder = path.resolve( __dirname, '../view' );
 
-        env === 'dev' ? mainWindow.loadURL( 'http://localhost:3000' ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
+        env === 'dev' ? mainWindow.loadURL( `http://${ devViewAddress }` ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
 
         env === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
 
@@ -71,7 +72,7 @@ module.exports = ( app ) => {
         global.__messager = require('./common/messager')( mainWindow );
 
         if ( env === 'dev' ) {
-            mainWindow.loadURL( 'http://localhost:3000/#/app' );
+            mainWindow.loadURL( `http://${ devViewAddress }/#/app` );
         }
         else {
             mainWindow.webContents.executeJavaScript( 'location.href = `${ location.href }app`' );
@@ -96,7 +97,7 @@ module.exports = ( app ) => {
         settingWindow.setMenu( null );
 
         if ( env === 'dev' ) {
-            settingWindow.loadURL( 'http://localhost:3000/#/setting' );
+            settingWindow.loadURL( `http://${ devViewAddress }/#/setting` );
         }
         else {
             settingWindow.loadURL( `file://${ viewFolder }/index.html` );

@@ -103,22 +103,6 @@ export default {
     },
     mounted ( ) {
         this.chooseItem( this.viewIndex );
-
-        Mousetrap.bind( 'left', ( ) => {
-            if ( this.viewIndex > 0 ) {
-                this.chooseItem( this.viewIndex - 1 );
-            }
-
-            return false;
-        } );
-
-        Mousetrap.bind( 'right', ( ) => {
-            if ( this.viewIndex < this.view.length - 1 ) {
-                this.chooseItem( this.viewIndex + 1 );
-            }
-
-            return false;
-        } );
     },
     methods: {
         chooseItem ( index ) {
@@ -130,6 +114,11 @@ export default {
         },
         panelItemAction ( flag ) {
 
+        },
+    },
+    watch: {
+        viewIndex ( v ) {
+            this.chooseItem( v );
         },
     },
 };
