@@ -13,8 +13,11 @@
     <a href="">
         <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg" />
     </a>
-    <a href="https://github.com/legoflow/legoflow/releases" target="_blank">
+    <a href="https://pan.baidu.com/s/18UNvitJNLG_hS94GE0xocQ" target="_blank">
         <img alt="Download-macOS" src="https://img.shields.io/badge/download-macOS-brightgreen.svg" />
+    </a>
+    <a href="https://pan.baidu.com/s/175FclQZBOETpHp5F7sf1GQ" target="_blank">
+        <img alt="Download-Windows64" src="https://img.shields.io/badge/download-Windows64-brightgreen.svg" />
     </a>
 </p>
 
@@ -36,7 +39,7 @@
 * 自动内联样式脚本
 * 自动替换线上资源地址
 * JS 编译 Sass 文件 Autoprefixer 自动补全
-* JS 编译 [art-template](https://aui.github.io/art-template/zh-cn/index.html) 语法 tpl 文件
+* JS 编译 art-template 语法 tpl 文件
 * ......
 
 ## 开发
