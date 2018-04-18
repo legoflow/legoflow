@@ -7,7 +7,7 @@ window.ipcRenderer = ipcRenderer;
 window.ipc = {
     app: {
         restart ( ) { ipcRenderer.send( 'APP_RESTART' ) },
-        checkUpdate ( ) { ipcRenderer.send( 'APP_CHECK_UPDATE' ) },
+        checkUpdate ( isAuto ) { ipcRenderer.send( 'APP_CHECK_UPDATE', isAuto ) },
         update ( )  { ipcRenderer.send( 'UPDATE' ) },
     },
     mainWindow: {
@@ -64,11 +64,11 @@ ipcRenderer.on( 'MESSAGER', ( event, data ) => {
 
 // 新建项目成功
 ipcRenderer.on( 'PROJECT_NEW_SUCCESS', ( event, data ) => {
-    window.vm && window.vm.projectNewAndAdd( data );
+    window.vm && window.vm.projectNewAndAdd( 'new', data );
 } )
 
 ipcRenderer.on( 'PROJECT_ADD_SUCCESS', ( event, data ) => {
-    window.vm && window.vm.projectNewAndAdd( data );
+    window.vm && window.vm.projectNewAndAdd( 'add', data );
 } )
 
 ipcRenderer.on( 'PROJECT_UPDATE', ( event, data ) => {

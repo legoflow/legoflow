@@ -21,7 +21,7 @@ module.exports = ( app ) => {
 
     global.__config = Object.assign( {
         version: app.getVersion( ),
-        root: app.getAppPath( ).pathNorm( ),
+        root: path.resolve( __dirname, '../' ).pathNorm( ),
         system: process.platform == 'win32' ? 'win' : 'mac',
         env: process.argv[ 2 ] || 'build',
     }, config );
@@ -59,7 +59,7 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
-        const viewFolder = path.resolve( __dirname, '../view' );
+        const viewFolder = path.resolve( root, './view' );
 
         env === 'dev' ? mainWindow.loadURL( `http://${ devViewAddress }` ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
 

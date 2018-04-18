@@ -80,11 +80,11 @@ npm run package:mac
 
 ## 下载
 
-→ 百度云 下载地址:&emsp;[macOS](https://pan.baidu.com/s/1Z_aUoCA_h4rVTrzD0ItVBQ)&emsp;|&emsp;Windows64
+→ 百度云 下载地址:&emsp;[macOS](https://pan.baidu.com/s/18UNvitJNLG_hS94GE0xocQ)&emsp;|&emsp;[Windows64](https://pan.baidu.com/s/175FclQZBOETpHp5F7sf1GQ)
 
-→ 开发者服务器 下载地址:&emsp;[macOS](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-macOS.dmg)&emsp;|&emsp;Windows64
+→ 开发者服务器 下载地址:&emsp;[macOS](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-macOS.zip)&emsp;|&emsp;[Windows64](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-windows-64.rar)
 
-→ Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)&emsp;|&emsp;Windows64
+→ Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)&emsp;|&emsp;[Windows64](https://github.com/legoflow/legoflow/releases)
 
 ## 反馈
 

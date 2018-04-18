@@ -53,11 +53,16 @@ ipc.on( 'UTIL_CHROME_OPEN', ( event, url ) => {
     chromeOpenUrl( url );
 } )
 
-ipc.on( 'APP_CHECK_UPDATE', async ( event ) => {
+ipc.on( 'APP_CHECK_UPDATE', async ( event, isAuto = false ) => {
     const { version, isNeedUpdate } = await updater.check( );
 
     if ( isNeedUpdate ) {
         mainWindow.webContents.send( 'CAN_UPDATE', { version } );
+    }
+    else {
+        if ( !isAuto ) {
+            __messager.event( `当前版本为最新${ __config.lab ? '预览' : '正式' }版本` );
+        }
     }
 } );
 

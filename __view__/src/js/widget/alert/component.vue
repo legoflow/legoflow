@@ -41,7 +41,7 @@
 
 #alert {
 	position: fixed;
-	top: 15px;
+	top: 35px;
 	left: 4%;
 	width: 92%;
 	z-index: 9;

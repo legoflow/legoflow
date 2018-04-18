@@ -33,6 +33,7 @@ const start = ( resolve, reject ) => {
         externals: config.externals || { },
         resolve: webpackResolve( config ),
         plugins: webpackPlugins( config ),
+        context: path.resolve( root, './node_modules' ),
     }
 
     const compiler = webpack( webpackOptions );

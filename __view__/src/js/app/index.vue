@@ -80,35 +80,35 @@ export default {
             window.ipc.mainWindow.show( );
 
             setTimeout( ( ) => {
-                window.ipc.app.checkUpdate( );
+                window.ipc.app.checkUpdate( true );
             }, 500 );
-
-             Mousetrap.bind( 'left', ( ) => {
-                if ( this.viewIndex > 0 ) {
-                    this.$store.commit( 'SET_VIEW_INDEX', this.viewIndex - 1 );
-                }
-
-                return false;
-            } );
-
-            Mousetrap.bind( 'right', ( ) => {
-                if ( this.viewIndex < this.view.length - 1 ) {
-                    this.$store.commit( 'SET_VIEW_INDEX', this.viewIndex + 1 );
-                }
-
-                return false;
-            } );
         }
 
         setTimeout( ( ) => {
             !isShowApp ? window.ipc.mainWindow.show( ) : void 0;
         }, 1000 );
+
+        Mousetrap.bind( 'left', ( ) => {
+            if ( this.viewIndex > 0 ) {
+                this.$store.commit( 'SET_VIEW_INDEX', this.viewIndex - 1 );
+            }
+
+            return false;
+        } );
+
+        Mousetrap.bind( 'right', ( ) => {
+            if ( this.viewIndex < this.view.length - 1 ) {
+                this.$store.commit( 'SET_VIEW_INDEX', this.viewIndex + 1 );
+            }
+
+            return false;
+        } );
     },
     methods: {
         async updateAlert ( { version } ) {
             alert( {
                 msg: `是否更新版本 ${ version }`,
-                list: [ { label: '查看新版本功能', url: 'https://github.com/legoflow/legoflow' } ],
+                list: [ { label: '查看新版本功能', url: window.url.changelog } ],
                 btns: [ '取消', '确定更新' ],
                 callback: ( index ) => {
                     if ( index == 1 ) {
@@ -143,7 +143,7 @@ export default {
                 }
             } )
         },
-        projectNewAndAdd ( { name, path, version } ) {
+        projectNewAndAdd ( flag, { name, path, version } ) {
             // 检查是否有相同路径
             let isExists = false;
 
@@ -171,11 +171,20 @@ export default {
 
             this.$store.commit( 'SET_VIEW_INDEX', 1 );
 
-            alert( '新建项目成功' );
+            switch ( flag ) {
+                case 'new': {
+                    alert( '新建项目成功' );
+                    break;
+                }
+                case 'add': {
+                    alert( '增加项目成功' );
+                    break;
+                }
+            }
         },
         messager ( { type, data } ) {
             switch ( type ) {
-                case 'info': {
+                case 'log': {
                     let { type, config, msg } = data;
 
                     if ( type.indexOf( 'workflow_' ) === 0 ) {

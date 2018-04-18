@@ -1,10 +1,13 @@
 ## Unreleased
 
-* 构建 Windows64 版本
+* [null]
 
-## 2.0.0-alpha.2
+## 2.0.0-alpha.2 (April 18, 2018)
 
+* 修复 创建项目成功后，项目列表没显示项目问题
+* 修复 构建项目进程提示
 * 增加 导出 Webpack 构建 Stats
+* 构建 Windows 64 版本
 
 ## 2.0.0-alpha.1 (April 13, 2018)
 
