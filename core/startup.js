@@ -112,5 +112,7 @@ module.exports = ( app ) => {
 
         // render IPC
         require('./ipc')( app, mainWindow, settingWindow );
+
+        mainWindow.on( 'blur', ( ) => mainWindow.webContents.send( 'MAIN_WINDOW_BLUR' ) );
     };
 };

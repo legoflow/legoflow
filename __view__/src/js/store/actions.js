@@ -22,5 +22,12 @@ export default {
         commit( 'SET_PANEL_LOG', { id, type: 'dev', value: '' } );
 
         commit( 'SET_LOG', { data, msg: { type: 'success', msg: '已停止' } } );
+    },
+    setPanelLogForBuildStop ( { commit }, data ) {
+        const { id } = data;
+
+        commit( 'SET_PANEL_LOG', { id, type: 'build', value: '已停止' } );
+
+        commit( 'SET_LOG', { data, msg: { type: 'success', msg: '已停止' } } );
     }
 };

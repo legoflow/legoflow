@@ -14,7 +14,7 @@ const runShell = require('./build/run_shell');
 
 const run = async ( _config_ ) => {
     // common config reslove
-    let config = require('./modules/common_config')( _config_ );
+    let config = require('./modules/common_config')( _config_, messager );
 
     const entryFiles = webpackEntry( config );
 

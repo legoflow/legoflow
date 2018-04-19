@@ -1,6 +1,6 @@
 <template>
 	<transition name="show">
-		<div id="alert" v-show="isShow" :class="{ 'have-top': isHaveTop }">
+		<div id="alert" v-show="isShow" :class="{ 'have-top': isHaveTop, 'windows': system !== 'mac' }">
 			<div id="alert-background"></div>
 			<div id="alert-content">{{ msg }}</div>
 			<div id="alert-list" v-if="list && list.length > 0">
@@ -41,7 +41,7 @@
 
 #alert {
 	position: fixed;
-	top: 35px;
+	top: 15px;
 	left: 4%;
 	width: 92%;
 	z-index: 9;
@@ -50,6 +50,10 @@
 	border-radius: 10px;
 	overflow: hidden;
 	background-color: rgba( 255, 255, 255, .9 );
+}
+
+.windows {
+    top: 35px !important;
 }
 
 #alert-list {
@@ -127,6 +131,7 @@
 export default {
 	el: document.createElement( 'div' ),
 	data: {
+        system: window.config.system,
 		msg: '',
         btns: [ ],
         list: [ ],

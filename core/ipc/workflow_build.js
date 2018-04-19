@@ -45,6 +45,8 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
 
     __workflowBuildPid[ id ] = thread.pid;
 
+    config.pid = thread.pid;
+
     thread.send( config );
 
     let messager = void 0;
@@ -78,23 +80,25 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
 
 // 关闭构建工作流
 ipcWorkflowFactory( 'WORKFLOW_BUILD_STOP', ( event, config ) => {
-    const result = killer( config.id );
+    config.pid = __workflowBuildPid[ config.id ];
 
-    const FAIL_EXEC = ( ) => {
-        __messager.event( '停止构建工作流失败' );
-    }
-
-    if ( !result ) {
-        FAIL_EXEC( ); return void 0;
-    }
+    config.workflow = 'buildStop';
 
     const messager = __messager._workflow_adapter_( config );
 
-    messager( { type: 'log', msg: '已停止' } );
-
     event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
 
+    const result = killer( config.id );
+
     // TODO: 中间态
+    // const FAIL_EXEC = ( ) => {
+    //     __messager.event( '停止构建工作流失败' );
+    // }
+
+    // if ( !result ) {
+    //     FAIL_EXEC( ); return void 0;
+    // }
+
     // result.then( ( ) => {
     //         event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
     //     } )

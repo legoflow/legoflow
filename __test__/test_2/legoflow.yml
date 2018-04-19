@@ -12,7 +12,7 @@ alias:
     $: ./src/assets/jquery.min.js
     zepto: ./src/assets/zepto.min.js
 
-    global:
+global:
     $: zepto
     zepto: zepto
 

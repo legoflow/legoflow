@@ -1,6 +1,6 @@
 ## Unreleased
 
-* [null]
+* 界面细节优化，合并日志记录
 
 ## 2.0.0-alpha.2 (April 18, 2018)
 

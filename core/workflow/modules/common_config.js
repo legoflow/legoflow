@@ -3,7 +3,7 @@
 const path = require('path');
 const _ = require('lodash');
 
-module.exports = ( _config_ ) => {
+const resolve = ( _config_ ) => {
     let config = _.cloneDeep( _config_ );
 
     const { projectPath, root, env, user, workflow } = config;
@@ -34,7 +34,7 @@ module.exports = ( _config_ ) => {
 
     // to absolute path
     for ( let item in config.alias ) {
-        if ( config.alias[ item ].indexOf( './' ) === 0 ) {
+        if ( typeof config.alias[ item ] === 'string' && config.alias[ item ].indexOf( './' ) === 0 ) {
             config.alias[ item ] = path.resolve( projectPath, config.alias[ item ] );
         }
     }
@@ -59,4 +59,14 @@ module.exports = ( _config_ ) => {
     config.args = args;
 
     return config;
+}
+
+module.exports = ( _config_, messager ) => {
+    try {
+        return resolve( _config_ );
+    } catch ( e ) {
+        console.error( '[COMMON_CONFIG]: ', e );
+
+        messager.stop( '配置文件解析错误' );
+    }
 };

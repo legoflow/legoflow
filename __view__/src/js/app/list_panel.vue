@@ -60,6 +60,7 @@
     z-index: 3;
     background-color: #FBFBFB;
     transition: transform .2s ease;
+    will-change: transform;
     .log-url {
         cursor: pointer;
         -webkit-touch-callout: none;
@@ -186,6 +187,12 @@ export default {
             panelLogBuild: '',
         };
     },
+    mounted ( ) {
+        window.eventBus.$on( 'MAIN_WINDOW_BLUR', ( ) => {
+            this.isMoveOnDevBtn = false;
+            this.isMoveOnBuildBtn = false;
+        } );
+    },
     methods: {
         toggleShowLogPanel ( ) {
             this.isShowLogPanel = !this.isShowLogPanel;
@@ -213,7 +220,7 @@ export default {
                 this.isShowLogPanel = false;
             }
         },
-        dev ( ) {
+        dev: window.appUtil.debounce( 200, function ( ) {
             const project = this.project[ this.projectActiveIndex ];
 
             const { workflow: { dev } } = window.ipc;
@@ -235,14 +242,14 @@ export default {
             else {
                 dev.stop( project );
             }
-        },
-        build ( ) {
+        } ),
+        build: window.appUtil.debounce( 200, function ( ) {
             const project = this.project[ this.projectActiveIndex ];
 
             const { workflow: { build } } = window.ipc;
 
             !project.build ? build.run( project ) : build.stop( project );
-        },
+        } ),
         devBtnText ( ) {
             if ( !this.project[ this.projectActiveIndex ] ) {
                 return '开发';

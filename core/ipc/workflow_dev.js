@@ -80,6 +80,8 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
 
     const thread = fork( path.resolve( __dirname, '../workflow/dev' ) );
 
+    config.pid = thread.pid;
+
     __workflowDevPid[ webpackPort ].pid = thread.pid;
 
     thread.send( config );
@@ -107,20 +109,28 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
 
 
 // 关闭开发工作流
-ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', ( event, config ) => {
-    const result = killer( config.id );
-
-    const FAIL_EXEC = ( ) => {
-        __messager.event( '停止开发工作流失败' );
-    }
-
-    if ( !result ) {
-        FAIL_EXEC( ); return void 0;
+ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', async ( event, config ) => {
+    for ( let _key_ in __workflowDevPid ) {
+        if ( __workflowDevPid[ _key_ ].id === config.id ) {
+            config.pid = __workflowDevPid[ _key_ ].pid;
+        }
     }
 
     event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
 
+    await global.__util.sleep( 800 );
+
+    const result = killer( config.id );
+
     // TODO: 中间态
+    // const FAIL_EXEC = ( ) => {
+    //     __messager.event( '停止开发工作流失败' );
+    // }
+
+    // if ( !result ) {
+    //     FAIL_EXEC( ); return void 0;
+    // }
+
     // result.then( ( ) => {
     //         //
     //     } )

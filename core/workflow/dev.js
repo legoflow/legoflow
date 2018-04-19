@@ -42,7 +42,7 @@ const run = async ( _config_ ) => {
     }
 
     // common config reslove
-    config = require('./modules/common_config')( _config_ );
+    config = require('./modules/common_config')( _config_, messager );
 
     config.ip = localIP;
 

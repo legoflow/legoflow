@@ -7,6 +7,7 @@
             </div>
             <div class="log-card-log" v-for="( item2, $index2 ) in item1.msgList" :key="$index2" :class="{ 'error': item2.type === 'error', 'success': item2.type === 'success' }">
                 {{ item2.msg }}
+                <span class="log-time">{{ item2.time }}</span>
             </div>
         </div>
     </div>
@@ -54,6 +55,7 @@
         background-color: $whiteColor;
     }
     .log-card-log {
+        position: relative;
         padding: 5px 1px;
         width: 100%;
         min-height: 30px;
@@ -75,6 +77,14 @@
 
 ::-webkit-scrollbar {
     width: 0;
+}
+
+.log-time {
+    position: absolute;
+    top: 7px;
+    right: 0;
+    font-size: 7px;
+    color: rgba( 0, 0, 0, .2 );
 }
 </style>
 

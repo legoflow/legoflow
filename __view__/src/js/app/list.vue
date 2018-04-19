@@ -13,15 +13,17 @@
             >
                 <div class="list-acitve-del" @click="deleteProject"></div>
             </div>
-            <div class="list-item" v-for="( item, $index ) in project" :key="item.id" @click="chooseProjectAcitveIndex( $index )">
-                <div class="list-item-name">
-                    {{ item.name }}<span>v{{ item.version }}</span>
-                    <div
-                        class="list-item-active-state"
-                        :style="{ 'opacity': project[ $index ].dev.launch || project[ $index ].dev.run || project[ $index ].build ? '1' : '0' }"
-                    ></div>
+            <transition-group tag="div" name="list-transition" id="items">
+                <div class="list-item" v-for="( item, $index ) in project" :key="item.id" @click="chooseProjectAcitveIndex( $index )">
+                    <div class="list-item-name">
+                        {{ item.name }}<span>v{{ item.version }}</span>
+                        <div
+                            class="list-item-active-state"
+                            :style="{ 'opacity': project[ $index ].dev.launch || project[ $index ].dev.run || project[ $index ].build ? '1' : '0' }"
+                        ></div>
+                    </div>
                 </div>
-            </div>
+            </transition-group>
         </div>
         <list-panel></list-panel>
     </div>
@@ -105,6 +107,7 @@
     border-top: 1px solid $borderColor;
     cursor: pointer;
     background-color: $whiteColor;
+    overflow: hidden;
 }
 
 .list-item-active-state {
@@ -139,6 +142,14 @@
 
 ::-webkit-scrollbar {
     width: 0;
+}
+
+.list-transition-enter-active, .list-transition-leave-active {
+    transition: all .1s ease;
+    height: 50px !important;
+}
+.list-transition-enter, .list-transition-leave-to {
+    height: 0 !important;
 }
 </style>
 
@@ -198,13 +209,12 @@ export default {
 				return void 0;
             }
 
+            const items = list.querySelector( '#items' );
+
 		    Vue.nextTick( ( ) => {
-		        sortable = Sortable.create( list, {
+		        sortable = Sortable.create( items, {
 			    	onEnd: ( e ) => {
                         let { oldIndex, newIndex } = e;
-
-                        --oldIndex;
-                        --newIndex;
 
                         this.$store.dispatch( 'sortList', { oldIndex, newIndex } );
 

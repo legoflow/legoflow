@@ -85,6 +85,8 @@ String.prototype.getConfig = function ( _config_ = { } ) {
     return config;
 }
 
-const util = { };
+const util = {
+    sleep: ( delay ) => new Promise(( resolve ) => setTimeout(resolve, delay)),
+};
 
 module.exports = util;

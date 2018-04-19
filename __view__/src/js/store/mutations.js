@@ -74,19 +74,28 @@ export default {
         state.panelLog[ id ][ type ] = value;
     },
     SET_LOG ( state, { data, msg } ) {
-        const { id, name } = data;
+        const { id, name, pid } = data;
 
-        const lastProject = state.log[ state.log.length - 1 ];
+        let isHaveLogIndex = void 0;
 
-        if ( !lastProject || ( lastProject && lastProject.id !== id ) ) {
+        state.log.forEach( ( item, index ) => {
+            if ( item.id == id && item.pid == pid ) {
+                isHaveLogIndex = index;
+            }
+        } );
+
+        msg.time = moment( ).format( 'hh:mm:ss.SSS' );
+
+        if ( typeof isHaveLogIndex !== 'undefined' ) {
+            state.log[ isHaveLogIndex ].msgList.push( msg );
+        }
+        else {
             state.log.unshift( {
                 id,
                 name,
+                pid,
                 msgList: [ msg ],
             } )
-        }
-        else {
-            state.log[ state.log.length - 1 ].msgList.push( msg );
         }
     },
     SET_UPDATE_COMPONENT_LABEL ( state, data ) {

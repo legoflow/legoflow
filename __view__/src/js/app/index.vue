@@ -177,7 +177,7 @@ export default {
                     break;
                 }
                 case 'add': {
-                    alert( '增加项目成功' );
+                    // alert( '增加项目成功' );
                     break;
                 }
             }
@@ -221,7 +221,7 @@ export default {
                 data = JSON.parse( data );
             }
 
-            const { id } = data;
+            const { id, workflow } = data;
 
             let project = void 0;
             let index = void 0;
@@ -263,6 +263,10 @@ export default {
                         break;
                     }
                     case 'stop': {
+                        if ( workflow === 'buildStop' ) {
+                            this.$store.dispatch( 'setPanelLogForBuildStop', data );
+                        }
+
                         this.$store.commit( 'SET_PROJECT_WORKFLOW_BUILD_IN_STATE', { index, value: false } );
                         break;
                     }
