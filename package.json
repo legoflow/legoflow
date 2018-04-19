@@ -1,14 +1,17 @@
 {
     "name": "legoflow",
-    "version": "2.0.0-alpha.2",
+    "version": "2.0.0-alpha.3",
     "description": "FE workflow",
     "main": "index.js",
     "scripts": {
         "start": "node ./script/start",
         "dev": "node ./script/start dev",
-        "debug": "electron index.js build",
-        "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(.DS_Store|__test__|__view__|__diff__|.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|.editorconfig|.nvmrc|.personconfig)'",
-        "pack:win": "electron-packager ./ \"LegoFlow 2\" --platform=win32 --arch=x64 --overwrite --out=./dist/ --icon=icon/logo.ico --version=1.8.4 --ignore=\"(.DS_Store|__test__|__view__|__diff__|.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|.editorconfig|.nvmrc|.personconfig)\""
+        "app": "electron index.js build",
+        "win:files": "node ./script/windows_files",
+        "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(\\.DS_Store|__test__|__view__|__diff__|\\.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|\\.editorconfig|\\.nvmrc|\\.personconfig|__windows_files__)'",
+        "pack:win": "electron-packager ./ \"LegoFlow 2\" --platform=win32 --arch=x64 --overwrite --out=./dist/ --icon=icon/logo.ico --version=1.8.4 --ignore=\"(\\.DS_Store|__test__|__view__|__diff__|\\.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|\\.editorconfig|\\.nvmrc|\\.personconfig)\"",
+        "pack:dmg": "node ./script/pack_dmg",
+        "pack:rar": "node ./script/pack_rar"
     },
     "repository": {
         "type": "git",

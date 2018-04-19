@@ -101,7 +101,7 @@ module.exports = async ( data ) => {
     fs.copySync( projectTypePath, path.resolve( projectPath, './src' ) );
 
     // cope .gitignore
-    const gitignoreFile = path.resolve( __dirname, '../../project_type/.gitignore' );
+    const gitignoreFile = path.resolve( __dirname, '../../project_type/gitignore' );
 
     fs.copySync( gitignoreFile, path.resolve( projectPath, './.gitignore' ) );
 

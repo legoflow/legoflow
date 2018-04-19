@@ -13,4 +13,3 @@ process.on( 'uncaughtException', ( e ) => {
 app.on( 'ready', require('./core/startup')( app ) );
 
 app.on( 'before-quit', threadKiller );
-
