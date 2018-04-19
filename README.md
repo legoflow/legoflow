@@ -19,6 +19,12 @@
     <a href="https://pan.baidu.com/s/1j-2n6lnl7PV4FW1J7dr6IQ" target="_blank">
         <img alt="Download-Windows64" src="https://img.shields.io/badge/download-Windows64-brightgreen.svg" />
     </a>
+    <a href="https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md" target="_blank">
+        <img alt="ChangeLog" src="https://img.shields.io/badge/CHANGE-LOG-orange.svg" />
+    </a>
+    <a href="">
+        <img alt="PRs" src="https://img.shields.io/badge/PRs-welcome-green.svg" />
+    </a>
 </p>
 
 <p align="center">
@@ -87,7 +93,7 @@ npm run package:mac
 
 → 腾讯云盘 下载地址:&emsp;[macOS](https://share.weiyun.com/5sRfp2n)&emsp;|&emsp;[Windows64](https://share.weiyun.com/57l0Aoi)
 
-→ Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)&emsp;|&emsp;[Windows64](https://github.com/legoflow/legoflow/releases)
+若出现以上源都无法下载，请加 Q 群下载群共享文件
 
 ## 反馈
 
