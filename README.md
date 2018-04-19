@@ -16,7 +16,7 @@
     <a href="https://pan.baidu.com/s/14FfASsJdxl7DferqFiAChA" target="_blank">
         <img alt="Download-macOS" src="https://img.shields.io/badge/download-macOS-brightgreen.svg" />
     </a>
-    <a href="https://pan.baidu.com/s/175FclQZBOETpHp5F7sf1GQ" target="_blank">
+    <a href="https://pan.baidu.com/s/1j-2n6lnl7PV4FW1J7dr6IQ" target="_blank">
         <img alt="Download-Windows64" src="https://img.shields.io/badge/download-Windows64-brightgreen.svg" />
     </a>
 </p>
@@ -83,9 +83,9 @@ npm run package:mac
 
 ## 下载
 
-→ 百度云盘 下载地址:&emsp;[macOS](https://pan.baidu.com/s/14FfASsJdxl7DferqFiAChA)&emsp;|&emsp;[Windows64](https://pan.baidu.com/s/175FclQZBOETpHp5F7sf1GQ)
+→ 百度云盘 下载地址:&emsp;[macOS](https://pan.baidu.com/s/14FfASsJdxl7DferqFiAChA)&emsp;|&emsp;[Windows64](https://pan.baidu.com/s/1j-2n6lnl7PV4FW1J7dr6IQ)
 
-→ 腾讯云盘 下载地址:&emsp;[macOS](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-macOS.dmg)&emsp;|&emsp;[Windows64](https://lilijialiang.com/legoflow/2/download/LegoFlow-2-Windows-64.rar)
+→ 腾讯云盘 下载地址:&emsp;[macOS](https://share.weiyun.com/5sRfp2n)&emsp;|&emsp;[Windows64](https://share.weiyun.com/57l0Aoi)
 
 → Github release 下载地址:&emsp;[macOS](https://github.com/legoflow/legoflow/releases)&emsp;|&emsp;[Windows64](https://github.com/legoflow/legoflow/releases)
 
