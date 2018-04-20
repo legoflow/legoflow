@@ -22,7 +22,7 @@ const personConfig = fs.existsSync( personConfigPath ) ? YAML.parse( fs.readFile
 
     console.log( chalk.green( `>>>>>>>>>> ${ chalk.bold( '[Override Engine files] success' ) }` ) );
 
-    const env = process.argv[ 2 ] || '';
+    const env = process.argv[ 2 ] || 'build';
 
     console.log( chalk.green( `>>>>>>>>>> ${ chalk.bold( `env#${ env || 'build' }` ) }` ) );
 

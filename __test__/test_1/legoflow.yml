@@ -1,21 +1,34 @@
 name: test_1-1
+
 version: 2.0.0-alpha.0
+
 type: vue
+
 REM: false
+
 ES.Next: true
+
+env:
+    dev-test:
+        alias:
+            axios: ./src/assets/axios.min.js
+
 alias:
     $: ./src/assets/jquery.min.js
     jquery: ./src/assets/jquery.min.js
     jQuery: ./src/assets/jquery.min.js
     varScss: ./src/sass/_var.scss
+
 global:
     $: jquery
     jquery: jquery
     jQuery: jquery
+
 workflow.build:
     cache: version
     html.resourcesDomain: https://legox.org
     shell: ./shell.js
+
 workflow.dev:
     watch.reload:
         - ./src/test/**/*

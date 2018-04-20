@@ -23,17 +23,17 @@ module.exports = ( app ) => {
         version: app.getVersion( ),
         root: path.resolve( __dirname, '../' ).pathNorm( ),
         system: process.platform == 'win32' ? 'win' : 'mac',
-        env: process.argv[ 2 ] || 'build',
+        appEnv: process.argv[ 2 ] || 'build',
     }, config );
 
     threadKiller( );
 
     return async ( ) => {
-        let { system, env, root } = __config;
+        let { system, appEnv, root } = __config;
 
         let devViewAddress = 'localhost:3000';
 
-        if ( env !== 'build' && personConfig.devViewAddress ) {
+        if ( appEnv !== 'build' && personConfig.devViewAddress ) {
             devViewAddress = personConfig.devViewAddress;
 
             console.log( '[DEV VIEW ADDRESS]', devViewAddress );
@@ -52,7 +52,7 @@ module.exports = ( app ) => {
             option.autoHideMenuBar = true;
         }
 
-        if ( env === 'dev' ) {
+        if ( appEnv === 'dev' ) {
             option.show = true;
             option.width = 800;
         }
@@ -61,9 +61,9 @@ module.exports = ( app ) => {
 
         const viewFolder = path.resolve( root, './view' );
 
-        env === 'dev' ? mainWindow.loadURL( `http://${ devViewAddress }` ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
+        appEnv === 'dev' ? mainWindow.loadURL( `http://${ devViewAddress }` ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
 
-        env === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
+        appEnv === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
 
         webSetting( mainWindow );
 
@@ -71,7 +71,7 @@ module.exports = ( app ) => {
 
         global.__messager = require('./common/messager')( mainWindow );
 
-        if ( env === 'dev' ) {
+        if ( appEnv === 'dev' ) {
             mainWindow.loadURL( `http://${ devViewAddress }/#/app` );
         }
         else {
@@ -96,7 +96,7 @@ module.exports = ( app ) => {
 
         settingWindow.setMenu( null );
 
-        if ( env === 'dev' ) {
+        if ( appEnv === 'dev' ) {
             settingWindow.loadURL( `http://${ devViewAddress }/#/setting` );
         }
         else {
