@@ -23,7 +23,7 @@
         <img alt="ChangeLog" src="https://img.shields.io/badge/CHANGE-LOG-orange.svg" />
     </a>
     <a href="">
-        <img alt="PRs" src="https://img.shields.io/badge/PRs-welcome-green.svg" />
+        <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg" />
     </a>
 </p>
 

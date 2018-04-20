@@ -5,3 +5,5 @@ test
 .dmg
 .personconfig
 __windows_files__
+__node-sass__
+__webpack_build_diff__
