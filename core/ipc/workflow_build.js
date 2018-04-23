@@ -5,7 +5,6 @@ const path = require('path');
 const { fork } = require('child_process');
 
 const ipcWorkflowFactory = require('../common/ipc_workflow_factory');
-const chromeOpenUrl = require('../common/chrome_open_url');
 
 let app, mainWindow;
 
@@ -55,10 +54,6 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
 
     const SUCCESS_EXEC = ( data, logger ) => {
         logger( '构建完成' );
-
-        if ( config.autoOpenChrome ) {
-            chromeOpenUrl( `${ config.projectPath }/dist` );
-        }
 
         event.sender.send( 'WORKFLOW_BUILD_STOP_SUCCESS', config );
     }

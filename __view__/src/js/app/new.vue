@@ -39,15 +39,20 @@
 <script>
 export default {
     data ( ) {
+        let projectTypeOptions = [ ]
+
+        JSON.parse( window.localStorage[ '@newProjectType' ] ).forEach( ( item ) => {
+            projectTypeOptions.push( {
+                label: item,
+                value: item,
+            } )
+        } );
+
         return {
             form: [
                 { label: '项目名称', type: 'input', placeholder: '必填' },
                 { label: '项目类型', type: 'select', placeholder: '必选',
-                    options: [
-                        { label: 'PC', value: 'pc' },
-                        { label: 'Mobile', value: 'mobile' },
-                        { label: 'Vue.js', value: 'vue' }
-                    ],
+                    options: projectTypeOptions,
                 },
                 { label: '项目路径', type: 'folder', placeholder: '必选' },
                 { label: '项目版本', type: 'input', placeholder: '必填', value: '0.0.1' },

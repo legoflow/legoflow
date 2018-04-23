@@ -5,6 +5,8 @@ const path = require('path');
 
 const threadKiller = require('./common/thread_killer');
 const webSetting = require('./common/web_setting');
+const util = require('legoflow-engine/util');
+const getProjectType = require('legoflow-project/getProjectType');
 
 let mainWindow = void 0;
 let settingWindow = void 0;
@@ -14,7 +16,7 @@ require('./clean')( );
 module.exports = ( app ) => {
     const personConfig = JSON.parse( decodeURI( process.argv[ 3 ] || '{}' ) );
 
-    global.__util = require('./common/util');
+    global.__util = util;
     global.__notifier = require('./common/notifier');
 
     const { config } = require('../package.json');
@@ -27,6 +29,8 @@ module.exports = ( app ) => {
     }, config );
 
     threadKiller( );
+
+    const projectType = Object.keys( getProjectType( ) );
 
     return async ( ) => {
         let { system, appEnv, root } = __config;
@@ -64,6 +68,8 @@ module.exports = ( app ) => {
         appEnv === 'dev' ? mainWindow.loadURL( `http://${ devViewAddress }` ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
 
         appEnv === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
+
+        mainWindow.webContents.executeJavaScript( `window.localStorage[ '@newProjectType' ] = '${ JSON.stringify( projectType ) }'` );
 
         webSetting( mainWindow );
 

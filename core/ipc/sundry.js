@@ -3,7 +3,6 @@
 const webSetting = require('../common/web_setting');
 const threadKiller = require('../common/thread_killer');
 const updater = require('../common/updater');
-const chromeOpenUrl = require('../common/chrome_open_url');
 
 let app, mainWindow, settingWindow;
 
@@ -50,7 +49,7 @@ ipc.on( 'UPDATE_CONFIG', async ( event ) => {
 
 // 使用 chrome 打开
 ipc.on( 'UTIL_CHROME_OPEN', ( event, url ) => {
-    chromeOpenUrl( url );
+    global.__util.chromeOpen( url );
 } )
 
 ipc.on( 'APP_CHECK_UPDATE', async ( event, isAuto = false ) => {

@@ -5,12 +5,16 @@ let app, mainWindow;
 module.exports = ( _app, _mainWindow ) => { app = _app, mainWindow = _mainWindow; }
 
 const electron = require('electron');
+const newProject = require('legoflow-project');
 
 const ipc = electron.ipcMain;
 
 // 新建项目
 ipc.on( 'PROJECT_NEW', async ( event, data ) => {
-    const result = await require('../common/project_new')( data );
+    data.author = __config.user;
+    data.c_version = `app@${ __config.version }`;
+
+    const result = await newProject( data );
 
     typeof result !== 'string'  ? event.sender.send( 'PROJECT_NEW_SUCCESS', result ) : __messager.event( result );
 } );
