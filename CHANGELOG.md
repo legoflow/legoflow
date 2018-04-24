@@ -5,8 +5,8 @@
 ## 2.0.0-alpha.4 (April 24, 2018)
 
 * 日志界面调整
-* 迁移使用工作流公共模块引擎[legoflow-engine](https://github.com/legoflow/engine)
-* 迁移使用公共项目模块[legoflow-project](https://github.com/legoflow/project)
+* 迁移使用工作流公共模块引擎 [legoflow-engine](https://github.com/legoflow/engine)
+* 迁移使用公共项目模块 [legoflow-project](https://github.com/legoflow/project)
 
 ## 2.0.0-alpha.3 (April 19, 2018)
 

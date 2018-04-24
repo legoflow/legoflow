@@ -20,7 +20,7 @@ window.ipc = {
         hide ( ) { ipcRenderer.send( 'SETTING_WINDOW_HIDE' ) },
         show ( ) { ipcRenderer.send( 'SETTING_WINDOW_SHOW' ) },
     },
-    updateConfig ( ) { ipcRenderer.send( 'UPDATE_CONFIG' ) },
+    updateConfig ( config ) { ipcRenderer.send( 'UPDATE_CONFIG', config ) },
     project: {
         new ( data ) { ipcRenderer.send( 'PROJECT_NEW', data ) },
         add ( data ) { ipcRenderer.send( 'PROJECT_ADD', data ) },

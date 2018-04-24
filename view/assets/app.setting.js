@@ -81,7 +81,14 @@ window.appSetting = {
             };
         }
 
-        window.ipc.updateConfig( );
+        window.ipc.updateConfig( {
+            user: window.appSetting.get( 'user' ),
+            port: window.appSetting.get( 'port' ),
+            editor: window.appSetting.get( 'editor' ),
+            nodeBin: window.appSetting.get( 'nodeBin' ),
+            lab: window.appSetting.get( 'lab' ),
+            autoOpenChrome: window.appSetting.get( 'autoOpenChrome' ),
+        } );
     },
     clear ( ) {
         delete window.localStorage[ USER ];

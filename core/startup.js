@@ -5,6 +5,7 @@ const path = require('path');
 
 const threadKiller = require('./common/thread_killer');
 const webSetting = require('./common/web_setting');
+
 const util = require('legoflow-engine/util');
 const getProjectType = require('legoflow-project/getProjectType');
 
@@ -66,17 +67,17 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
+        webSetting.init( mainWindow )
+
         const viewFolder = path.resolve( root, './view' );
 
         appEnv === 'dev' ? mainWindow.loadURL( `http://${ devViewAddress }` ) : mainWindow.loadURL( `file://${ viewFolder }/index.html` );
 
+        await webSetting.setConfig( );
+
         appEnv === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
 
         mainWindow.webContents.executeJavaScript( `window.localStorage[ '@newProjectType' ] = '${ JSON.stringify( projectType ) }'` );
-
-        webSetting( mainWindow );
-
-        await webSetting.updateConfig( );
 
         global.__messager = require('./common/messager')( mainWindow );
 

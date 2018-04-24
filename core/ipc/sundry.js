@@ -43,8 +43,10 @@ ipc.on( 'SETTING_WINDOW_HIDE', ( ) => settingWindow.hide( ) );
 ipc.on( 'SETTING_WINDOW_SHOW', ( ) => settingWindow.show( ) );
 
 // 更新配置
-ipc.on( 'UPDATE_CONFIG', async ( event ) => {
-    await webSetting.updateConfig( );
+ipc.on( 'UPDATE_CONFIG', async ( event, config ) => {
+    for ( let i in config ) {
+        webSetting.update( i, config[ i ] );
+    }
 } );
 
 // 使用 chrome 打开
