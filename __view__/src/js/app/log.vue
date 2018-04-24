@@ -17,7 +17,7 @@
 @import "~var";
 
 .log {
-    padding-bottom: 60px;
+    padding: 10px 10px 60px 10px;
     overflow: auto;
 }
 
@@ -36,9 +36,13 @@
 .log-card {
     position: relative;
     padding: 45px 10px 0 10px;
+    margin-bottom: 10px;
     width: 100%;
-    border-bottom: 1px solid $borderColor;
-    background-color: rgba( 0, 0, 0, .015 );
+    border: 1px solid rgba( 0, 0, 0, .05 );
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba( 0, 0, 0, .011 );
+    box-shadow: 0 0 5px rgba( 0, 0, 0, .06 );
     .log-card-titile {
         position: absolute;
         top: 0;
@@ -52,7 +56,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         border-bottom: 1px solid $borderColor;
-        background-color: $whiteColor;
     }
     .log-card-log {
         position: relative;

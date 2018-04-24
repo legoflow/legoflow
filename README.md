@@ -13,11 +13,8 @@
     <a href="">
         <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg" />
     </a>
-    <a href="https://pan.baidu.com/s/14FfASsJdxl7DferqFiAChA" target="_blank">
-        <img alt="Download-macOS" src="https://img.shields.io/badge/download-macOS-brightgreen.svg" />
-    </a>
-    <a href="https://pan.baidu.com/s/1j-2n6lnl7PV4FW1J7dr6IQ" target="_blank">
-        <img alt="Download-Windows64" src="https://img.shields.io/badge/download-Windows64-brightgreen.svg" />
+    <a href="https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g" target="_blank">
+        <img alt="Download" src="https://img.shields.io/badge/download-app-brightgreen.svg" />
     </a>
     <a href="https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md" target="_blank">
         <img alt="ChangeLog" src="https://img.shields.io/badge/CHANGE-LOG-orange.svg" />
@@ -89,9 +86,9 @@ npm run package:mac
 
 ## 下载
 
-→ 百度云盘 下载地址:&emsp;[macOS](https://pan.baidu.com/s/14FfASsJdxl7DferqFiAChA)&emsp;|&emsp;[Windows64](https://pan.baidu.com/s/1j-2n6lnl7PV4FW1J7dr6IQ)
+→ 百度云盘 **[下载地址](https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g)**
 
-→ 腾讯云盘 下载地址:&emsp;[macOS](https://share.weiyun.com/5sRfp2n)&emsp;|&emsp;[Windows64](https://share.weiyun.com/57l0Aoi)
+→ 腾讯云盘 **[下载地址](https://share.weiyun.com/5kP4ElS)**
 
 若出现以上源都无法下载，请加 Q 群下载群共享文件
 

@@ -7,11 +7,14 @@ const del = require('del');
 
 const root = path.resolve( __dirname, '../' );
 const dist = path.resolve( root, './dist' );
+
+const { version } = require( `${ root }/package.json` );
+
 const app = 'LegoFlow 2-win32-x64';
 const appPath = path.resolve( dist, `./${ app }` );
 const newApp = 'LegoFlow 2';
 const newAppPath = path.resolve( dist, `./${ newApp }` );
-const zip = 'LegoFlow-2-Windows-64.rar';
+const zip = `LegoFlow-2-Windows-64-${ version }.rar`;
 const zipPath = path.resolve( dist, `./${ zip }` );
 
 if ( !fs.existsSync( appPath ) ) {

@@ -41,6 +41,7 @@ header {
     height: 30px;
     line-height: 30px;
     background-color: #f3f3f3;
+    border-bottom: 1px solid #EEE;
 }
 
 .header-panel {

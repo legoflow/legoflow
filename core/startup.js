@@ -55,6 +55,9 @@ module.exports = ( app ) => {
             option.frame = false;
             option.autoHideMenuBar = true;
         }
+        else {
+            option.width = 285;
+        }
 
         if ( appEnv === 'dev' ) {
             option.show = true;

@@ -13,7 +13,7 @@ const { version } = require( `${ root }/package.json` );
 
 const dmg = `LegoFlow-2-${ version }.dmg`;
 const dmgPath = path.resolve( appPath, `./${ dmg }` );
-const newDmg = 'LegoFlow-2-macOS.dmg';
+const newDmg = `LegoFlow-2-macOS-${ version }.dmg`;
 const newDmgPath = path.resolve( appPath, `./${ newDmg }` );
 
 if ( !fs.existsSync( app ) ) {
