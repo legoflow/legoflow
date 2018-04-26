@@ -1,18 +1,16 @@
-name: test_2-1
+name: test_2
 
-version: 2.0.0-alpha.0
+version: cli@0.0.3
 
-type: mobile
+type: Vue.js
 
-REM: true
+REM: false
 
 ES.Next: true
 
-alias:
-    $: ./src/assets/jquery.min.js
-    zepto: ./src/assets/zepto.min.js
+alias: {}
 
-global:
-    $: zepto
-    zepto: zepto
+global: {}
 
+externals:
+    vue: Vue
