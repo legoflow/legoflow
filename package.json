@@ -79,7 +79,7 @@
         "image-size": "0.6.2",
         "legoflow-config": "0.0.2",
         "legoflow-engine": "0.0.12",
-        "legoflow-project": "0.0.3",
+        "legoflow-project": "0.0.4",
         "line-reader": "^0.4.0",
         "loader-utils": "1.1.0",
         "lodash": "^4.17.10",

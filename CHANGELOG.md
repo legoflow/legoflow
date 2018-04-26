@@ -1,6 +1,7 @@
 ## Unreleased
 
 * Engine 升级，修复个别 Windows 兼容性问题
+* 修复 新建项目未创建 "图片" 文件件
 
 ## 2.0.0-alpha.5 (April 26, 2018)
 
