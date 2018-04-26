@@ -2,6 +2,12 @@
 
 * [null]
 
+## 2.0.0-alpha.5 (April 26, 2018)
+
+* 更新 Engine，升级 Babel 7 版本
+* 更新 dependencies 依赖
+* 迁移使用公共配置信息 [legoflow-config](https://github.com/legoflow/config)
+
 ## 2.0.0-alpha.4 (April 24, 2018)
 
 * 日志界面调整
