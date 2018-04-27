@@ -57,6 +57,8 @@ ipc.on( 'UTIL_CHROME_OPEN', ( event, url ) => {
 ipc.on( 'APP_CHECK_UPDATE', async ( event, isAuto = false ) => {
     const { version, isNeedUpdate } = await updater.check( );
 
+    console.log( '[check update result]', version );
+
     if ( isNeedUpdate ) {
         mainWindow.webContents.send( 'CAN_UPDATE', { version } );
     }

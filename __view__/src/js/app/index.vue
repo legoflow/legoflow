@@ -74,9 +74,7 @@ export default {
     mounted ( ) {
         let isShowApp = false;
 
-        window.onload = ( ) => {
-            isShowApp = true;
-
+        const showApp = ( ) => {
             window.ipc.mainWindow.show( );
 
             setTimeout( ( ) => {
@@ -84,8 +82,14 @@ export default {
             }, 500 );
         }
 
+        window.onload = ( ) => {
+            isShowApp = true;
+
+            showApp( );
+        }
+
         setTimeout( ( ) => {
-            !isShowApp ? window.ipc.mainWindow.show( ) : void 0;
+            !isShowApp ? showApp( ) : void 0;
         }, 1000 );
 
         Mousetrap.bind( 'left', ( ) => {
@@ -106,13 +110,22 @@ export default {
     },
     methods: {
         async updateAlert ( { version } ) {
+            const [ fNowVersion, sNowVersion ] = window.config.version.split( '.' );
+            const [ fUpdateVersion, sUpdateVersion ] = version.split( '.' );
+
+            let isBreakUpdate = false;
+
+            if ( fUpdateVersion > fNowVersion || sUpdateVersion > sNowVersion  ) {
+                isBreakUpdate = true;
+            }
+
             alert( {
-                msg: `是否更新版本 ${ version }`,
-                list: [ { label: '查看新版本功能', url: window.url.changelog } ],
-                btns: [ '取消', '确定更新' ],
+                msg: !isBreakUpdate ? `是否热更新版本 ${ version }` : `下载更新大版本 ${ version }`,
+                list: [ { label: '查看新版本功能', url: window.URL.changelog } ],
+                btns: [ '取消', !isBreakUpdate ? '确定更新' : '下载更新' ],
                 callback: ( index ) => {
                     if ( index == 1 ) {
-                        window.ipc.app.update( );
+                        !isBreakUpdate ? window.ipc.app.update( ) : window.appUtil.openURL( window.URL.download );
                     }
                 },
             } )

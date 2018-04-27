@@ -3,10 +3,11 @@
 const Menu = window.remote.Menu;
 
 window.URL = {
-    home: 'https://github.com/legoflow/legoflow/tree/2.x',
+    home: 'https://github.com/legoflow/legoflow',
     wiki: 'https://github.com/legoflow/legoflow/issues/12',
-    changelog: 'https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md',
+    changelog: 'https://github.com/legoflow/legoflow/CHANGELOG.md',
     advice: 'https://github.com/legoflow/legoflow/issues',
+    download: 'https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g#list/path=%2F',
 }
 
 let macMenu = [ {

@@ -9,9 +9,9 @@ const isPOP = lab ? 'preview' : 'publish';
 
 updater.config( {
     root,
-    versionURL: 'https://lilijialiang.com/legoflow/2/version.json',
+    versionURL: 'https://lilijialiang.com/legoflow/2.0/version.json',
     versionField: isPOP,
-    zipURL: `https://lilijialiang.com/legoflow/2/${ isPOP }`,
+    zipURL: `https://lilijialiang.com/legoflow/2.0/${ isPOP }`,
     isDiffSystem: false,
     packageJsonFile: path.resolve( root, './package.json' ),
     nowVersion: version,

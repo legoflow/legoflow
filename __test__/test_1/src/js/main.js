@@ -57,3 +57,7 @@ new Vue( {
 
 
 LOG_TO_HTML( `workflow env: ${ process.env }` );
+
+fetch( '/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc', { method: 'POST' } ).then( ( response ) => {
+    console.log( response );
+} )

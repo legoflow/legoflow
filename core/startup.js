@@ -12,8 +12,6 @@ const getProjectType = require('legoflow-project/getProjectType');
 let mainWindow = void 0;
 let settingWindow = void 0;
 
-require('./clean')( );
-
 module.exports = ( app ) => {
     const personConfig = JSON.parse( decodeURI( process.argv[ 3 ] || '{}' ) );
 

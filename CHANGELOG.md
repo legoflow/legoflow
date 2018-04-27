@@ -1,7 +1,11 @@
 ## Unreleased
 
-* Engine 升级，修复个别 Windows 兼容性问题
-* 修复 新建项目未创建 "图片" 文件件
+* [null]
+
+## 2.0.0-alpha.6 (April 27, 2018)
+
+* 升级 Engine [v0.0.17](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0017-april-27-2018)
+* 修复 新建项目未创建 "图片" 文件夹
 
 ## 2.0.0-alpha.5 (April 26, 2018)
 

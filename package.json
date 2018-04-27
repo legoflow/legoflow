@@ -1,6 +1,6 @@
 {
     "name": "legoflow",
-    "version": "2.0.0-alpha.5",
+    "version": "2.0.0-alpha.6",
     "description": "FE workflow",
     "main": "index.js",
     "scripts": {
@@ -78,7 +78,7 @@
         "html-loader": "0.5.5",
         "image-size": "0.6.2",
         "legoflow-config": "0.0.2",
-        "legoflow-engine": "0.0.12",
+        "legoflow-engine": "0.0.17",
         "legoflow-project": "0.0.4",
         "line-reader": "^0.4.0",
         "loader-utils": "1.1.0",
@@ -101,7 +101,7 @@
         "useref": "1.2.0",
         "vue-loader": "14.2.2",
         "vue-template-compiler": "2.5.16",
-        "webpack": "4.5.0",
+        "webpack": "4.6.0",
         "webpack-dev-server": "3.1.2",
         "yamljs": "^0.3.0"
     },
@@ -112,8 +112,8 @@
         }
     },
     "devDependencies": {
-        "electron": "^1.8.4",
-        "electron-packager": "^12.0.1",
-        "electron-rebuild": "~1.7.3"
+        "electron": "1.8.4",
+        "electron-packager": "12.0.1",
+        "electron-rebuild": "1.7.3"
     }
 }
