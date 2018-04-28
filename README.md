@@ -16,7 +16,7 @@
     <a href="https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g" target="_blank">
         <img alt="Download" src="https://img.shields.io/badge/download-app-brightgreen.svg" />
     </a>
-    <a href="https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md" target="_blank">
+    <a href="https://github.com/legoflow/legoflow/blob/master/CHANGELOG.md" target="_blank">
         <img alt="ChangeLog" src="https://img.shields.io/badge/CHANGE-LOG-orange.svg" />
     </a>
     <a href="">
@@ -78,11 +78,11 @@ npm run package:mac
 
 ## 使用说明
 
-查看 **[2.0 使用说明](https://github.com/legoflow/legoflow/issues/12)**
+查看 **[2.0 使用说明](https://legoflow.com/wiki)**
 
 ## 更新日志
 
-查看 **[CHANGELOG](https://github.com/legoflow/legoflow/blob/2.x/CHANGELOG.md)**
+查看 **[CHANGELOG](https://github.com/legoflow/legoflow/blob/master/CHANGELOG.md)**
 
 ## 下载
 
