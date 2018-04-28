@@ -78,7 +78,7 @@ npm run package:mac
 
 ## 使用说明
 
-查看 **[2.0 Alpha 使用说明](https://github.com/legoflow/legoflow/issues/12)**
+查看 **[2.0 使用说明](https://github.com/legoflow/legoflow/issues/12)**
 
 ## 更新日志
 
@@ -91,6 +91,10 @@ npm run package:mac
 → 腾讯云盘 **[下载地址](https://share.weiyun.com/5kP4ElS)**
 
 若出现以上源都无法下载，请加 Q 群下载群共享文件
+
+## v1.0 版本
+
+[https://legoflow.com/v1](https://legoflow.com/v1)
 
 ## 反馈
 

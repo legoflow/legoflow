@@ -2,6 +2,10 @@
 
 * [null]
 
+## 2.0.0-beta.0 (April 28, 2018)
+
+* 同步公布 beta.0 版本
+
 ## 2.0.0-alpha.6 (April 27, 2018)
 
 * 升级 Engine [v0.0.17](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0017-april-27-2018)
