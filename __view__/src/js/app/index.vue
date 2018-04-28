@@ -115,7 +115,12 @@ export default {
 
             let isBreakUpdate = false;
 
+            // 功能版本，完整下载更新
             if ( fUpdateVersion > fNowVersion || sUpdateVersion > sNowVersion  ) {
+                isBreakUpdate = true;
+            }
+            // 正式版本，完整下载更新
+            else if ( version.indexOf( 'beta' ) < 0 && window.config.version.indexOf( 'beta' ) > 0 ) {
                 isBreakUpdate = true;
             }
 

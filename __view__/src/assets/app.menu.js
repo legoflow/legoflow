@@ -7,7 +7,7 @@ window.URL = {
     wiki: 'https://github.com/legoflow/legoflow/issues/12',
     changelog: 'https://github.com/legoflow/legoflow/CHANGELOG.md',
     advice: 'https://github.com/legoflow/legoflow/issues',
-    download: 'https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g#list/path=%2F',
+    download: 'https://legoflow.com',
 }
 
 let macMenu = [ {
