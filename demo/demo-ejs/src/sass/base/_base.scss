@@ -1,0 +1,52 @@
+
+// 引入重置样式
+@import "normalize";
+
+/* 设置基本html,body样式 */
+html,body{
+	margin: 0 auto;
+	padding: 0;
+}
+
+/* 清除默认按钮表现形式 */
+button{
+	-webkit-appearance: none;
+			appearance: none;
+}
+
+/* 设置表格默认样式 */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 文本域禁止拖拉放大 */
+textarea {
+	resize: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+i, em {
+    font-style: normal;
+}
+
+ol, ul, li, menu {
+    list-style: none outside none;
+}
+
+fieldset, iframe, abbr, acronym {
+    border: 0 none;
+}
+
+dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, hr,
+article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+}
+
+del {
+    text-decoration:line-through;
+}

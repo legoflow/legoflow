@@ -1,0 +1,10 @@
+{
+  "name": "demo-use-npm",
+  "version": "0.0.1",
+  "repository": {},
+  "author": "UED.lijialiang",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}

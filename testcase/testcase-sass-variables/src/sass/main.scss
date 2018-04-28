@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@import "img";
+
+body {
+    font: 300 12px/1.5 "San Francisco", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    color: #333;
+    a {
+        text-decoration: none;
+        color: #333;
+        &:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+    }
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+@if( $env == 'dev' ) {
+    html, body {
+        background-color: red;
+    }
+}
+
+@if( $env == 'build' ) {
+    html, body {
+        background-color: blue;
+    }
+}
