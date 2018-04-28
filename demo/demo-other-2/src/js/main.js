@@ -1,1 +1,0 @@
-console.log(require('vue$2.2'));
