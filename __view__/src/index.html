@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> LegoFlow 2 </title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+    <app></app>
+
+    <!-- app -->
+    <script src="./assets/app.util.js"></script>
+    <script src="./assets/app.setting.js"></script>
+    <script src="./assets/app.config.js"></script>
+    <script src="./assets/app.ipc.js"></script>
+    <script src="./assets/app.menu.js"></script>
+
+    <!-- vue -->
+    <!-- @if env='dev' -->
+    <script src="./assets/vue.runtime.js"></script>
+    <!-- @endif -->
+    <!-- @if env='build' !>
+    <script src="./assets/vue.min.js"></script>
+    <!-- @endif -->
+    <script src="./assets/vue-router.min.js"></script>
+    <script src="./assets/vuex.min.js"></script>
+
+    <!-- other -->
+    <script src="./assets/moment.min.js"></script>
+    <script src="./assets/lodash.js"></script>
+    <script src="./assets/mousetrap.min.js"></script>
+    <script src="./assets/sortable.js"></script>
+
+    <!-- entry -->
+    <script src="./js/main.js"></script>
+
+</body>
+</html>

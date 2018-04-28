@@ -1,0 +1,16 @@
+name: test_2
+
+version: cli@0.0.3
+
+type: Vue.js
+
+REM: false
+
+ES.Next: true
+
+alias: {}
+
+global: {}
+
+externals:
+    vue: Vue
