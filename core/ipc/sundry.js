@@ -11,6 +11,9 @@ module.exports = ( _app, _mainWindow, _settingWindow ) => {
 }
 
 const electron = require('electron');
+const fs = require('fs-extra');
+
+const { exec } = require('child_process');
 
 const ipc = electron.ipcMain;
 
@@ -54,6 +57,46 @@ ipc.on( 'UTIL_CHROME_OPEN', ( event, url ) => {
     global.__util.chromeOpen( url );
 } )
 
+// 使用 资源管理器打开
+ipc.on( 'UTIL_FOLDER_OPEN', ( event, url ) => {
+    if ( !fs.existsSync( url ) ) {
+        messager.event( '无法打开不存在的路径' );
+
+        return void 0;
+    }
+
+    electron.shell.showItemInFolder( url );
+} )
+
+ipc.on( 'UTIL_EDITOR_OPEN', ( event, url ) => {
+    let { editor } = __config;
+
+    if ( editor && fs.existsSync( url ) ) {
+        switch ( editor ) {
+			case 'sublimeText3':
+                editor = 'Sublime Text';
+				break;
+			case 'VSCode':
+                editor = 'Visual Studio Code';
+                break;
+            case 'Atom':
+                editor = 'atom';
+                break;
+            case 'WebStorm':
+                editor = 'webStorm';
+                break;
+		}
+
+        const command = `open -a "${ editor }"  ${ url }`;
+
+        exec( command, ( e ) => {
+			if ( e ) {
+				messager.event( '无法打开编辑器' );
+			}
+		} );
+    }
+} )
+
 ipc.on( 'APP_CHECK_UPDATE', async ( event, isAuto = false ) => {
     const { version, isNeedUpdate } = await updater.check( );
 
@@ -69,7 +112,7 @@ ipc.on( 'APP_CHECK_UPDATE', async ( event, isAuto = false ) => {
     }
 } );
 
-ipc.on( 'UPDATE', async ( event ) => {
+ipc.on( 'APP_UPDATE', async ( event ) => {
     const tips = [
         '下载更新包...',
         '解压中...',

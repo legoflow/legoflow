@@ -8,7 +8,7 @@ window.ipc = {
     app: {
         restart ( ) { ipcRenderer.send( 'APP_RESTART' ) },
         checkUpdate ( isAuto ) { ipcRenderer.send( 'APP_CHECK_UPDATE', isAuto ) },
-        update ( )  { ipcRenderer.send( 'UPDATE' ) },
+        update ( )  { ipcRenderer.send( 'APP_UPDATE' ) },
     },
     mainWindow: {
         min ( ) { ipcRenderer.send( 'MAIN_WINDOW_MIN' ) },
@@ -44,6 +44,12 @@ window.ipc = {
             ) {
                 ipcRenderer.send( 'UTIL_CHROME_OPEN', url );
             }
+        },
+        folderOpen ( url ) {
+            ipcRenderer.send( 'UTIL_FOLDER_OPEN', url );
+        },
+        editorOpen ( url ) {
+            ipcRenderer.send( 'UTIL_EDITOR_OPEN', url );
         },
     },
 }

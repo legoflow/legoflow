@@ -9,11 +9,11 @@
             </div>
         </div>
         <div class="panel-content">
-            <div class="panel-content-ico-box">
+            <!-- <div class="panel-content-ico-box">
                 <div class="panel-content-ico"></div>
                 <div class="panel-content-ico"></div>
                 <div class="panel-content-ico" @click="toggleShowLogPanel" @dblclick="autoShowLogPanel"></div>
-            </div>
+            </div> -->
             <div class="panel-content-btns">
                 <button :class="[
                         project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run ) ? 'is-running' : '',
@@ -146,20 +146,22 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 180px;
+    width: 100%;
     height: 100%;
     button {
         float: left;
         width: 50%;
         height: 100%;
         border: none;
-        border-left: 1px solid $borderColor;
         background-color: rgba(0, 0, 0, 0);
         font-size: 15px;
         color: $mainColor;
         letter-spacing: 1px;
         cursor: pointer;
         transition: all .1s ease;
+        &:nth-of-type( 2 ) {
+            border-left: 1px solid $borderColor;
+        }
     }
 }
 

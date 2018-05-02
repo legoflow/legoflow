@@ -113,7 +113,16 @@ export default {
             !this.isShowMenuActive ? this.isShowMenuActive = true : void 0;
         },
         panelItemAction ( flag ) {
-
+            switch ( flag ) {
+                case 'close': {
+                    window.remote.app.quit( );
+                    break;
+                }
+                case 'min': {
+                    window.ipc.mainWindow.min( );
+                    break;
+                }
+            }
         },
     },
     watch: {

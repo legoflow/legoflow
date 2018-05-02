@@ -20,7 +20,9 @@ module.exports = ( mainWindow ) => {
 
     tray.setToolTip( 'LegoFlow 2' );
 
-    tray.on( 'click', mainWindow.show );
+    tray.on( 'click', ( ) => {
+        mainWindow.show( );
+    } );
 
     tray.on( 'drop-files', async ( event, _path_ ) => {
         const projectPath = _path_[ 0 ];

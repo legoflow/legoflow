@@ -14,7 +14,13 @@
                 <div class="list-acitve-del" @click="deleteProject"></div>
             </div>
             <transition-group tag="div" name="list-transition" id="items">
-                <div class="list-item" v-for="( item, $index ) in project" :key="item.id" @click="chooseProjectAcitveIndex( $index )">
+                <div
+                    class="list-item"
+                    v-for="( item, $index ) in project"
+                    :key="item.id"
+                    @click="chooseProjectAcitveIndex( $index )"
+                    @dblclick="openProjectFolder( $index )"
+                >
                     <div class="list-item-name">
                         {{ item.name }}<span>v{{ item.version }}</span>
                         <div
@@ -166,6 +172,7 @@ export default {
     data ( ) {
         return {
             listHeight: 0,
+            isPressedCmd: false,
         }
     },
     mounted ( ) {
@@ -193,10 +200,30 @@ export default {
 
         // 可排序
         this.sortable( );
+
+        if ( window.config.system === 'mac' ) {
+            document.body.addEventListener( 'keyup', ( event ) => {
+                this.isPressedCmd = false;
+            } )
+
+            document.body.addEventListener( 'keydown', ( event ) => {
+                if ( event.which == 91 ) {
+                    this.isPressedCmd = true;
+                }
+            } )
+        }
     },
     methods: {
         chooseProjectAcitveIndex ( index ) {
             this.$store.commit( 'SET_PROJECT_ACTIVE_INDEX', index );
+
+            if ( this.isPressedCmd ) {
+                const project = this.project[ index ];
+
+                if ( project && project.path ) {
+                    window.ipc.util.editorOpen( project.path );
+                }
+            }
         },
         sortable ( ) {
             if ( sortable ) {
@@ -224,12 +251,21 @@ export default {
 		    } )
         },
         deleteProject ( ) {
-            if ( this.projectActiveIndex == this.project.length - 1 ) {
-                this.$store.commit( 'SET_PROJECT_ACTIVE_INDEX', this.projectActiveIndex - 1 );
-            }
+            const lastIndex = this.project.length - 1;
 
             this.$store.commit( 'DEL_PROJECT', this.projectActiveIndex );
+
+            if ( this.projectActiveIndex == lastIndex ) {
+                this.$store.commit( 'SET_PROJECT_ACTIVE_INDEX', this.projectActiveIndex - 1 );
+            }
         },
+        openProjectFolder ( $index ) {
+            const project = this.project[ $index ];
+
+            if ( project && project.path ) {
+                window.ipc.util.folderOpen( project.path );
+            }
+        }
     },
     watch: {
         projectActiveIndex ( v ) {
