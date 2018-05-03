@@ -2,6 +2,10 @@
 
 * [null]
 
+## 2.0.0-beta.2 (May 4, 2018)
+
+* 升级 Engine [v0.0.18](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0018-may-3-2018)
+
 ## 2.0.0-beta.1 (May 2, 2018)
 
 * 修改 view 层列表面板操作交互
