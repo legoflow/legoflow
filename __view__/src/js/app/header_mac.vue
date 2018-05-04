@@ -110,7 +110,7 @@ export default {
 
             this.$store.commit( 'SET_VIEW_INDEX', index );
 
-            !this.isShowMenuActive ? this.isShowMenuActive = true : void 0;
+            !this.isShowMenuActive && ( this.isShowMenuActive = true );
         },
         panelItemAction ( flag ) {
             switch ( flag ) {

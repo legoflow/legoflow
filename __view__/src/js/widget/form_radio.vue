@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <div :class="[ 'radio', value ? 'checked' : void 0 ]"></div>
+        <div :class="[ 'radio', value && 'checked' ]"></div>
         <div class="radio-label" @click="toggleChecked">
             {{ item.label }}
         </div>

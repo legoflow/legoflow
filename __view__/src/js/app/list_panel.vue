@@ -1,6 +1,6 @@
 <template>
     <div class="panel">
-        <div class="panel-log" :style="{ transform: isShowLogPanel ? 'translate3d( 0, -70px, 0 )' : void 0 }">
+        <div class="panel-log" :style="{ transform: isShowLogPanel && 'translate3d( 0, -70px, 0 )' }">
             <div class="log-item log-dev">
                 开发:<span :class="{ 'log-url': panelLogDev.indexOf( 'http://' ) == 0 }" @click="( ) => isOpen( panelLogDev )">{{ panelLogDev }}</span>
             </div>
@@ -231,7 +231,7 @@ export default {
                 let devingProjectNumber = 0;
 
                 this.project.forEach( ( item ) => {
-                    item.dev.launch && project.dev.run ? ++devingProjectNumber : void 0;
+                    item.dev.launch && project.dev.run && ++devingProjectNumber;
                 } );
 
                 if ( devingProjectNumber >= 5 ) {

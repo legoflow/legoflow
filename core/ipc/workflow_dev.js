@@ -95,7 +95,7 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
     const STOP_EXEC = ( msg ) => {
         killer( config.id );
 
-        messager ? messager( { type: 'error', msg } ) : void 0;
+        messager && messager( { type: 'error', msg } );
 
         event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
     }

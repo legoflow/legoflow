@@ -23,7 +23,7 @@ window.appUtil = {
     openDialog ( ) {
         return new Promise( ( resolve, reject ) => {
             dialog.showOpenDialog( { properties: [ 'openDirectory' ] }, ( path ) => {
-                resolve( path ? path[ 0 ] : void 0 );
+                resolve( path && path[ 0 ] );
             } )
         } );
     },

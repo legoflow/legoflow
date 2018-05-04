@@ -90,7 +90,7 @@ export default {
 
             if ( value && item.options ) {
                 item.options.forEach( ( i, index ) => {
-                    i.value == value ? this.chooseIndex = index : void 0;
+                    i.value == value && ( this.chooseIndex = index );
                 } );
             }
         },

@@ -100,7 +100,7 @@ export default {
             Vue.set( this.values, index, value );
         },
         loadValues ( ) {
-            this.initValues ? this.values = _.cloneDeep( this.initValues ) : void 0;
+            this.initValues && ( this.values = _.cloneDeep( this.initValues ) );
 
             this.values.forEach( ( item, index ) => {
                 this.form[ index ].value = item;

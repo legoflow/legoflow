@@ -36,3 +36,6 @@ workflow.dev:
         /mock:
             target: http://legox.org
             changeOrigin: true
+    user.args:
+        *:
+            token: "'uid123123'"

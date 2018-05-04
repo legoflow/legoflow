@@ -190,10 +190,10 @@ export default {
     },
     watch: {
         isShowAppMenu ( v ) {
-            v ? this.isShowHelpMenu = false : void 0;
+            v && ( this.isShowHelpMenu = false );
         },
         isShowHelpMenu ( v ) {
-            v ? this.isShowAppMenu = false : void 0;
+            v && ( this.isShowAppMenu = false );
         },
     },
 };

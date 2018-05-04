@@ -89,7 +89,7 @@ export default {
         }
 
         setTimeout( ( ) => {
-            !isShowApp ? showApp( ) : void 0;
+            !isShowApp && showApp( );
         }, 1000 );
 
         Mousetrap.bind( 'left', ( ) => {
@@ -166,7 +166,7 @@ export default {
             let isExists = false;
 
             this.project.forEach( ( item ) => {
-                item.path === path ? isExists = true : void 0;
+                item.path === path && ( isExists = true );
             } )
 
             if ( isExists ) {

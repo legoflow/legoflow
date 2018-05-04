@@ -31,7 +31,7 @@ export default {
         async choose ( ) {
             const path = await window.appUtil.openDialog( );
 
-            path ? this.$emit( 'choose', { index: this.index, value: path } ) : void 0;
+            path && this.$emit( 'choose', { index: this.index, value: path } );
         }
     },
 };

@@ -12,11 +12,11 @@ Object.defineProperty( window, 'alert', {
 			if ( typeof option === 'object' ) {
                 const { msg, callback, btns, top, list } = option;
 
-                typeof msg !== 'undefined' ? Alert.data.msg = msg : void 0;
-                typeof callback !== 'undefined' ? Alert.data.callback = callback : void 0;
-                typeof btns !== 'undefined' ? Alert.data.btns = btns : void 0;
-                typeof top !== 'undefined' ? Alert.data.top = top : void 0;
-                typeof list !== 'undefined' ? Alert.data.list = list : void 0;
+                typeof msg !== 'undefined' && ( Alert.data.msg = msg );
+                typeof callback !== 'undefined' && ( Alert.data.callback = callback );
+                typeof btns !== 'undefined' && ( Alert.data.btns = btns );
+                typeof top !== 'undefined' && ( Alert.data.top = top );
+                typeof list !== 'undefined' && ( Alert.data.list = list );
             }
             else {
 				Alert.data.msg = option;

@@ -210,7 +210,7 @@ export default {
     },
     methods: {
         isRestart ( ) {
-            this.isSuccess ? window.ipc.app.restart( ) : void 0;
+            this.isSuccess && window.ipc.app.restart( );
         }
     },
 };

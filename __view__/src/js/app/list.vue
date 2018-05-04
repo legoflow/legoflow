@@ -6,7 +6,7 @@
                 v-if="project.length > 0"
                 :class="[
                     'list-acitve',
-                    project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run || project[ projectActiveIndex ].build ) ? 'running' : void 0
+                    ( project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run || project[ projectActiveIndex ].build ) ) && 'running'
                 ]"
                 :style="{ transform: `translate3d( 0, ${ projectActiveIndex * 49 }px, 0 )` }"
                 ref="active"
@@ -223,6 +223,8 @@ export default {
                 if ( project && project.path ) {
                     window.ipc.util.editorOpen( project.path );
                 }
+
+                this.isPressedCmd = false;
             }
         },
         sortable ( ) {

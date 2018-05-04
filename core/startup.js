@@ -73,7 +73,7 @@ module.exports = ( app ) => {
 
         await webSetting.setConfig( );
 
-        appEnv === 'dev' ? mainWindow.webContents.openDevTools( { mode: 'right' } ) : void 0;
+        appEnv === 'dev' && mainWindow.webContents.openDevTools( { mode: 'right' } );
 
         mainWindow.webContents.executeJavaScript( `window.localStorage[ '@newProjectType' ] = '${ JSON.stringify( projectType ) }'` );
 

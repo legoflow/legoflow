@@ -172,7 +172,7 @@ export default {
             this.isShow = false;
 
 			setTimeout( ( ) => {
-			    isCallback && this.callback ? this.callback( index ) : void 0;
+			    isCallback && this.callback && this.callback( index );
 
 				this.$destroy( true );
 			}, 500 );
