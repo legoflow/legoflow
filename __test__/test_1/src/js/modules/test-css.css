@@ -1,0 +1,7 @@
+body {
+    background-color: #EEE;
+}
+
+#app {
+    transition: all .2s ease;
+}

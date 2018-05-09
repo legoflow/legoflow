@@ -26,7 +26,8 @@ global:
 
 workflow.build:
     cache: version
-    html.resourcesDomain: https://legox.org
+    # html.resourcesDomain: https://legox.org
+    bundle.limitResourcesSize: 1
     shell: ./shell.js
 
 workflow.dev:

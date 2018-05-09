@@ -8,6 +8,9 @@ const LOG_TO_HTML = ( msg ) => {
 
 require('./modules/test-js.js')( );
 
+console.log( require('./modules/test-css') );
+console.log( require('./modules/monaco.ttf') );
+
 LOG_TO_HTML( require('./modules/1.png').substring( 0, 30 ) );
 
 LOG_TO_HTML( require('./modules/test-scss.scss') );
@@ -47,12 +50,24 @@ new Vue( {
         },
     } ),
     components: { vueComponent },
-    render ( h ) {
-        return (
-            <div id="vue"><vue-component/></div>
-        );
-    },
-    // template: '<div id="vue"><vue-component/></div>',
+    // render ( h ) {
+    //     return (
+    //         <div id="vue">
+    //             <vue-component>
+    //                 <template slot-scope="user">
+    //                     <span>11{{ user }}</span>
+    //                 </template>
+    //             </vue-component>
+    //         </div>
+    //     );
+    // },
+    template: `<div id="vue">
+                <vue-component>
+                    <template slot-scope="data">
+                        <span>11{{ data.text }}</span>
+                    </template>
+                </vue-component>
+            </div>`,
 } )
 
 

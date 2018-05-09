@@ -1,6 +1,12 @@
 ## Unreleased
 
+* [null]
+
+## 2.0.0-beta.3 (May 4, 2018)
+
 * 修复 view 层个别情况下双击项目资源管理器打开问题
+* 修复 view 项目名称过长隐藏问题
+* 升级 Engine [v0.0.22](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0022-may-9-2018)
 
 ## 2.0.0-beta.2 (May 4, 2018)
 

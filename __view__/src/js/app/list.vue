@@ -131,7 +131,7 @@
 }
 
 .list-item-name {
-    width: 100%;
+    width: 87%;
     height: 100%;
     line-height: 50px;
     font-size: 16px;
