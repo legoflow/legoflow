@@ -9,6 +9,7 @@ const CONFIG_STORAGE_MAPPING = {
     autoOpenChrome: '@autoOpenChrome',
     lab: '@lab',
     nodeBin: '@nodeBin',
+    customProjectPath: '@customProjectPath',
 }
 
 let window = void 0;

@@ -21,6 +21,10 @@ export default {
         state.editor = data;
         window.appSetting.set( 'editor', state.editor );
     },
+    SET_CUSTOM_PROJECT_PROJECT ( state, data ) {
+        state.customProjectPath = data;
+        window.appSetting.set( 'customProjectPath', state.customProjectPath );
+    },
     SET_AUTO_OPEN_CHROME ( state, data ) {
         state.autoOpenChrome = data;
         window.appSetting.set( 'autoOpenChrome', state.autoOpenChrome );

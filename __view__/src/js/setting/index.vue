@@ -39,7 +39,7 @@
 const { debounce } = window.appUtil;
 
 export default {
-    computed: Vuex.mapState( [ 'user', 'port', 'editor', 'autoOpenChrome', 'nodeBin', 'lab' ] ),
+    computed: Vuex.mapState( [ 'user', 'port', 'editor', 'autoOpenChrome', 'nodeBin', 'lab', 'customProjectPath' ] ),
     data ( ) {
         return {
             form: [
@@ -49,6 +49,7 @@ export default {
                 { label: '工作流自动打开 Chrome', type: 'radio' },
                 { label: '其他', type: 'separate' },
                 { label: '实验室', type: 'radio' },
+                { label: 'Project', type: 'input', placeholder: 'custom project path' },
                 { label: 'NodeBin', type: 'input', placeholder: 'which node' },
             ],
             values: [ ],
@@ -75,7 +76,7 @@ export default {
         save: debounce( 300, function ( ) {
             const { values, loadValues } = this.$refs.form;
 
-            const [ user, port, editor, autoOpenChrome, x, lab, nodeBin ] = values;
+            const [ user, port, editor, autoOpenChrome, x, lab, customProjectPath, nodeBin ] = values;
 
             this.$store.commit( 'SET_USER', user );
             this.$store.commit( 'SET_PORT', port );
@@ -83,6 +84,7 @@ export default {
             this.$store.commit( 'SET_AUTO_OPEN_CHROME', autoOpenChrome );
             this.$store.commit( 'SET_LAB', lab );
             this.$store.commit( 'SET_NODE_BIN', nodeBin );
+            this.$store.commit( 'SET_CUSTOM_PROJECT_PROJECT', customProjectPath );
 
             this.updateValues( );
 
@@ -96,7 +98,8 @@ export default {
             this.values[ 2 ] = this.editor;
             this.values[ 3 ] = this.autoOpenChrome;
             this.values[ 5 ] = this.lab;
-            this.values[ 6 ] = this.nodeBin;
+            this.values[ 6 ] = this.customProjectPath;
+            this.values[ 7 ] = this.nodeBin;
         },
     },
 };

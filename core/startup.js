@@ -7,7 +7,7 @@ const threadKiller = require('./common/thread_killer');
 const webSetting = require('./common/web_setting');
 
 const util = require('legoflow-engine/util');
-const getProjectType = require('legoflow-project/getProjectType');
+const legoflowProject = require('legoflow-project');
 
 let mainWindow = void 0;
 let settingWindow = void 0;
@@ -29,7 +29,7 @@ module.exports = ( app ) => {
 
     threadKiller( );
 
-    const projectType = Object.keys( getProjectType( ) );
+    const projectType = Object.keys( legoflowProject.getProjectType( ) );
 
     return async ( ) => {
         let { system, appEnv, root } = __config;

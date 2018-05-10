@@ -1,6 +1,6 @@
 ## Unreleased
 
-* [null]
+* 升级 Project，支持自定义项目类型
 
 ## 2.0.0-beta.3 (May 4, 2018)
 

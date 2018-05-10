@@ -7,6 +7,7 @@ const AUTO_OPEN_CHROME = '@autoOpenChrome';
 const PROJECT = '@project';
 const NODE_BIN = '@nodeBin';
 const LAB = '@lab'
+const CUSTOM_PROJECT_PATH = '@customProjectPath';
 
 if ( !window.localStorage[ USER ] ) {
     window.localStorage[ USER ] = '';
@@ -36,12 +37,17 @@ if ( !window.localStorage[ LAB ] ) {
     window.localStorage[ LAB ] = 'false';
 }
 
+if ( !window.localStorage[ CUSTOM_PROJECT_PATH ] ) {
+    window.localStorage[ CUSTOM_PROJECT_PATH ] = '';
+}
+
 window.appSetting = {
     get ( key ) {
         switch ( key ) {
             case 'user': return window.localStorage[ USER ];
             case 'port': return window.localStorage[ PORT ];
             case 'editor': return window.localStorage[ EDITOR ];
+            case 'customProjectPath': return window.localStorage[ CUSTOM_PROJECT_PATH ];
             case 'autoOpenChrome': return JSON.parse( window.localStorage[ AUTO_OPEN_CHROME ] );
             case 'project': return JSON.parse( window.localStorage[ PROJECT ] );
             case 'nodeBin': return window.localStorage[ NODE_BIN ];
@@ -53,6 +59,9 @@ window.appSetting = {
                     editor: window.localStorage[ EDITOR ],
                     autoOpenChrome: JSON.parse( window.localStorage[ AUTO_OPEN_CHROME ] ),
                     project: JSON.parse( window.localStorage[ PROJECT ] ),
+                    nodeBin: window.localStorage[ NODE_BIN ],
+                    lab: JSON.parse( window.localStorage[ LAB ] ),
+                    customProjectPath: window.localStorage[ CUSTOM_PROJECT_PATH ],
                 };
         }
     },
@@ -64,6 +73,7 @@ window.appSetting = {
             case 'nodeBin': { window.localStorage[ NODE_BIN ] = value; break; }
             case 'lab': { window.localStorage[ LAB ] = value; break; }
             case 'autoOpenChrome': { window.localStorage[ AUTO_OPEN_CHROME ] = value; break; }
+            case 'customProjectPath': { window.localStorage[ CUSTOM_PROJECT_PATH ] = value; break; }
             case 'project': {
                 const data = _.cloneDeep( value );
 
@@ -88,6 +98,7 @@ window.appSetting = {
             nodeBin: window.appSetting.get( 'nodeBin' ),
             lab: window.appSetting.get( 'lab' ),
             autoOpenChrome: window.appSetting.get( 'autoOpenChrome' ),
+            customProjectPath: window.appSetting.get( 'customProjectPath' ),
         } );
     },
     clear ( ) {
@@ -98,5 +109,6 @@ window.appSetting = {
         delete window.localStorage[ PROJECT ];
         delete window.localStorage[ NODE_BIN ];
         delete window.localStorage[ LAB ];
+        delete window.localStorage[ CUSTOM_PROJECT_PATH ];
     },
 }

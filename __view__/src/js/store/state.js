@@ -7,6 +7,7 @@ export default {
     autoOpenChrome: window.appSetting.get( 'autoOpenChrome' ),
     nodeBin: window.appSetting.get( 'nodeBin' ),
     lab: window.appSetting.get( 'lab' ),
+    customProjectPath: window.appSetting.get( 'customProjectPath' ),
     view: [
         { label: '新建', component: 'NewComponent' },
         { label: '列表', component: 'ListComponent' },
