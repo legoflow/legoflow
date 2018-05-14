@@ -65,7 +65,7 @@ module.exports = ( app ) => {
 
         mainWindow = new BrowserWindow( option );
 
-        webSetting.init( mainWindow )
+        webSetting.init( mainWindow );
 
         const viewFolder = path.resolve( root, './view' );
 
@@ -122,5 +122,7 @@ module.exports = ( app ) => {
         require('./ipc')( app, mainWindow, settingWindow );
 
         mainWindow.on( 'blur', ( ) => mainWindow.webContents.send( 'MAIN_WINDOW_BLUR' ) );
+
+        app.on( 'activate', ( ) => mainWindow.show( ) );
     };
 };
