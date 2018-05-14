@@ -9,8 +9,6 @@ module.exports = ( { config, messager, nodeBinExec } ) => {
 
     const { projectPath } = config;
 
-    config.autoOpenChrome = false;
-
     del.sync( [ `${ projectPath }/dist.zip` ], { force: true } );
 
     messager.log( '打包中' );

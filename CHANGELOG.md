@@ -1,5 +1,9 @@
 ## Unreleased
 
+* [null]
+
+## 2.0.0-beta.4 (May 14, 2018)
+
 * 升级 Engine [v0.0.23](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0023-may-14-2018)
 * 升级 Project，支持自定义项目类型
 * 修复 创建项目时选择源路径问题
