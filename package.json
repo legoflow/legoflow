@@ -80,7 +80,7 @@
         "html-loader": "0.5.5",
         "image-size": "0.6.2",
         "legoflow-config": "0.0.3",
-        "legoflow-engine": "0.0.22",
+        "legoflow-engine": "0.0.23",
         "legoflow-project": "0.0.6",
         "line-reader": "^0.4.0",
         "loader-utils": "1.1.0",

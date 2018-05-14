@@ -1,6 +1,6 @@
 <template>
     <div class="panel">
-        <div class="panel-log" :style="{ transform: isShowLogPanel && 'translate3d( 0, -70px, 0 )' }">
+        <div class="panel-log" :style="{ transform: isShowLogPanel ? 'translate3d( 0, -70px, 0 )' : '' }">
             <div class="log-item log-dev">
                 开发:<span :class="{ 'log-url': panelLogDev.indexOf( 'http://' ) == 0 }" @click="( ) => isOpen( panelLogDev )">{{ panelLogDev }}</span>
             </div>
@@ -9,11 +9,6 @@
             </div>
         </div>
         <div class="panel-content">
-            <!-- <div class="panel-content-ico-box">
-                <div class="panel-content-ico"></div>
-                <div class="panel-content-ico"></div>
-                <div class="panel-content-ico" @click="toggleShowLogPanel" @dblclick="autoShowLogPanel"></div>
-            </div> -->
             <div class="panel-content-btns">
                 <button :class="[
                         project[ projectActiveIndex ] && ( project[ projectActiveIndex ].dev.launch || project[ projectActiveIndex ].dev.run ) ? 'is-running' : '',
@@ -196,30 +191,16 @@ export default {
         } );
     },
     methods: {
-        toggleShowLogPanel ( ) {
-            this.isShowLogPanel = !this.isShowLogPanel;
-            this.isAutoToggleLogPanel = false;
-        },
         autoToggleShowLogPanel ( ) {
             if ( !this.isAutoToggleLogPanel ) {
                 return void 0;
             }
 
-            if ( this.panelLogDev || this.panelLogBuild ) {
-                this.isShowLogPanel = true;
-            }
-            else {
+            if ( !this.panelLogDev && !this.panelLogBuild ) {
                 this.isShowLogPanel = false;
             }
-        },
-        autoShowLogPanel ( ) {
-            this.isAutoToggleLogPanel = true;
-
-            if ( this.panelLogDev || this.panelLogBuild ) {
-                this.isShowLogPanel = true;
-            }
             else {
-                this.isShowLogPanel = false;
+                this.isShowLogPanel = true;
             }
         },
         dev: window.appUtil.debounce( 200, function ( ) {
@@ -301,13 +282,17 @@ export default {
     watch: {
         projectActiveIndex ( v ) {
             this.setLocalPanelLog( );
-            this.autoToggleShowLogPanel( );
+            Vue.nextTick( ( ) => {
+                this.autoToggleShowLogPanel( );
+            } )
         },
         panelLog: {
             deep: true,
             handler ( ) {
                 this.setLocalPanelLog( );
-                this.autoToggleShowLogPanel( );
+                Vue.nextTick( ( ) => {
+                    this.autoToggleShowLogPanel( );
+                } )
             }
         },
     },

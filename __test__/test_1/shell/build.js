@@ -4,8 +4,12 @@ const path = require('path');
 const del = require('del');
 const shell = require('shelljs');
 
-module.exports = ( { config: { projectPath }, messager, nodeBinExec } ) => {
+module.exports = ( { config, messager, nodeBinExec } ) => {
     messager.log( '删除原有 zip' );
+
+    const { projectPath } = config;
+
+    config.autoOpenChrome = false;
 
     del.sync( [ `${ projectPath }/dist.zip` ], { force: true } );
 

@@ -22,7 +22,8 @@
                     @dblclick="openProjectFolder( $index )"
                 >
                     <div class="list-item-name">
-                        {{ item.name }}<span>v{{ item.version }}</span>
+                        <div class="list-item-name-label">{{ item.name }}</div>
+                        <span>v{{ item.version }}</span>
                         <div
                             class="list-item-active-state"
                             :style="{ 'opacity': project[ $index ].dev.launch || project[ $index ].dev.run || project[ $index ].build ? '1' : '0' }"
@@ -131,15 +132,24 @@
 }
 
 .list-item-name {
-    width: 87%;
+    width: 100%;
     height: 100%;
-    line-height: 50px;
-    font-size: 16px;
-    font-weight: 600;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    .list-item-name-label {
+        max-width: 65%;
+        height: 100%;
+        line-height: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
     span {
+        margin-top: 8px;
         margin-left: 5px;
         font-size: 10px;
         color: $assistFontColor;

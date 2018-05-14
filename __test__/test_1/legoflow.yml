@@ -28,7 +28,7 @@ workflow.build:
     cache: version
     # html.resourcesDomain: https://legox.org
     bundle.limitResourcesSize: 1
-    shell: ./shell.js
+    shell: ./shell/build.js
 
 workflow.dev:
     watch.reload:
@@ -40,3 +40,4 @@ workflow.dev:
     user.args:
         *:
             token: "'uid123123'"
+    shell: ./shell/dev.js
