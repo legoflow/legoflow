@@ -12,7 +12,7 @@ fs.mkdirSync( windowsFolder );
 
 const files = [
     '__test__', '.personconfig', 'core', 'icon', 'package.json',
-    'README.md', 'script', 'store', 'view', 'index.js', 'LICENSE', '.nvmrc',
+    'README.md', 'script', 'view', 'index.js', 'LICENSE', '.nvmrc',
 ]
 
 for ( let file of files ) {
