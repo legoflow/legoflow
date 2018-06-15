@@ -2,6 +2,12 @@
 
 * [null]
 
+## 2.0.0-beta.6 (June 14, 2018)
+
+* 升级 Engine [v0.0.36](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0036-june-14-2018)，主要支持 Webpack mode
+* 修复 捕捉异常错误问题
+* 升级 Project 优化 Vue.ts 初始化脚手架
+
 ## 2.0.0-beta.5 (June 5, 2018)
 
 * 升级 Engine [v0.0.30](https://github.com/legoflow/engine/blob/master/CHANGELOG.md#0030-june-4-2018), 支持多项新属性

@@ -13,6 +13,7 @@ const ipc = electron.ipcMain;
 ipc.on( 'PROJECT_NEW', async ( event, data ) => {
     data.author = __config.user;
     data.c_version = `app@${ __config.version }`;
+    data.from = 'app';
 
     const result = await legoflowProject.new( data );
 

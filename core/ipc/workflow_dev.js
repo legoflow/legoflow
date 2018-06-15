@@ -15,7 +15,7 @@ module.exports = ( _app, _mainWindow ) => {
 
 global.__workflowDevPid = { };
 
-let canUserPortForWebpack = __config.env === 'dev' ? __config.webpack.originPortDev : __config.webpack.originPort;
+let canUserPortForWebpack = __config.env === 'dev' ? __config.webpackConfig.originPortDev : __config.webpackConfig.originPort;
 
 // 注册
 const register = ( { id } ) => {
@@ -75,6 +75,7 @@ ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
 
     config.webpackPort = webpackPort;
     config.workflow = 'dev';
+    config.from = 'app';
 
     event.sender.send( 'WORKFLOW_DEV_RUN_LAUNCH', config );
 

@@ -19,7 +19,7 @@ module.exports = ( ) => {
     }
 
     // kill thread by webpack port
-    const webpackPort = __config.env === 'dev' ? __config.webpack.originPortDev : __config.webpack.originPort;
+    const webpackPort = __config.env === 'dev' ? __config.webpackConfig.originPortDev : __config.webpackConfig.originPort;
     for ( let i = webpackPort, max = webpackPort + 10; i < max; i++ ) {
         kill( i );
     }

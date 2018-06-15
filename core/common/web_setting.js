@@ -23,7 +23,7 @@ const setLocalStorage = ( key, value ) => {
 exports.init = ( _window_ ) => {
     window = _window_;
 
-    __config = Object.assign( __config, legoflowConfig.getConfig( ) );
+    __config = Object.assign( __config, legoflowConfig.get( ) );
 }
 
 exports.setConfig = async ( ) => {

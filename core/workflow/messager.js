@@ -1,6 +1,6 @@
 'use strict';
 
-const { Messager } = require('legoflow-engine');
+const Messager = require('legoflow-engine/messager');
 
 Messager.sender = function ( { type, msg } ) {
     if ( typeof msg === 'object' ) {
@@ -11,6 +11,5 @@ Messager.sender = function ( { type, msg } ) {
 }
 
 Messager.setConfig = function ( config ) {
-    console.log( 123123123 );
     process.send( { type: 'update-config', config } );
 }

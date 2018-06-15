@@ -39,6 +39,7 @@ ipcWorkflowFactory( 'WORKFLOW_BUILD_RUN', ( event, config ) => {
     const { id } = config;
 
     config.workflow = 'build';
+    config.from = 'app';
 
     const thread = fork( path.resolve( __dirname, '../workflow/build' ) );
 
