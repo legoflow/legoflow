@@ -1,6 +1,6 @@
 {
     "name": "legoflow",
-    "version": "2.0.0-beta.6",
+    "version": "2.0.0-beta.7",
     "description": "FE workflow",
     "main": "index.js",
     "scripts": {
@@ -35,9 +35,9 @@
         "electron-cover-updater": "0.0.8",
         "fs-extra": "^5.0.0",
         "glob": "~7.1.2",
-        "legoflow-config": "0.0.7",
-        "legoflow-engine": "0.0.36",
-        "legoflow-project": "0.0.20",
+        "legoflow-config": "0.0.9",
+        "legoflow-engine": "0.0.51-beta.5",
+        "legoflow-project": "0.0.27",
         "lodash": "^4.17.10",
         "moment": "^2.22.0",
         "node-notifier": "~5.2.1",

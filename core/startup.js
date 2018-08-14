@@ -29,9 +29,9 @@ module.exports = ( app ) => {
 
     threadKiller( );
 
-    const projectType = Object.keys( legoflowProject.getProjectType( ) );
-
     return async ( ) => {
+        const projectType = Object.keys( await legoflowProject.getProjectType( ) );
+
         let { system, appEnv, root } = __config;
 
         let devViewAddress = 'localhost:3000';

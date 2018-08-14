@@ -11,7 +11,7 @@ del.sync( windowsFolder );
 fs.mkdirSync( windowsFolder );
 
 const files = [
-    '__test__', '.personconfig', 'core', 'icon', 'package.json', '.github',
+    '__test__', '.personconfig', 'core', 'icon', 'package.json',
     'README.md', 'script', 'view', 'index.js', 'LICENSE', '.nvmrc',
 ]
 
