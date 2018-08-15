@@ -52,7 +52,7 @@ import LogComponent from './log';
 import UpdateComponent from './update';
 
 export default {
-    computed: Vuex.mapState( [ 'view', 'viewIndex', 'project' ] ),
+    computed: Vuex.mapState( [ 'view', 'viewIndex', 'project', 'projectActiveIndex' ] ),
     components: {
         HeaderMacComponent,
         HeaderWinComponent,
@@ -76,6 +76,8 @@ export default {
 
         const showApp = ( ) => {
             window.ipc.mainWindow.show( );
+
+            window.renderMacMenu && window.renderMacMenu();
 
             setTimeout( ( ) => {
                 window.ipc.app.checkUpdate( true );
@@ -109,6 +111,9 @@ export default {
         } );
     },
     methods: {
+        getProjectActive () {
+            return this.project[this.projectActiveIndex];
+        },
         async updateAlert ( { version } ) {
             const [ fNowVersion, sNowVersion ] = window.config.version.split( '.' );
             const [ fUpdateVersion, sUpdateVersion ] = version.split( '.' );

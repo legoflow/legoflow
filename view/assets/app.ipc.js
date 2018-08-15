@@ -25,6 +25,10 @@ window.ipc = {
         new ( data ) { ipcRenderer.send( 'PROJECT_NEW', data ) },
         add ( data ) { ipcRenderer.send( 'PROJECT_ADD', data ) },
         update ( data ) { ipcRenderer.send( 'PROJECT_UPDATE', data ) },
+        npmInstall (data) {
+            window.alert('安装中，稍候返回结果');
+            ipcRenderer.send( 'PROJECT_NPM_INSTALL', data );
+        },
     },
     workflow: {
         dev: {
@@ -106,3 +110,10 @@ ipcRenderer.on( 'WORKFLOW_BUILD_STOP_SUCCESS', ( event, data ) => {
     window.vm.projectWorkflow( { type: 'build', state: 'stop', data, } );
 } )
 
+ipcRenderer.on( 'PROJECT_NPM_INSTALL_SUCCESS', ( event, data ) => {
+    window.alert({ msg: `${data.name}, NPM Install Success`, btns: ['确定'] });
+} )
+
+ipcRenderer.on( 'PROJECT_NPM_INSTALL_ERROR', ( event, data ) => {
+    window.alert({ msg: `${data.name}, NPM Install Error`, btns: ['确定'] });
+} )

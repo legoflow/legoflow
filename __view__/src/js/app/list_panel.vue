@@ -163,6 +163,7 @@
 .is-running {
     background-color: $mainColor !important;
     color: $whiteColor !important;
+    border-color: $mainColor !important;
 }
 
 .stop-state {

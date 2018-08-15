@@ -7,6 +7,7 @@
                     <li class="disable-hover">v{{ version }}</li>
                     <li @click="menuAction( 'update' )">检查更新</li>
                     <li @click="menuAction( 'setting' )">全局设置</li>
+                    <li @click="menuAction( 'projectNpmInatall' )">内置 NPM 安装项目依赖</li>
                     <li @click="menuAction( 'hide' )">隐藏</li>
                     <li @click="menuAction( 'min' )">最小化</li>
                     <li @click="menuAction( 'quit' )">退出</li>
@@ -183,6 +184,11 @@ export default {
                 }
                 case 'advice': {
                     window.appUtil.openURL( window.URL.advice );
+                    break;
+                }
+                case 'projectNpmInatall': {
+                    const project = window.vm.getProjectActive();
+                    window.ipc.project.npmInstall(project);
                     break;
                 }
             }

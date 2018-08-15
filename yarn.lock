@@ -4982,8 +4982,8 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
 
 "gulp-assets@git+https://github.com/legoflow-override/gulp-assets.git":
-  version "0.0.0"
-  resolved "git+https://github.com/legoflow-override/gulp-assets.git#0440e1509afd936f59e3568e5dd6a382648026d1"
+  version "0.0.1"
+  resolved "git+https://github.com/legoflow-override/gulp-assets.git#db12122216d3aaac563f7b2790eb9b3ab337cdf0"
 
 gulp-autoprefixer@5.0.0:
   version "5.0.0"
@@ -5057,9 +5057,9 @@ gulp-decompress@^1.2.0:
     gulp-util "^3.0.1"
     readable-stream "^2.0.2"
 
-"gulp-dist@git+https://github.com/legoflow-override/gulp-dist.git":
-  version "0.0.0"
-  resolved "git+https://github.com/legoflow-override/gulp-dist.git#c11eff29a4e4a1e086c5fbb95680ee3d22b200c3"
+"gulp-dist@git+https://github.com/legoflow-override/gulp-dist.git#0.0.1":
+  version "0.0.1"
+  resolved "git+https://github.com/legoflow-override/gulp-dist.git#4e132cc03ac2a594fc03053a860f9cd3d4617a9c"
 
 gulp-ejs@3.1.2:
   version "3.1.2"
@@ -5099,9 +5099,9 @@ gulp-if@2.0.2, gulp-if@^2.0.2:
     ternary-stream "^2.0.1"
     through2 "^2.0.1"
 
-"gulp-image-size@git+https://github.com/legoflow-override/gulp-image-size.git":
-  version "0.0.0"
-  resolved "git+https://github.com/legoflow-override/gulp-image-size.git#7fd01511f2da1ab7466d7136b358d59d493a6e97"
+"gulp-image-size@git+https://github.com/legoflow-override/gulp-image-size.git#0.0.1":
+  version "0.0.1"
+  resolved "git+https://github.com/legoflow-override/gulp-image-size.git#0d5bcdb2d960056acfc5aa1e5bd5632bf160d275"
 
 gulp-imagemin@4.1.0:
   version "4.1.0"
@@ -6529,9 +6529,9 @@ legoflow-config@0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/legoflow-config/-/legoflow-config-0.0.9.tgz#5b06cf8de2c09ff93b8fe19bc118fdc188a0ef8d"
 
-legoflow-engine@0.0.51-beta.5:
-  version "0.0.51-beta.5"
-  resolved "https://registry.yarnpkg.com/legoflow-engine/-/legoflow-engine-0.0.51-beta.5.tgz#4722d066ae471bbfed87b68f9d3044c533250696"
+legoflow-engine@0.0.51-beta.8:
+  version "0.0.51-beta.8"
+  resolved "https://registry.yarnpkg.com/legoflow-engine/-/legoflow-engine-0.0.51-beta.8.tgz#59b9003dc220bfc9613cb4e1f08c3b5169b507b6"
   dependencies:
     "@babel/core" "7.0.0-rc.1"
     "@babel/plugin-proposal-class-properties" "7.0.0-rc.1"
@@ -6578,13 +6578,13 @@ legoflow-engine@0.0.51-beta.5:
     gulp-clean-css "3.9.3"
     gulp-concat "2.6.1"
     gulp-css-base64 "git+https://github.com/legoflow-override/gulp-css-base64.git"
-    gulp-dist "git+https://github.com/legoflow-override/gulp-dist.git"
+    gulp-dist "git+https://github.com/legoflow-override/gulp-dist.git#0.0.1"
     gulp-ejs "3.1.2"
     gulp-filter-style-file "git+https://github.com/legoflow-override/gulp-filter-style-file.git"
     gulp-header "2.0.5"
     gulp-html-version "git+https://github.com/legoflow-override/gulp-html-version.git"
     gulp-if "2.0.2"
-    gulp-image-size "git+https://github.com/legoflow-override/gulp-image-size.git"
+    gulp-image-size "git+https://github.com/legoflow-override/gulp-image-size.git#0.0.1"
     gulp-imagemin "4.1.0"
     gulp-inline-source "2.1.0"
     gulp-make-css-url-version "git+https://github.com/legoflow-override/gulp-make-css-url-version.git"
@@ -11084,11 +11084,7 @@ use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
 
-useref@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/useref/-/useref-1.4.1.tgz#02dabad10b1a85025d964252fca31b805931ad7d"
-
-"useref@git+https://github.com/legoflow-override/useref.git":
+useref@^1.4.1, "useref@git+https://github.com/legoflow-override/useref.git":
   version "1.4.1"
   resolved "git+https://github.com/legoflow-override/useref.git#ff2256a8c64c55441cb643df073eba91e2c3bb31"
 

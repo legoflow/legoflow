@@ -32,6 +32,14 @@ let macMenu = [ {
             },
             { type: 'separator' },
             {
+                label: '内置 NPM 安装项目依赖',
+                click ( ) {
+                    const project = window.vm.getProjectActive();
+                    window.ipc.project.npmInstall(project);
+                },
+            },
+            { type: 'separator' },
+            {
                 label: '隐藏',
                 accelerator: 'CmdOrCtrl+W',
                 click ( ) {
@@ -70,6 +78,7 @@ let macMenu = [ {
                 label: '打开',
                 accelerator: 'CmdOrCtrl+O',
                 click ( ) {
+                    console.log('oo')
                 },
             },
             { label: '粘贴', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
@@ -115,6 +124,11 @@ let macMenu = [ {
 ];
 
 if ( config.system === 'mac' ) {
-    let menu = Menu.buildFromTemplate( macMenu );
+    let menu = Menu.buildFromTemplate( [{label: 'LegoFlow 2'}] );
     Menu.setApplicationMenu( menu );
+
+    window.renderMacMenu = () => {
+        let menu = Menu.buildFromTemplate( macMenu );
+        Menu.setApplicationMenu( menu );
+    }
 }

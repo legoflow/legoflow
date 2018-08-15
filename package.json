@@ -36,7 +36,7 @@
         "fs-extra": "^5.0.0",
         "glob": "~7.1.2",
         "legoflow-config": "0.0.9",
-        "legoflow-engine": "0.0.51-beta.5",
+        "legoflow-engine": "0.0.51-beta.8",
         "legoflow-project": "0.0.27",
         "lodash": "^4.17.10",
         "moment": "^2.22.0",

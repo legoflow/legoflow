@@ -45,3 +45,14 @@ ipc.on( 'PROJECT_UPDATE', ( event, data ) => {
 
     mainWindow.webContents.send( 'PROJECT_UPDATE', config );
 } )
+
+// 通过内置 npm 安装依赖
+ipc.on('PROJECT_NPM_INSTALL', (event, data) => {
+    require('../common/project_npm_install')(data.path)
+        .then(() => {
+            mainWindow.webContents.send( 'PROJECT_NPM_INSTALL_SUCCESS', data );
+        })
+        .catch((e) => {
+            mainWindow.webContents.send( 'PROJECT_NPM_INSTALL_ERROR', data );
+        })
+})

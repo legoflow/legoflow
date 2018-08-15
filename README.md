@@ -41,8 +41,6 @@
 * EJS 模板编译
 * 自动内联样式脚本
 * 自动替换线上资源地址
-* JS 编译 Sass 文件 Autoprefixer 自动补全
-* JS 编译 art-template 语法 tpl 文件
 * ......
 
 ## 开发
