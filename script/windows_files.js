@@ -1,27 +1,27 @@
-'use strict';
+'use strict'
 
-const path = require('path');
-const fs = require('fs-extra');
-const del = require('del');
+const path = require('path')
+const fs = require('fs-extra')
+const del = require('del')
 
-const root = path.resolve( __dirname, '../' );
-const windowsFolder = path.resolve( root, './__windows_files__' );
+const root = path.resolve(__dirname, '../')
+const windowsFolder = path.resolve(root, './__windows_files__')
 
-del.sync( windowsFolder );
-fs.mkdirSync( windowsFolder );
+del.sync(windowsFolder)
+fs.mkdirSync(windowsFolder)
 
 const files = [
-    '__test__', '.personconfig', 'core', 'icon', 'package.json', 'npm',
-    'README.md', 'script', 'view', 'index.js', 'LICENSE', '.nvmrc',
+  '__test__', '.personconfig', 'core', 'icon', 'package.json', 'npm',
+  'README.md', 'script', 'view', 'index.js', 'LICENSE', '.nvmrc'
 ]
 
-for ( let file of files ) {
-    const filePath = path.resolve( root, `./${ file }` );
-    const distFilePath = path.resolve( windowsFolder, `./${ file }` );
+for (let file of files) {
+  const filePath = path.resolve(root, `./${file}`)
+  const distFilePath = path.resolve(windowsFolder, `./${file}`)
 
-    fs.copySync( filePath, distFilePath );
+  fs.copySync(filePath, distFilePath)
 }
 
-del.sync( `${ windowsFolder }/**/.DS_Store` );
+del.sync(`${windowsFolder}/**/.DS_Store`)
 
-console.log( 'OK' );
+console.log('OK')

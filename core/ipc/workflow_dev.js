@@ -1,141 +1,142 @@
-'use strict';
+'use strict'
 
-const ps = require('ps-node');
-const path = require('path');
-const { fork } = require('child_process');
+const ps = require('ps-node')
+const path = require('path')
+const { fork } = require('child_process')
 
-const ipcWorkflowFactory = require('../common/ipc_workflow_factory');
+const ipcWorkflowFactory = require('../common/ipc_workflow_factory')
 
-let app, mainWindow;
+/* eslint-disable no-unused-vars */
+let app, mainWindow
 
-module.exports = ( _app, _mainWindow ) => {
-    app = _app, mainWindow = _mainWindow;
-    ipcWorkflowFactory.setMainWindow( _mainWindow );
+module.exports = (_app, _mainWindow) => {
+  /* eslint-disable no-unused-expressions */
+  /* eslint-disable no-sequences */
+  app = _app, mainWindow = _mainWindow
+  ipcWorkflowFactory.setMainWindow(_mainWindow)
 }
 
-global.__workflowDevPid = { };
+global.__workflowDevPid = { }
 
-let canUserPortForWebpack = __config.env === 'dev' ? __config.webpackConfig.originPortDev : __config.webpackConfig.originPort;
+let canUserPortForWebpack = __config.env === 'dev' ? __config.webpackConfig.originPortDev : __config.webpackConfig.originPort
 
 // 注册
-const register = ( { id } ) => {
-    let port = void 0;
+const register = ({ id }) => {
+  let port = void 0
 
-	for ( let key in __workflowDevPid ) {
-		if ( __workflowDevPid[ key ] === '' ) {
-            port = key;
+  for (let key in __workflowDevPid) {
+    if (__workflowDevPid[ key ] === '') {
+      port = key
 
-            __workflowDevPid[ key ] = { id, pid: void 0 };
-		}
+      __workflowDevPid[ key ] = { id, pid: void 0 }
     }
+  }
 
-	if ( !port ) {
-        canUserPortForWebpack = canUserPortForWebpack + 1;
+  if (!port) {
+    canUserPortForWebpack = canUserPortForWebpack + 1
 
-        __workflowDevPid[ canUserPortForWebpack ] = { id, pid: void 0 };
+    __workflowDevPid[ canUserPortForWebpack ] = { id, pid: void 0 }
 
-		port = canUserPortForWebpack;
-    }
+    port = canUserPortForWebpack
+  }
 
-	return port;
+  return port
 }
 
 // 停止指定开发进程
-const killer = ( id ) => {
-    let pid = void 0;
-    let key = void 0;
+const killer = (id) => {
+  let pid = void 0
+  let key = void 0
 
-    for ( let _key_ in __workflowDevPid ) {
-         if ( __workflowDevPid[ _key_ ].id === id ) {
-            pid = __workflowDevPid[ _key_ ].pid;
-            key = _key_;
-         }
+  for (let _key_ in __workflowDevPid) {
+    if (__workflowDevPid[ _key_ ].id === id) {
+      pid = __workflowDevPid[ _key_ ].pid
+      key = _key_
     }
+  }
 
-    if ( typeof pid === 'undefined' ) {
-        return void 0;
-    }
+  if (typeof pid === 'undefined') {
+    return void 0
+  }
 
-    return new Promise( ( resolve, reject ) => {
-        ps.kill( pid, ( e ) => {
-            if ( e ) {
-                reject( );
-            }
-            else {
-                __workflowDevPid[ key ] = '';
-                resolve( );
-            }
-        } );
-    } );
+  return new Promise((resolve, reject) => {
+    ps.kill(pid, (e) => {
+      if (e) {
+        reject(e)
+      } else {
+        __workflowDevPid[ key ] = ''
+        resolve()
+      }
+    })
+  })
 }
 
 // 启动开发工作流
-ipcWorkflowFactory( 'WORKFLOW_DEV_RUN', ( event, config ) => {
-    const webpackPort = register( config );
+ipcWorkflowFactory('WORKFLOW_DEV_RUN', (event, config) => {
+  const webpackPort = register(config)
 
-    config.webpackPort = webpackPort;
-    config.workflow = 'dev';
-    config.from = 'app';
+  config.webpackPort = webpackPort
+  config.workflow = 'dev'
+  config.from = 'app'
 
-    event.sender.send( 'WORKFLOW_DEV_RUN_LAUNCH', config );
+  event.sender.send('WORKFLOW_DEV_RUN_LAUNCH', config)
 
-    const thread = fork( path.resolve( __dirname, '../workflow/dev' ) );
+  const thread = fork(path.resolve(__dirname, '../workflow/dev'))
 
-    config.pid = thread.pid;
+  config.pid = thread.pid
 
-    __workflowDevPid[ webpackPort ].pid = thread.pid;
+  __workflowDevPid[ webpackPort ].pid = thread.pid
 
-    thread.send( config );
+  thread.send(config)
 
-    let messager = void 0;
+  let messager = void 0
 
-    const SUCCESS_EXEC = ( data, logger ) => {
-        event.sender.send( 'WORKFLOW_DEV_RUN_SUCCESS', data );
-    }
+  const SUCCESS_EXEC = (data, logger) => {
+    event.sender.send('WORKFLOW_DEV_RUN_SUCCESS', data)
+  }
 
-    const STOP_EXEC = ( msg ) => {
-        killer( config.id );
+  const STOP_EXEC = (msg) => {
+    killer(config.id)
 
-        messager && messager( { type: 'error', msg } );
+    messager && messager({ type: 'error', msg })
 
-        event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
-    }
+    event.sender.send('WORKFLOW_DEV_STOP_SUCCESS', config)
+  }
 
-    messager = __messager._workflow_adapter_( config, SUCCESS_EXEC, STOP_EXEC );
+  messager = __messager._workflow_adapter_(config, SUCCESS_EXEC, STOP_EXEC)
 
-    messager( { type: 'log', msg: '启动中，请稍候...' } );
+  messager({ type: 'log', msg: '启动中，请稍候...' })
 
-    thread.on( 'message', messager );
-} );
-
+  thread.on('message', messager)
+})
 
 // 关闭开发工作流
-ipcWorkflowFactory( 'WORKFLOW_DEV_STOP', async ( event, config ) => {
-    for ( let _key_ in __workflowDevPid ) {
-        if ( __workflowDevPid[ _key_ ].id === config.id ) {
-            config.pid = __workflowDevPid[ _key_ ].pid;
-        }
+ipcWorkflowFactory('WORKFLOW_DEV_STOP', async (event, config) => {
+  for (let _key_ in __workflowDevPid) {
+    if (__workflowDevPid[ _key_ ].id === config.id) {
+      config.pid = __workflowDevPid[ _key_ ].pid
     }
+  }
 
-    event.sender.send( 'WORKFLOW_DEV_STOP_SUCCESS', config );
+  event.sender.send('WORKFLOW_DEV_STOP_SUCCESS', config)
 
-    await global.__util.sleep( 800 );
+  await global.__util.sleep(800)
 
-    const result = killer( config.id );
+  const result = killer(config.id)
 
-    // TODO: 中间态
-    // const FAIL_EXEC = ( ) => {
-    //     __messager.event( '停止开发工作流失败' );
-    // }
+  // TODO: 中间态
+  // const FAIL_EXEC = ( ) => {
+  //     __messager.event( '停止开发工作流失败' );
+  // }
 
-    // if ( !result ) {
-    //     FAIL_EXEC( ); return void 0;
-    // }
+  // if ( !result ) {
+  //     FAIL_EXEC( ); return void 0;
+  // }
 
-    // result.then( ( ) => {
-    //         //
-    //     } )
-    //     .catch( ( e ) => {
-    //         FAIL_EXEC( );
-    //     } )
-} )
+  // result.then( ( ) => {
+  //         //
+  //     } )
+  //     .catch( ( e ) => {
+  //         FAIL_EXEC( );
+  //     } )
+})

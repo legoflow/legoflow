@@ -1,33 +1,33 @@
-'use strict';
+'use strict'
 
-const electron = require('electron');
+const electron = require('electron')
 
-const ipc = electron.ipcMain;
+const ipc = electron.ipcMain
 
-let mainWindow = void 0;
+let mainWindow = void 0
 
-const factory = function ( key, main ) {
-    ipc.on( key, ( event, data ) => {
-        const { id, name, path } = data;
+const factory = function (key, main) {
+  ipc.on(key, (event, data) => {
+    const { path } = data
 
-        const config = path.getConfig( data );
+    const config = path.getConfig(data)
 
-        if ( !config ) {
-            __messager.event( '找不到配置文件' );
+    if (!config) {
+      global.__messager.event('找不到配置文件')
 
-            return void 0;
-        }
+      return void 0
+    }
 
-        mainWindow.webContents.send( 'PROJECT_UPDATE', config );
+    mainWindow.webContents.send('PROJECT_UPDATE', config)
 
-        config.projectPath = config.path;
+    config.projectPath = config.path
 
-        main( event, config );
-    } );
+    main(event, config)
+  })
 }
 
-factory.setMainWindow = ( _mainWindow ) => {
-    mainWindow = _mainWindow;
-};
+factory.setMainWindow = (_mainWindow) => {
+  mainWindow = _mainWindow
+}
 
-module.exports = factory;
+module.exports = factory

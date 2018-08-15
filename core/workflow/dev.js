@@ -1,14 +1,14 @@
-'use strict';
+'use strict'
 
-require('./messager');
+require('./messager')
 
-const dev = require('legoflow-engine/dev');
-const messager = require('legoflow-engine/messager');
+const dev = require('legoflow-engine/dev')
+const messager = require('legoflow-engine/messager')
 
-process.on( 'message', dev );
+process.on('message', dev)
 
-process.on( 'uncaughtException', ( err ) => {
-    console.error( '[DEV@UNCAUGHT EXCEPTION]', err );
+process.on('uncaughtException', (err) => {
+  console.error('[DEV@UNCAUGHT EXCEPTION]', err)
 
-    messager( { type: 'error', msg: err } );
-} );
+  messager({ type: 'error', msg: err })
+})

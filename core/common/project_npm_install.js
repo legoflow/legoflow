@@ -1,23 +1,21 @@
-'use strict';
+'use strict'
 
-const shell = require('shelljs');
-const path = require('path');
+const shell = require('shelljs')
 
 module.exports = function (projectPath) {
-    const npm = require('../../npm/lib/npm');
+  const npm = require('../../npm/lib/npm')
 
-    shell.cd(projectPath);
+  shell.cd(projectPath)
 
-    return new Promise((resolve, reject) => {
-        npm.load( () => {
-            npm.install((e) => {
-                if (e) {
-                    reject()
-                }
-                else {
-                    resolve();
-                }
-            })
-        })
-    });
-};
+  return new Promise((resolve, reject) => {
+    npm.load(() => {
+      npm.install((e) => {
+        if (e) {
+          reject(e)
+        } else {
+          resolve()
+        }
+      })
+    })
+  })
+}

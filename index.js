@@ -1,15 +1,14 @@
-'use strict';
+'use strict'
 
-const { app } = require('electron');
+const { app } = require('electron')
 
-const threadKiller = require('./core/common/thread_killer');
+const threadKiller = require('./core/common/thread_killer')
 
-process.on( 'uncaughtException', ( e ) => {
-    console.error( e );
+process.on('uncaughtException', (e) => {
+  console.error(e)
+  throw e
+})
 
-    throw e;
-} );
+app.on('ready', require('./core/startup')(app))
 
-app.on( 'ready', require('./core/startup')( app ) );
-
-app.on( 'before-quit', threadKiller );
+app.on('before-quit', threadKiller)
