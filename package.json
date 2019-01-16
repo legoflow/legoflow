@@ -1,59 +1,59 @@
 {
-    "name": "legoflow",
-    "version": "2.0.0-beta.7",
-    "description": "FE workflow",
-    "main": "index.js",
-    "scripts": {
-        "start": "node ./script/start",
-        "dev": "node ./script/start dev",
-        "app": "electron index.js build",
-        "cover:node_sass": "node ./script/cover_node_sass",
-        "del:dep": "node ./script/del_dep",
-        "win:files": "node ./script/windows_files",
-        "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(\\.DS_Store|__test__|__view__|__diff__|\\.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|\\.editorconfig|\\.nvmrc|\\.personconfig|__windows_files__|__node-sass__|__webpack_build_diff__|ISSUE_TEMPLATE.md)'",
-        "pack:win": "electron-packager ./ \"LegoFlow 2\" --platform=win32 --arch=x64 --overwrite --out=./dist/ --icon=icon/logo.ico --version=1.8.4 --ignore=\"(\\.DS_Store|__test__|__view__|__diff__|\\.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|\\.editorconfig|\\.nvmrc|\\.personconfig)\"",
-        "pack:dmg": "node ./script/pack_dmg",
-        "pack:rar": "node ./script/pack_rar"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/legoflow/legoflow.git"
-    },
-    "engines": {
-        "node": ">=8.2.1 <9.0.0"
-    },
-    "author": "lijialiang@yy.com",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/legoflow/legoflow/issues"
-    },
-    "homepage": "https://github.com/legoflow/legoflow#readme",
-    "dependencies": {
-        "axios": "~0.18.0",
-        "cross-port-killer": "~1.0.1",
-        "del": "~3.0.0",
-        "electron-cover-updater": "0.0.8",
-        "fs-extra": "^5.0.0",
-        "glob": "~7.1.2",
-        "legoflow-config": "0.0.9",
-        "legoflow-engine": "0.0.51-beta.8",
-        "legoflow-project": "0.0.27",
-        "lodash": "^4.17.10",
-        "moment": "^2.22.0",
-        "node-notifier": "~5.2.1",
-        "node-sass": "4.7.2",
-        "ps-node": "~0.1.6",
-        "shelljs": "^0.7.8"
-    },
-    "config": {
-        "webpackConfig": {
-            "originPort": 6600,
-            "originPortDev": 6500
-        }
-    },
-    "devDependencies": {
-        "electron": "1.8.4",
-        "electron-packager": "12.0.1",
-        "electron-rebuild": "1.7.3"
+  "name": "legoflow",
+  "version": "2.0.0",
+  "description": "FE workflow application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./script/start",
+    "dev": "node ./script/start dev",
+    "app": "electron index.js build",
+    "cover:node_sass": "node ./script/cover_node_sass",
+    "del:dep": "node ./script/del_dep",
+    "win:files": "node ./script/windows_files",
+    "pack:mac": "electron-packager ./ 'LegoFlow 2' --platform=darwin --arch=x64 --overwrite --out=./dist/ --icon=./icon/logo.icns --version=1.8.4 --ignore='(\\.DS_Store|__test__|__view__|__diff__|\\.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|\\.editorconfig|\\.nvmrc|\\.personconfig|__windows_files__|__node-sass__|__webpack_build_diff__|ISSUE_TEMPLATE.md)'",
+    "pack:win": "electron-packager ./ \"LegoFlow 2\" --platform=win32 --arch=x64 --overwrite --out=./dist/ --icon=icon/logo.ico --version=1.8.4 --ignore=\"(\\.DS_Store|__test__|__view__|__diff__|\\.gitignore|TODO|MARK|CHANGELOG.md|node_modules_override|\\.editorconfig|\\.nvmrc|\\.personconfig)\"",
+    "pack:dmg": "node ./script/pack_dmg",
+    "pack:rar": "node ./script/pack_rar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legoflow/legoflow.git"
+  },
+  "engines": {
+    "node": ">=8.2.1 <9.0.0"
+  },
+  "author": "lijialiang@yy.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/legoflow/legoflow/issues"
+  },
+  "homepage": "https://github.com/legoflow/legoflow#readme",
+  "dependencies": {
+    "axios": "~0.18.0",
+    "cross-port-killer": "~1.0.1",
+    "del": "~3.0.0",
+    "electron-cover-updater": "0.0.8",
+    "fs-extra": "^5.0.0",
+    "glob": "~7.1.2",
+    "legoflow-config": "1.0.0",
+    "legoflow-engine": "1.10.0",
+    "legoflow-project": "1.2.3",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.0",
+    "node-notifier": "~5.2.1",
+    "node-sass": "4.7.2",
+    "ps-node": "~0.1.6",
+    "shelljs": "^0.7.8"
+  },
+  "config": {
+    "webpackConfig": {
+      "originPort": 6600,
+      "originPortDev": 6500
     }
+  },
+  "devDependencies": {
+    "electron": "1.8.4",
+    "electron-packager": "12.0.1",
+    "electron-rebuild": "1.7.3"
+  }
 }

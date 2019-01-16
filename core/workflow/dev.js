@@ -9,6 +9,5 @@ process.on('message', dev)
 
 process.on('uncaughtException', (err) => {
   console.error('[DEV@UNCAUGHT EXCEPTION]', err)
-
   messager({ type: 'error', msg: err })
 })

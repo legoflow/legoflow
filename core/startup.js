@@ -107,7 +107,6 @@ module.exports = (app) => {
       settingWindow.loadURL(`http://${devViewAddress}/#/setting`)
     } else {
       settingWindow.loadURL(`file://${viewFolder}/index.html`)
-
       settingWindow.webContents.executeJavaScript('location.href = `${ location.href }setting`')
     }
 

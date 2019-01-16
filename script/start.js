@@ -14,7 +14,7 @@ const personConfig = fs.existsSync(personConfigPath) ? YAML.parse(fs.readFileSyn
 (async () => {
   const env = process.argv[ 2 ] || 'build'
 
-  console.log(chalk.green(`>>>>>>>>>> ${chalk.bold(`env#${env || 'build'}`)}`))
+  console.log(chalk.green(`>>>>>>>>>> ${chalk.bold(`env#${env || 'build'}#`)}`))
 
   shell.exec(`electron ${root} ${env} "${encodeURI(JSON.stringify(personConfig))}"`)
 })()

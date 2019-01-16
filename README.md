@@ -1,31 +1,31 @@
 <p align="center">
-    <a href="">
-        <img alt="Logo" src="./icon/logo@128.png" />
-    </a>
+  <a href="">
+    <img alt="Logo" src="./icon/logo@128.png" />
+  </a>
 </p>
 
 <h1 align="center"> LegoFlow 2 </h1>
 
 <p align="center">
-    <a href="https://opensource.org/licenses/MIT">
-        <img alt="Licence" src="https://img.shields.io/badge/license-MIT-green.svg" />
-    </a>
-    <a href="">
-        <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg" />
-    </a>
-    <a href="https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g" target="_blank">
-        <img alt="Download" src="https://img.shields.io/badge/download-app-brightgreen.svg" />
-    </a>
-    <a href="https://github.com/legoflow/legoflow/blob/master/CHANGELOG.md" target="_blank">
-        <img alt="ChangeLog" src="https://img.shields.io/badge/CHANGE-LOG-orange.svg" />
-    </a>
-    <a href="">
-        <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg" />
-    </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img alt="Licence" src="https://img.shields.io/badge/license-MIT-green.svg" />
+  </a>
+  <a href="">
+    <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg" />
+  </a>
+  <a href="https://pan.baidu.com/s/1PfUT9GwOxovp1E3Kj5WP8g" target="_blank">
+    <img alt="Download" src="https://img.shields.io/badge/download-app-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/legoflow/legoflow/blob/master/CHANGELOG.md" target="_blank">
+    <img alt="ChangeLog" src="https://img.shields.io/badge/CHANGE-LOG-orange.svg" />
+  </a>
+  <a href="">
+    <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg" />
+  </a>
 </p>
 
 <p align="center">
-    更轻、更强、开箱即用的 <strong>前端工作流客户端</strong>
+  更轻、更强、开箱即用的 <strong>前端工作流客户端</strong>
 </p>
 
 ## 功能
@@ -42,6 +42,10 @@
 * 自动内联样式脚本
 * 自动替换线上资源地址
 * ......
+
+## CLI
+
+建议使用 [CLI](https://github.com/legoflow/legoflow-cli) 拥有更全面的功能模式
 
 ## 开发
 

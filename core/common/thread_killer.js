@@ -5,16 +5,20 @@ const { kill } = require('cross-port-killer')
 
 module.exports = () => {
   // kill workflow of dev
-  for (let key in global.__workflowDevPid) {
-    if (__workflowDevPid[ key ] && __workflowDevPid[ key ].pid) {
-      ps.kill(__workflowDevPid[ key ].pid)
+  if (global.__workflowDevPid) {
+    for (let key in __workflowDevPid) {
+      if (__workflowDevPid[ key ] && __workflowDevPid[ key ].pid) {
+        ps.kill(__workflowDevPid[ key ].pid)
+      }
     }
   }
 
   // kill workflow of build
-  for (let key in global.__workflowBuildPid) {
-    if (__workflowBuildPid[ key ]) {
-      ps.kill(__workflowBuildPid[ key ])
+  if (global.__workflowBuildPid) {
+    for (let key in __workflowBuildPid) {
+      if (__workflowBuildPid[ key ]) {
+        ps.kill(__workflowBuildPid[ key ])
+      }
     }
   }
 
