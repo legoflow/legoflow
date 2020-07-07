@@ -2603,7 +2603,7 @@
     "npm-pick-manifest": "^2.1.0",
     "npm-profile": "^3.0.2",
     "npm-registry-client": "^8.5.1",
-    "npm-registry-fetch": "^1.1.0",
+    "npm-registry-fetch": "^8.1.1",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.2",
     "once": "~1.4.0",
