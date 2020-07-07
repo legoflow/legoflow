@@ -52,7 +52,7 @@
         }
     },
     "devDependencies": {
-        "electron": "1.8.4",
+        "electron": "7.2.4",
         "electron-packager": "12.0.1",
         "electron-rebuild": "1.7.3"
     }
