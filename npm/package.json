@@ -2652,7 +2652,7 @@
   "description": "a package manager for JavaScript",
   "devDependencies": {
     "deep-equal": "~1.0.1",
-    "marked": "^0.4.0",
+    "marked": "^1.1.1",
     "marked-man": "~0.2.1",
     "npm-registry-couchapp": "^2.7.1",
     "npm-registry-mock": "~1.1.0",
