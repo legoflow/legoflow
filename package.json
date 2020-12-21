@@ -40,7 +40,7 @@
         "legoflow-project": "0.0.27",
         "lodash": "^4.17.10",
         "moment": "^2.22.0",
-        "node-notifier": "~5.2.1",
+        "node-notifier": "~8.0.1",
         "node-sass": "4.7.2",
         "ps-node": "~0.1.6",
         "shelljs": "^0.7.8"
