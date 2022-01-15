@@ -43,7 +43,7 @@
         "node-notifier": "~5.2.1",
         "node-sass": "4.7.2",
         "ps-node": "~0.1.6",
-        "shelljs": "^0.7.8"
+        "shelljs": "^0.8.5"
     },
     "config": {
         "webpackConfig": {
